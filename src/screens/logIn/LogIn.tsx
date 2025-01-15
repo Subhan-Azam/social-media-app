@@ -7,11 +7,12 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-// import LoginBtn from '../../components/button/loginBtn';
+// import {IoChevronBackOutline} from 'react-icons/io5';
 
 const LogIn = () => {
   return (
     <View style={styles.container}>
+      {/* <IoChevronBackOutline /> */}
       <View style={styles.box}>
         <Image
           style={styles.instagramImg}
@@ -21,14 +22,17 @@ const LogIn = () => {
           <TextInput
             style={styles.textInput}
             placeholder="Enter Email"
-            placeholderTextColor="gray"
+            placeholderTextColor="#00000033"
           />
+          <Text style={styles.error}>invalid Name</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Enter Password"
-            placeholderTextColor="gray"
+            placeholderTextColor="#00000033"
             secureTextEntry
           />
+          <Text style={styles.error}>invalid password</Text>
+
           <TouchableOpacity style={styles.forgetPassLink}>
             <Text style={styles.forgotText}>Forget Password?</Text>
           </TouchableOpacity>
@@ -60,6 +64,7 @@ export default LogIn;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   box: {
     flex: 1,
@@ -67,7 +72,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 15,
     padding: 20,
-    backgroundColor: 'white',
   },
   instagramImg: {
     marginBottom: 30,
@@ -85,7 +89,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderBlockColor: '#0000001A',
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
+  },
+  error: {
+    color: 'red',
+    fontSize: 12,
+    marginTop: -15,
   },
   forgetPassLink: {
     width: '100%',
