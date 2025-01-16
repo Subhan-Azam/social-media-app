@@ -4,6 +4,7 @@ import React from 'react';
 import LogIn from './src/screens/logIn/LogIn';
 // import SignUp from './src/screens/signUp/SignUp';
 // import ForgetPassword from './src/screens/forgetPassword/ForgetPassword';
+// import ResetPassword from './src/screens/resetPassword/ResetPassword';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <LogIn />
       {/* <SignUp /> */}
       {/* <ForgetPassword /> */}
+      {/* <ResetPassword /> */}
     </View>
   );
 };
@@ -21,5 +23,6 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
 });

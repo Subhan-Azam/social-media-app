@@ -6,11 +6,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 
-const SignUp = () => {
+const SignUp: React.FC = () => {
+  const [password, setPassword] = useState<boolean>(false);
+  const [confirmPass, setConfirmPass] = useState<boolean>(false);
+
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.backIcon}
+        source={require('../../assets/images/backIcon.png')}
+      />
       <View style={styles.box}>
         <Image
           style={styles.instagramImg}
@@ -22,29 +29,36 @@ const SignUp = () => {
             placeholder="Username"
             placeholderTextColor="#00000033"
           />
-          <Text style={styles.error}>invalid Name</Text>
+          {/* <Text style={styles.error}>invalid Name</Text> */}
           <TextInput
             style={styles.textInput}
             placeholder="Enter Email"
             placeholderTextColor="#00000033"
           />
-          <Text style={styles.error}>invalid Name</Text>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Enter Email"
-            placeholderTextColor="#00000033"
-          />
-          <Text style={styles.error}>invalid Name</Text>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Enter Password"
-            placeholderTextColor="#00000033"
-            secureTextEntry
-          />
-          <Text style={styles.error}>invalid password</Text>
+          {/* <Text style={styles.error}>invalid Name</Text> */}
+          <View style={styles.textInput}>
+            <TextInput
+              style={styles.textInputPass}
+              placeholder="Password"
+              placeholderTextColor="#00000033"
+              secureTextEntry={!password}
+            />
+            <Text onPress={() => setPassword(!password)}>Chg</Text>
+          </View>
+          {/* <Text style={styles.error}>invalid Name</Text> */}
+          <View style={styles.textInput}>
+            <TextInput
+              style={styles.textInputPass}
+              placeholder="Confirm Password"
+              placeholderTextColor="#00000033"
+              secureTextEntry={!confirmPass}
+            />
+            <Text onPress={() => setConfirmPass(!confirmPass)}>Chg</Text>
+          </View>
+          {/* <Text style={styles.error}>invalid password</Text> */}
         </View>
-        <TouchableOpacity style={styles.logInBtn}>
-          <Text style={styles.logInBtnText}>Sign Up</Text>
+        <TouchableOpacity style={styles.signUpBtn}>
+          <Text style={styles.signUpBtnText}>Sign Up</Text>
         </TouchableOpacity>
         <View style={styles.logInWithGoogle}>
           <Image source={require('../../assets/images/Icon.png')} />
@@ -68,12 +82,14 @@ const SignUp = () => {
 
 export default SignUp;
 
-
-
 const styles = StyleSheet.create({
+  backIcon: {
+    position: 'absolute',
+    top: 30,
+    left: 20,
+  },
   container: {
     flex: 1,
-    backgroundColor: 'white',
   },
   box: {
     flex: 1,
@@ -91,31 +107,40 @@ const styles = StyleSheet.create({
   },
   textInput: {
     width: '100%',
-    height: 40,
+    height: 44,
     borderColor: 'gray',
     color: 'black',
     backgroundColor: '#FAFAFA',
     borderWidth: 1,
     borderRadius: 5,
     borderBlockColor: '#0000001A',
-    // paddingHorizontal: 10,
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  textInputPass: {
+    width: '90%',
+    color: 'black',
   },
   error: {
     color: 'red',
     fontSize: 12,
     marginTop: -15,
   },
-  logInBtnText: {
-    color: 'white',
-    fontWeight: 600,
-  },
-  logInBtn: {
+
+  signUpBtn: {
     backgroundColor: '#3797EF',
     width: '100%',
     height: 44,
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 20,
+  },
+  signUpBtnText: {
+    color: 'white',
+    fontWeight: 600,
   },
   logInWithGoogle: {
     flexDirection: 'row',
