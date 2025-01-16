@@ -27,6 +27,7 @@ const ForgetPassword: React.FC = () => {
             style={styles.textInput}
             placeholder="Enter Email"
             placeholderTextColor="#00000033"
+            autoCapitalize="none"
           />
           {/* <Text style={styles.error}>invalid email</Text> */}
         </View>
@@ -34,7 +35,6 @@ const ForgetPassword: React.FC = () => {
           <Text style={styles.MagicLinkBtnText}>Send Magic Link</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.endHrLine} />
     </SafeAreaView>
   );
 };

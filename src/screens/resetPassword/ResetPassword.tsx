@@ -27,11 +27,11 @@ const ResetPassword: React.FC = () => {
         <View style={styles.inputsBox}>
           <View style={styles.textInput}>
             <TextInput
+              secureTextEntry={!showOldPass}
               style={styles.textInputPass}
               placeholder="Enter Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
-              secureTextEntry={!showOldPass}
             />
 
             <Text onPress={() => setShowOldPass(!showOldPass)}>Chg</Text>
@@ -39,11 +39,11 @@ const ResetPassword: React.FC = () => {
           {/* <Text style={styles.error}>invalid Name</Text> */}
           <View style={styles.textInput}>
             <TextInput
+              secureTextEntry={!showNewPass}
               style={styles.textInputPass}
               placeholder="Enter Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
-              secureTextEntry={!showNewPass}
             />
 
             <Text onPress={() => setShowNewPass(!showNewPass)}>Chg</Text>
@@ -51,11 +51,11 @@ const ResetPassword: React.FC = () => {
           {/* <Text style={styles.error}>invalid Name</Text> */}
           <View style={styles.textInput}>
             <TextInput
+              secureTextEntry={!showConfirmPass}
               style={styles.textInputPass}
               placeholder="Enter Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
-              secureTextEntry={!showConfirmPass}
             />
 
             <Text onPress={() => setShowConfirmPass(!showConfirmPass)}>

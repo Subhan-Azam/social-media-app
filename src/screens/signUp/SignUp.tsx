@@ -1,9 +1,14 @@
 import {
   Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -13,70 +18,81 @@ const SignUp: React.FC = () => {
   const [confirmPass, setConfirmPass] = useState<boolean>(false);
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.backIcon}
-        source={require('../../assets/images/backIcon.png')}
-      />
-      <View style={styles.box}>
-        <Image
-          style={styles.instagramImg}
-          source={require('../../assets/images/InstagramLogo.png')}
-        />
-        <View style={styles.inputsBox}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Username"
-            placeholderTextColor="#00000033"
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <Image
+            style={styles.backIcon}
+            source={require('../../assets/images/backIcon.png')}
           />
-          {/* <Text style={styles.error}>invalid Name</Text> */}
-          <TextInput
-            style={styles.textInput}
-            placeholder="Enter Email"
-            placeholderTextColor="#00000033"
-          />
-          {/* <Text style={styles.error}>invalid Name</Text> */}
-          <View style={styles.textInput}>
-            <TextInput
-              style={styles.textInputPass}
-              placeholder="Password"
-              placeholderTextColor="#00000033"
-              secureTextEntry={!password}
+          <View style={styles.box}>
+            <Image
+              style={styles.instagramImg}
+              source={require('../../assets/images/InstagramLogo.png')}
             />
-            <Text onPress={() => setPassword(!password)}>Chg</Text>
+            <View style={styles.inputsBox}>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Username"
+                placeholderTextColor="#00000033"
+                autoCapitalize="none"
+              />
+              {/* <Text style={styles.error}>invalid Name</Text> */}
+              <TextInput
+                style={styles.textInput}
+                placeholder="Enter Email"
+                placeholderTextColor="#00000033"
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+              {/* <Text style={styles.error}>invalid Name</Text> */}
+              <View style={styles.textInput}>
+                <TextInput
+                  secureTextEntry={!password}
+                  style={styles.textInputPass}
+                  placeholder="Password"
+                  placeholderTextColor="#00000033"
+                  autoCapitalize="none"
+                />
+                <Text onPress={() => setPassword(!password)}>Chg</Text>
+              </View>
+              {/* <Text style={styles.error}>invalid Name</Text> */}
+              <View style={styles.textInput}>
+                <TextInput
+                  secureTextEntry={!confirmPass}
+                  style={styles.textInputPass}
+                  placeholder="Confirm Password"
+                  placeholderTextColor="#00000033"
+                  autoCapitalize="none"
+                />
+                <Text onPress={() => setConfirmPass(!confirmPass)}>Chg</Text>
+              </View>
+              {/* <Text style={styles.error}>invalid password</Text> */}
+            </View>
+            <TouchableOpacity style={styles.signUpBtn}>
+              <Text style={styles.signUpBtnText}>Sign Up</Text>
+            </TouchableOpacity>
+            <View style={styles.logInWithGoogle}>
+              <Image source={require('../../assets/images/Icon.png')} />
+              <Text>Login with Google</Text>
+            </View>
+            <View style={styles.OrSec}>
+              <View style={styles.line} />
+              <Text>OR</Text>
+              <View style={styles.line} />
+            </View>
+            <View style={styles.signUpSec}>
+              <Text style={styles.signUpText1}>
+                Already have an account? Log In.
+              </Text>
+              <Text style={styles.signUpText2}> Log In.</Text>
+            </View>
           </View>
-          {/* <Text style={styles.error}>invalid Name</Text> */}
-          <View style={styles.textInput}>
-            <TextInput
-              style={styles.textInputPass}
-              placeholder="Confirm Password"
-              placeholderTextColor="#00000033"
-              secureTextEntry={!confirmPass}
-            />
-            <Text onPress={() => setConfirmPass(!confirmPass)}>Chg</Text>
-          </View>
-          {/* <Text style={styles.error}>invalid password</Text> */}
-        </View>
-        <TouchableOpacity style={styles.signUpBtn}>
-          <Text style={styles.signUpBtnText}>Sign Up</Text>
-        </TouchableOpacity>
-        <View style={styles.logInWithGoogle}>
-          <Image source={require('../../assets/images/Icon.png')} />
-          <Text>Login with Google</Text>
-        </View>
-        <View style={styles.OrSec}>
-          <View style={styles.line} />
-          <Text>OR</Text>
-          <View style={styles.line} />
-        </View>
-        <View style={styles.signUpSec}>
-          <Text style={styles.signUpText1}>
-            Already have an account? Log In.
-          </Text>
-          <Text style={styles.signUpText2}> Log In.</Text>
-        </View>
-      </View>
-    </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -90,6 +106,9 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  scrollView: {
+    flexGrow: 1,
   },
   box: {
     flex: 1,

@@ -5,6 +5,11 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import React, {useState} from 'react';
 
@@ -16,75 +21,82 @@ const LogIn: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.backIcon}
-        source={require('../../assets/images/backIcon.png')}
-      />
-      {/* <IoChevronBackOutline /> */}
-      <View style={styles.box}>
-        <Image
-          style={styles.instagramImg}
-          source={require('../../assets/images/InstagramLogo.png')}
-        />
-        <View style={styles.inputsBox}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Enter Email"
-            placeholderTextColor="#00000033"
-            keyboardType="email-address"
-            autoCapitalize="none"
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView
+          contentContainerStyle={styles.scrollView}
+          keyboardShouldPersistTaps="handled">
+          <Image
+            style={styles.backIcon}
+            source={require('../../assets/images/backIcon.png')}
           />
-          {/* <Text style={styles.error}>invalid email</Text> */}
-          <View style={styles.textInput}>
-            <TextInput
-              style={styles.textInputPass}
-              placeholder="Enter Password"
-              placeholderTextColor="#00000033"
-              autoCapitalize="none"
-              secureTextEntry={!showPassword}
+
+          <View style={styles.box}>
+            <Image
+              style={styles.instagramImg}
+              source={require('../../assets/images/InstagramLogo.png')}
             />
+            <View style={styles.inputsBox}>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Enter Email"
+                placeholderTextColor="#00000033"
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+              <View style={styles.textInput}>
+                <TextInput
+                  style={styles.textInputPass}
+                  placeholder="Enter Password"
+                  placeholderTextColor="#00000033"
+                  autoCapitalize="none"
+                  secureTextEntry={!showPassword}
+                />
+                <Text onPress={hideShowPass}>Chg</Text>
+              </View>
 
-            <Text onPress={hideShowPass}>Chg</Text>
+              <TouchableOpacity style={styles.forgetPassLink}>
+                <Text style={styles.forgotText}>Forget Password?</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.logInBtn}>
+              <Text style={styles.logInBtnText}>Log In</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.logInWithGoogle}>
+              <Image source={require('../../assets/images/Icon.png')} />
+              <Text>Login with Google</Text>
+            </TouchableOpacity>
+            <View style={styles.OrSec}>
+              <View style={styles.line} />
+              <Text>OR</Text>
+              <View style={styles.line} />
+            </View>
+            <View style={styles.signUpSec}>
+              <Text style={styles.signUpText1}>Don’t have an account?</Text>
+              <Text style={styles.signUpText2}> Sign up.</Text>
+            </View>
           </View>
-          {/* <Text style={styles.error}>invalid password</Text> */}
-
-          <TouchableOpacity style={styles.forgetPassLink}>
-            <Text style={styles.forgotText}>Forget Password?</Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.logInBtn}>
-          <Text style={styles.logInBtnText}>Log In</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.logInWithGoogle}>
-          <Image source={require('../../assets/images/Icon.png')} />
-          <Text>Login with Google</Text>
-        </TouchableOpacity>
-        <View style={styles.OrSec}>
-          <View style={styles.line} />
-          <Text>OR</Text>
-          <View style={styles.line} />
-        </View>
-        <View style={styles.signUpSec}>
-          <Text style={styles.signUpText1}>Don’ t have an account?</Text>
-          <Text style={styles.signUpText2}> Sign up.</Text>
-        </View>
-      </View>
-      <View style={styles.endHrLine} />
-    </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
 export default LogIn;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollView: {
+    flexGrow: 1,
+  },
   backIcon: {
     position: 'absolute',
     top: 30,
     left: 20,
-  },
-  container: {
-    flex: 1,
   },
   box: {
     flex: 1,
@@ -131,7 +143,7 @@ const styles = StyleSheet.create({
   forgotText: {
     color: '#3797EF',
     textAlign: 'right',
-    fontWeight: 500,
+    fontWeight: '500',
     fontSize: 12,
   },
   logInBtn: {
@@ -144,7 +156,7 @@ const styles = StyleSheet.create({
   },
   logInBtnText: {
     color: 'white',
-    fontWeight: 600,
+    fontWeight: '600',
   },
   logInWithGoogle: {
     flexDirection: 'row',
@@ -173,14 +185,191 @@ const styles = StyleSheet.create({
   signUpText2: {
     color: '#3797EF',
   },
-  endHrLine: {
-    position: 'absolute',
-    bottom: 50,
-    width: '100%',
-    height: 1,
-    backgroundColor: '#00000033',
-  },
 });
+
+// import {
+//   Image,
+//   StyleSheet,
+//   Text,
+//   TextInput,
+//   TouchableOpacity,
+//   View,
+// } from 'react-native';
+// import React, {useState} from 'react';
+
+// const LogIn: React.FC = () => {
+//   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+//   const hideShowPass = (): void => {
+//     setShowPassword(!showPassword);
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <Image
+//         style={styles.backIcon}
+//         source={require('../../assets/images/backIcon.png')}
+//       />
+//       {/* <IoChevronBackOutline /> */}
+//       <View style={styles.box}>
+//         <Image
+//           style={styles.instagramImg}
+//           source={require('../../assets/images/InstagramLogo.png')}
+//         />
+//         <View style={styles.inputsBox}>
+//           <TextInput
+//             style={styles.textInput}
+//             placeholder="Enter Email"
+//             placeholderTextColor="#00000033"
+//             keyboardType="email-address"
+//             autoCapitalize="none"
+//           />
+//           {/* <Text style={styles.error}>invalid email</Text> */}
+//           <View style={styles.textInput}>
+//             <TextInput
+//               style={styles.textInputPass}
+//               placeholder="Enter Password"
+//               placeholderTextColor="#00000033"
+//               autoCapitalize="none"
+//               secureTextEntry={!showPassword}
+//             />
+
+//             <Text onPress={hideShowPass}>Chg</Text>
+//           </View>
+//           {/* <Text style={styles.error}>invalid password</Text> */}
+
+//           <TouchableOpacity style={styles.forgetPassLink}>
+//             <Text style={styles.forgotText}>Forget Password?</Text>
+//           </TouchableOpacity>
+//         </View>
+//         <TouchableOpacity style={styles.logInBtn}>
+//           <Text style={styles.logInBtnText}>Log In</Text>
+//         </TouchableOpacity>
+//         <TouchableOpacity style={styles.logInWithGoogle}>
+//           <Image source={require('../../assets/images/Icon.png')} />
+//           <Text>Login with Google</Text>
+//         </TouchableOpacity>
+//         <View style={styles.OrSec}>
+//           <View style={styles.line} />
+//           <Text>OR</Text>
+//           <View style={styles.line} />
+//         </View>
+//         <View style={styles.signUpSec}>
+//           <Text style={styles.signUpText1}>Don’ t have an account?</Text>
+//           <Text style={styles.signUpText2}> Sign up.</Text>
+//         </View>
+//       </View>
+//       <View style={styles.endHrLine} />
+//     </View>
+//   );
+// };
+
+// export default LogIn;
+
+// const styles = StyleSheet.create({
+//   backIcon: {
+//     position: 'absolute',
+//     top: 30,
+//     left: 20,
+//   },
+//   container: {
+//     flex: 1,
+//   },
+//   box: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     gap: 15,
+//     padding: 20,
+//   },
+//   instagramImg: {
+//     marginBottom: 30,
+//   },
+//   inputsBox: {
+//     width: '100%',
+//     gap: 15,
+//   },
+//   textInput: {
+//     width: '100%',
+//     height: 44,
+//     borderColor: 'gray',
+//     color: 'black',
+//     backgroundColor: '#FAFAFA',
+//     borderWidth: 1,
+//     borderRadius: 5,
+//     borderBlockColor: '#0000001A',
+//     paddingHorizontal: 10,
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//   },
+//   textInputPass: {
+//     width: '90%',
+//     color: 'black',
+//   },
+//   error: {
+//     color: 'red',
+//     fontSize: 12,
+//     marginTop: -15,
+//   },
+//   forgetPassLink: {
+//     width: '100%',
+//     alignItems: 'flex-end',
+//     marginBottom: 15,
+//   },
+//   forgotText: {
+//     color: '#3797EF',
+//     textAlign: 'right',
+//     fontWeight: 500,
+//     fontSize: 12,
+//   },
+//   logInBtn: {
+//     backgroundColor: '#3797EF',
+//     width: '100%',
+//     height: 44,
+//     borderRadius: 5,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   logInBtnText: {
+//     color: 'white',
+//     fontWeight: 600,
+//   },
+//   logInWithGoogle: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     gap: 10,
+//     paddingVertical: 30,
+//   },
+//   OrSec: {
+//     flexDirection: 'row',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     gap: 50,
+//     marginBottom: 30,
+//   },
+//   line: {
+//     flex: 1,
+//     height: 1,
+//     backgroundColor: '#00000033',
+//   },
+//   signUpSec: {
+//     flexDirection: 'row',
+//   },
+//   signUpText1: {
+//     color: 'gray',
+//   },
+//   signUpText2: {
+//     color: '#3797EF',
+//   },
+//   endHrLine: {
+//     position: 'absolute',
+//     bottom: 50,
+//     width: '100%',
+//     height: 1,
+//     backgroundColor: '#00000033',
+//   },
+// });
 
 // import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 // import React, { useState } from 'react';
