@@ -1,10 +1,4 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
 
@@ -15,10 +9,11 @@ const ResetPassword: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.backIcon}
-        source={require('../../assets/images/backIcon.png')}
-      />
+      <TouchableOpacity
+        // onPress={() => navigation.goBack()}
+        style={styles.backIcon}>
+        <Image source={require('../../assets/images/backIcon.png')} />
+      </TouchableOpacity>
       <View style={styles.box}>
         <Image
           style={styles.instagramImg}
@@ -66,7 +61,6 @@ const ResetPassword: React.FC = () => {
         </View>
 
         <AuthBtn title="Reset Password" />
-
       </View>
     </View>
   );
@@ -78,7 +72,11 @@ const styles = StyleSheet.create({
   backIcon: {
     position: 'absolute',
     top: 30,
-    left: 20,
+    left: 17,
+    height: 30,
+    width: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   container: {
     flex: 1,

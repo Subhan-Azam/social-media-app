@@ -13,8 +13,21 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
+import {NavigationProp} from '@react-navigation/native';
 
-const LogIn: React.FC = () => {
+type RootStackParamList = {
+  LogIn: undefined;
+  SignUp: undefined;
+  ForgetPassword: undefined;
+};
+
+type LogInScreenNavigationProp = NavigationProp<RootStackParamList, 'LogIn'>;
+
+interface Props {
+  navigation: LogInScreenNavigationProp;
+}
+
+const LogIn: React.FC<Props> = ({navigation}) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
@@ -25,11 +38,6 @@ const LogIn: React.FC = () => {
         <ScrollView
           contentContainerStyle={styles.scrollView}
           keyboardShouldPersistTaps="handled">
-          <Image
-            style={styles.backIcon}
-            source={require('../../assets/images/backIcon.png')}
-          />
-
           <View style={styles.box}>
             <Image
               style={styles.instagramImg}
@@ -55,7 +63,11 @@ const LogIn: React.FC = () => {
               </View>
 
               <TouchableOpacity style={styles.forgetPassLink}>
-                <Text style={styles.forgotText}>Forget Password?</Text>
+                <Text
+                  style={styles.forgotText}
+                  onPress={() => navigation.navigate('ForgetPassword')}>
+                  Forget Password?
+                </Text>
               </TouchableOpacity>
             </View>
 
@@ -71,8 +83,12 @@ const LogIn: React.FC = () => {
               <View style={styles.line} />
             </View>
             <View style={styles.signUpSec}>
-              <Text style={styles.signUpText1}>Don’t have an account?</Text>
-              <Text style={styles.signUpText2}> Sign up.</Text>
+              <Text style={styles.signUpText1}>Don’t have an account? </Text>
+              <Text
+                style={styles.signUpText2}
+                onPress={() => navigation.navigate('SignUp')}>
+                Sign up.
+              </Text>
             </View>
           </View>
         </ScrollView>
@@ -89,11 +105,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flexGrow: 1,
-  },
-  backIcon: {
-    position: 'absolute',
-    top: 30,
-    left: 20,
   },
   box: {
     flex: 1,
