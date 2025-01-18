@@ -4,18 +4,35 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
+import {NavigationProp} from '@react-navigation/native';
 
-const ForgetPassword: React.FC = () => {
+type RootStackParamList = {
+  // ForgetPassword is name from AuthNavigation
+  ForgetPassword: undefined;
+};
+
+type SignUpScreenNavigationProp = NavigationProp<
+  RootStackParamList,
+  'ForgetPassword'
+>;
+
+interface Props {
+  navigation: SignUpScreenNavigationProp;
+}
+
+const ForgetPassword: React.FC<Props> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        style={styles.backIcon}
-        source={require('../../assets/images/backIcon.png')}
-      />
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.backIcon}>
+        <Image source={require('../../assets/images/backIcon.png')} />
+      </TouchableOpacity>
       <View style={styles.box}>
         <Image source={require('../../assets/images/InstagramLogo.png')} />
         <Text style={styles.forgetPassDesc}>
@@ -44,7 +61,11 @@ const styles = StyleSheet.create({
   backIcon: {
     position: 'absolute',
     top: 30,
-    left: 20,
+    left: 17,
+    height: 30,
+    width: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   container: {
     flex: 1,

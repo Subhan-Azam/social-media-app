@@ -1,20 +1,13 @@
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import React from 'react';
-// import SplashScreen from './src/screens/splashScreen/SplashScreen';
-// import LogIn from './src/screens/logIn/LogIn';
-import SignUp from './src/screens/signUp/SignUp';
-// import ForgetPassword from './src/screens/forgetPassword/ForgetPassword';
-// import ResetPassword from './src/screens/resetPassword/ResetPassword';
+import AuthNavigation from './src/navigation/AuthNavigation';
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      {/* <SplashScreen /> */}
-      {/* <LogIn /> */}
-      <SignUp />
-      {/* <ForgetPassword /> */}
-      {/* <ResetPassword /> */}
-    </View>
+    <SafeAreaView style={styles.container}>
+      <AuthNavigation />
+    </SafeAreaView>
   );
 };
 

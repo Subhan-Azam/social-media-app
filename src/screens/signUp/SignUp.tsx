@@ -7,13 +7,26 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
+import {NavigationProp} from '@react-navigation/native';
 
-const SignUp: React.FC = () => {
+type RootStackParamList = {
+  LogIn: undefined;
+  SignUp: undefined;
+};
+
+type SignUpScreenNavigationProp = NavigationProp<RootStackParamList, 'SignUp'>;
+
+interface Props {
+  navigation: SignUpScreenNavigationProp;
+}
+
+const SignUp: React.FC<Props> = ({navigation}) => {
   const [password, setPassword] = useState<boolean>(false);
   const [confirmPass, setConfirmPass] = useState<boolean>(false);
 
@@ -23,10 +36,11 @@ const SignUp: React.FC = () => {
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          <Image
+          <TouchableOpacity
             style={styles.backIcon}
-            source={require('../../assets/images/backIcon.png')}
-          />
+            onPress={() => navigation.goBack()}>
+            <Image source={require('../../assets/images/backIcon.png')} />
+          </TouchableOpacity>
           <View style={styles.box}>
             <Image
               style={styles.instagramImg}
@@ -76,7 +90,7 @@ const SignUp: React.FC = () => {
 
             <View style={styles.logInWithGoogle}>
               <Image source={require('../../assets/images/Icon.png')} />
-              <Text>Login with Google</Text>
+              <Text>Sign Up with Google</Text>
             </View>
             <View style={styles.OrSec}>
               <View style={styles.line} />
@@ -84,10 +98,12 @@ const SignUp: React.FC = () => {
               <View style={styles.line} />
             </View>
             <View style={styles.signUpSec}>
-              <Text style={styles.signUpText1}>
-                Already have an account? Log In.
+              <Text style={styles.signUpText1}>Already have an account? </Text>
+              <Text
+                style={styles.signUpText2}
+                onPress={() => navigation.navigate('LogIn')}>
+                Log In.
               </Text>
-              <Text style={styles.signUpText2}> Log In.</Text>
             </View>
           </View>
         </ScrollView>
@@ -102,7 +118,11 @@ const styles = StyleSheet.create({
   backIcon: {
     position: 'absolute',
     top: 30,
-    left: 20,
+    left: 17,
+    height: 30,
+    width: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   container: {
     flex: 1,
