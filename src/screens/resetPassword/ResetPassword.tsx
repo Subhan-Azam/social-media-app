@@ -3,10 +3,10 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
+import AuthBtn from '../../components/Buttons/AuthBtn';
 
 const ResetPassword: React.FC = () => {
   const [showOldPass, setShowOldPass] = useState<boolean>(false);
@@ -64,9 +64,9 @@ const ResetPassword: React.FC = () => {
           </View>
           {/* <Text style={styles.error}>invalid Name</Text> */}
         </View>
-        <TouchableOpacity style={styles.resetBtn}>
-          <Text style={styles.resetBtnText}>Reset Password</Text>
-        </TouchableOpacity>
+
+        <AuthBtn title="Reset Password" />
+
       </View>
     </View>
   );

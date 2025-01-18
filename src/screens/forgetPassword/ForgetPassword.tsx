@@ -4,10 +4,10 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
+import AuthBtn from '../../components/Buttons/AuthBtn';
 
 const ForgetPassword: React.FC = () => {
   return (
@@ -31,9 +31,8 @@ const ForgetPassword: React.FC = () => {
           />
           {/* <Text style={styles.error}>invalid email</Text> */}
         </View>
-        <TouchableOpacity style={styles.MagicLinkBtn}>
-          <Text style={styles.MagicLinkBtnText}>Send Magic Link</Text>
-        </TouchableOpacity>
+
+        <AuthBtn title="Send Magic Link" />
       </View>
     </SafeAreaView>
   );

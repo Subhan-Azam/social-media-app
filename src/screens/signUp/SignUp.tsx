@@ -7,11 +7,11 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
+import AuthBtn from '../../components/Buttons/AuthBtn';
 
 const SignUp: React.FC = () => {
   const [password, setPassword] = useState<boolean>(false);
@@ -71,9 +71,9 @@ const SignUp: React.FC = () => {
               </View>
               {/* <Text style={styles.error}>invalid password</Text> */}
             </View>
-            <TouchableOpacity style={styles.signUpBtn}>
-              <Text style={styles.signUpBtnText}>Sign Up</Text>
-            </TouchableOpacity>
+
+            <AuthBtn title="Sign Up" />
+
             <View style={styles.logInWithGoogle}>
               <Image source={require('../../assets/images/Icon.png')} />
               <Text>Login with Google</Text>
