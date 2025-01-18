@@ -13,21 +13,14 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
-import {NavigationProp} from '@react-navigation/native';
 
-type RootStackParamList = {
-  LogIn: undefined;
-  SignUp: undefined;
-  ForgetPassword: undefined;
+type LogInProps = {
+  navigation: {
+    navigate: (screen: string) => void;
+  };
 };
 
-type LogInScreenNavigationProp = NavigationProp<RootStackParamList, 'LogIn'>;
-
-interface Props {
-  navigation: LogInScreenNavigationProp;
-}
-
-const LogIn: React.FC<Props> = ({navigation}) => {
+const LogIn: React.FC<LogInProps> = ({navigation}) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (

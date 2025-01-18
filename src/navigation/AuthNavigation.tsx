@@ -5,12 +5,19 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LogIn from '../screens/logIn/LogIn';
 import SignUp from '../screens/signUp/SignUp';
 import ForgetPassword from '../screens/forgetPassword/ForgetPassword';
+import SplashScreen from '../screens/splashScreen/SplashScreen';
 
 const AuthNavigation = () => {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="splash"
+          component={SplashScreen}
+          options={{headerShown: false}}
+        />
+
         <Stack.Screen
           name="LogIn"
           component={LogIn}
