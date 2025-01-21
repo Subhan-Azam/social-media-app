@@ -3,12 +3,13 @@ import React from 'react';
 
 type AuthBtnProps = {
   title: string;
+  onPress: () => void;
 };
 
-const AuthBtn: React.FC<AuthBtnProps> = ({title}) => {
+const AuthBtn: React.FC<AuthBtnProps> = ({title, onPress}) => {
   return (
     <>
-      <TouchableOpacity style={styles.logInBtn}>
+      <TouchableOpacity onPress={onPress} style={styles.logInBtn}>
         <Text style={styles.logInBtnText}>{title}</Text>
       </TouchableOpacity>
     </>

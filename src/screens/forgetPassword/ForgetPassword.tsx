@@ -9,23 +9,15 @@ import {
 } from 'react-native';
 import React from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
-import {NavigationProp} from '@react-navigation/native';
 
-type RootStackParamList = {
-  // ForgetPassword is name from AuthNavigation
-  ForgetPassword: undefined;
+type ForgetPasswordProps = {
+  navigation: {
+    navigate: (screen: 'string') => void;
+    goBack: () => void;
+  };
 };
 
-type SignUpScreenNavigationProp = NavigationProp<
-  RootStackParamList,
-  'ForgetPassword'
->;
-
-interface Props {
-  navigation: SignUpScreenNavigationProp;
-}
-
-const ForgetPassword: React.FC<Props> = ({navigation}) => {
+const ForgetPassword: React.FC<ForgetPasswordProps> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity

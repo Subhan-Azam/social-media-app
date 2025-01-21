@@ -10,7 +10,7 @@ type SplashScreenProps = {
 const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
   useEffect(() => {
     const timeOutHandler = setTimeout(() => {
-      navigation.replace('LogIn');
+      navigation.replace('logIn');
     }, 300);
     return () => clearTimeout(timeOutHandler);
   });

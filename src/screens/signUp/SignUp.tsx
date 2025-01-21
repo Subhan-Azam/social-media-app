@@ -11,24 +11,41 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
-import {NavigationProp} from '@react-navigation/native';
+import useHideShowPass from '../../hooks/useHideShowPass';
+import useSignUp from '../../hooks/useSignUp';
 
-type RootStackParamList = {
-  LogIn: undefined;
-  SignUp: undefined;
+type SignUpProps = {
+  navigation: {
+    navigate: (screen: string) => void;
+    goBack: () => void;
+  };
 };
 
-type SignUpScreenNavigationProp = NavigationProp<RootStackParamList, 'SignUp'>;
+const SignUp: React.FC<SignUpProps> = ({navigation}) => {
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    loading,
+    createUser,
+    errorInput,
+  } = useSignUp();
 
-interface Props {
-  navigation: SignUpScreenNavigationProp;
-}
-
-const SignUp: React.FC<Props> = ({navigation}) => {
-  const [password, setPassword] = useState<boolean>(false);
-  const [confirmPass, setConfirmPass] = useState<boolean>(false);
+  const {
+    showPassword: showPassword,
+    togglePasswordVisibility: toggleShowPassword,
+  } = useHideShowPass();
+  const {
+    showPassword: confirmShowPass,
+    togglePasswordVisibility: toggleConfirmShowPass,
+  } = useHideShowPass();
 
   return (
     <KeyboardAvoidingView
@@ -48,45 +65,57 @@ const SignUp: React.FC<Props> = ({navigation}) => {
             />
             <View style={styles.inputsBox}>
               <TextInput
+                value={name}
+                onChangeText={setName}
                 style={styles.textInput}
                 placeholder="Username"
                 placeholderTextColor="#00000033"
                 autoCapitalize="none"
               />
-              {/* <Text style={styles.error}>invalid Name</Text> */}
               <TextInput
+                value={email}
+                onChangeText={setEmail}
                 style={styles.textInput}
                 placeholder="Enter Email"
                 placeholderTextColor="#00000033"
                 keyboardType="email-address"
                 autoCapitalize="none"
               />
-              {/* <Text style={styles.error}>invalid Name</Text> */}
               <View style={styles.textInput}>
                 <TextInput
-                  secureTextEntry={!password}
+                  value={password}
+                  onChangeText={setPassword}
+                  secureTextEntry={!showPassword}
                   style={styles.textInputPass}
                   placeholder="Password"
                   placeholderTextColor="#00000033"
                   autoCapitalize="none"
                 />
-                <Text onPress={() => setPassword(!password)}>Chg</Text>
+                <Text onPress={toggleShowPassword}>
+                  {showPassword ? 'Hide' : 'Show'}
+                </Text>
               </View>
-              {/* <Text style={styles.error}>invalid Name</Text> */}
               <View style={styles.textInput}>
                 <TextInput
-                  secureTextEntry={!confirmPass}
+                  value={confirmPassword}
+                  onChangeText={setConfirmPassword}
+                  secureTextEntry={!confirmShowPass}
                   style={styles.textInputPass}
                   placeholder="Confirm Password"
                   placeholderTextColor="#00000033"
                   autoCapitalize="none"
                 />
-                <Text onPress={() => setConfirmPass(!confirmPass)}>Chg</Text>
+                <Text onPress={toggleConfirmShowPass}>
+                  {confirmShowPass ? 'Hide' : 'Show'}
+                </Text>
               </View>
-              {/* <Text style={styles.error}>invalid password</Text> */}
+              {errorInput && <Text style={styles.error}>{errorInput}</Text>}
             </View>
 
-            <AuthBtn title="Sign Up" />
+            <AuthBtn
+              onPress={createUser}
+              title={loading ? 'Loading...' : 'Sign Up'}
+            />
 
             <View style={styles.logInWithGoogle}>
               <Image source={require('../../assets/images/Icon.png')} />
@@ -101,7 +130,7 @@ const SignUp: React.FC<Props> = ({navigation}) => {
               <Text style={styles.signUpText1}>Already have an account? </Text>
               <Text
                 style={styles.signUpText2}
-                onPress={() => navigation.navigate('LogIn')}>
+                onPress={() => navigation.navigate('logIn')}>
                 Log In.
               </Text>
             </View>

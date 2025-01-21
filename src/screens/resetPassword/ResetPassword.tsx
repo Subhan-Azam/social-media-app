@@ -1,16 +1,35 @@
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
+import useHideShowPass from '../../hooks/useHideShowPass';
 
-const ResetPassword: React.FC = () => {
-  const [showOldPass, setShowOldPass] = useState<boolean>(false);
-  const [showNewPass, setShowNewPass] = useState<boolean>(false);
-  const [showConfirmPass, setShowConfirmPass] = useState<boolean>(false);
+type ResetPasswordProps = {
+  navigation: {
+    navigate: (screen: string) => void;
+    goBack: () => void;
+  };
+};
+const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
+  const {showPassword: showOldPass, togglePasswordVisibility: toggleOldPass} =
+    useHideShowPass(false);
+  const {showPassword: showNewPass, togglePasswordVisibility: toggleNewPass} =
+    useHideShowPass(false);
+  const {
+    showPassword: showConfirmPass,
+    togglePasswordVisibility: toggleConfirmPass,
+  } = useHideShowPass(false);
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        // onPress={() => navigation.goBack()}
+        onPress={() => navigation.goBack()}
         style={styles.backIcon}>
         <Image source={require('../../assets/images/backIcon.png')} />
       </TouchableOpacity>
@@ -29,7 +48,7 @@ const ResetPassword: React.FC = () => {
               autoCapitalize="none"
             />
 
-            <Text onPress={() => setShowOldPass(!showOldPass)}>Chg</Text>
+            <Text onPress={toggleOldPass}>{showOldPass ? 'Hide' : 'Show'}</Text>
           </View>
           {/* <Text style={styles.error}>invalid Name</Text> */}
           <View style={styles.textInput}>
@@ -40,8 +59,7 @@ const ResetPassword: React.FC = () => {
               placeholderTextColor="#00000033"
               autoCapitalize="none"
             />
-
-            <Text onPress={() => setShowNewPass(!showNewPass)}>Chg</Text>
+            <Text onPress={toggleNewPass}>{showOldPass ? 'Hide' : 'Show'}</Text>
           </View>
           {/* <Text style={styles.error}>invalid Name</Text> */}
           <View style={styles.textInput}>
@@ -53,8 +71,8 @@ const ResetPassword: React.FC = () => {
               autoCapitalize="none"
             />
 
-            <Text onPress={() => setShowConfirmPass(!showConfirmPass)}>
-              Chg
+            <Text onPress={toggleConfirmPass}>
+              {showOldPass ? 'Hide' : 'Show'}
             </Text>
           </View>
           {/* <Text style={styles.error}>invalid Name</Text> */}
