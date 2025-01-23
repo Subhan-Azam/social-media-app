@@ -34,8 +34,8 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
     confirmPassword,
     setConfirmPassword,
     loading,
-    createUser,
     errorInput,
+    createUser,
   } = useSignUp();
 
   const {
@@ -112,10 +112,7 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
               {errorInput && <Text style={styles.error}>{errorInput}</Text>}
             </View>
 
-            <AuthBtn
-              onPress={createUser}
-              title={loading ? 'Loading...' : 'Sign Up'}
-            />
+            <AuthBtn onPress={createUser} title="Sign Up" loading={loading} />
 
             <View style={styles.logInWithGoogle}>
               <Image source={require('../../assets/images/Icon.png')} />

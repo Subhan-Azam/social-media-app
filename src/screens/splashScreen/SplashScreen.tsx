@@ -1,20 +1,7 @@
 import {StyleSheet, Image, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 
-type SplashScreenProps = {
-  navigation: {
-    replace: (screen: string) => void;
-  };
-};
-
-const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
-  useEffect(() => {
-    const timeOutHandler = setTimeout(() => {
-      navigation.replace('logIn');
-    }, 300);
-    return () => clearTimeout(timeOutHandler);
-  });
-
+const SplashScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Image

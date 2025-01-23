@@ -1,20 +1,28 @@
-import {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import auth from '@react-native-firebase/auth';
-import {Alert} from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+import {
+  setEmail,
+  setPassword,
+  setErrorInput,
+  setLoading,
+  resetForm,
+} from '../store/slices/logInSlice';
+import {RootState} from '../store/store';
 
 const useLogIn = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [errorInput, setErrorInput] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-
+  const dispatch = useDispatch();
+  // const { email, password, errorInput, loading } = useSelector((state: RootState) => state.logInStore);
+  const {email, password, errorInput, loading} = useSelector(
+    (state: RootState) => state.logInStore,
+  );
   const userValidation = () => {
     if (!email.trim() || !password.trim()) {
-      setErrorInput('All Fields are required.');
+      dispatch(setErrorInput('All Fields are required.'));
       return false;
     }
     if (!/\S+@\S+\.\S+/.test(email.trim())) {
-      setErrorInput('Please enter a valid email address.');
+      dispatch(setErrorInput('Please enter a valid email address.'));
       return false;
     }
     return true;
@@ -26,32 +34,41 @@ const useLogIn = () => {
     }
 
     try {
-      setLoading(true);
-      await auth().signInWithEmailAndPassword(email, password);
-      Alert.alert('Success', 'Logged in successfully!');
-      setEmail('');
-      setPassword('');
-      setErrorInput(null);
-    } 
-    catch (error: any) {
-      if (error.code === 'auth/user-not-found') {
-        setErrorInput('No user found with this email.');
-      } else if (error.code === 'auth/wrong-password') {
-        setErrorInput('Incorrect password.');
-      } else {
-        setErrorInput('An unexpected error occurred.');
+      dispatch(setLoading(true));
+      const userCredential = await auth().signInWithEmailAndPassword(
+        email,
+        password,
+      );
+
+      const userDoc = await firestore()
+        .collection('users')
+        .doc(userCredential.user.uid)
+        .get();
+      if (!userDoc.exists) {
+        await auth().signOut();
+        dispatch(setErrorInput('User not found in the database.'));
+        return;
       }
-    } 
-    finally {
-      setLoading(false);
+
+      dispatch(resetForm());
+    } catch (error: any) {
+      if (error.code === 'auth/user-not-found') {
+        dispatch(setErrorInput('No user found with this email.'));
+      } else if (error.code === 'auth/wrong-password') {
+        dispatch(setErrorInput('Incorrect password.'));
+      } else {
+        dispatch(setErrorInput('An unexpected error occurred.'));
+      }
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 
   return {
     email,
-    setEmail,
+    setEmail: (text: string) => dispatch(setEmail(text)),
     password,
-    setPassword,
+    setPassword: (text: string) => dispatch(setPassword(text)),
     errorInput,
     loading,
     userLogin,

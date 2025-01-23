@@ -1,16 +1,26 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 
 type AuthBtnProps = {
   title: string;
   onPress: () => void;
+  loading: boolean;
 };
 
-const AuthBtn: React.FC<AuthBtnProps> = ({title, onPress}) => {
+const AuthBtn: React.FC<AuthBtnProps> = ({title, onPress, loading = false}) => {
   return (
     <>
       <TouchableOpacity onPress={onPress} style={styles.logInBtn}>
-        <Text style={styles.logInBtnText}>{title}</Text>
+        {loading ? (
+          <ActivityIndicator color="#ffffff" />
+        ) : (
+          <Text style={styles.logInBtnText}>{title}</Text>
+        )}
       </TouchableOpacity>
     </>
   );
