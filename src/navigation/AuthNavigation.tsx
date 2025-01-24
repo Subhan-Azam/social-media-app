@@ -53,17 +53,17 @@ const AppNavigator = () => {
       ) : (
         <>
           <Stack.Screen
-            name="LogIn"
+            name="logIn"
             component={LogIn}
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="SignUp"
+            name="signUp"
             component={SignUp}
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="ForgetPassword"
+            name="forgetPassword"
             component={ForgetPassword}
             options={{headerShown: false}}
           />

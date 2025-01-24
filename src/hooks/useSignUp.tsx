@@ -1,99 +1,80 @@
-import auth from '@react-native-firebase/auth';
-// import {useState} from 'react';
-import {Alert} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import firestore from '@react-native-firebase/firestore';
-import {
-  setName,
-  setEmail,
-  setPassword,
-  setConfirmPassword,
-  setErrorInput,
-  setLoading,
-  resetForm,
-} from '../store/slices/signUpSlice';
-import {RootState} from '../store/store';
+import {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {signUpUser} from '../store/slices/authSlice';
+import {AppDispatch} from '../store/store';
 
 const useSignUp = () => {
-  const dispatch = useDispatch();
-  const {name, email, password, confirmPassword, errorInput, loading} =
-    useSelector((state: RootState) => state.signUpStore);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorInput, setErrorInput] = useState('');
 
-  const userValidation = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  // Validation logic
+  const validateInputs = () => {
     if (!name || !email || !password || !confirmPassword) {
-      console.log('Error', 'All Fields are required.');
-      dispatch(setErrorInput('All Fields are required.'));
-      return false;
+      return 'All fields are required.';
     }
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      console.log('Error', 'Please enter a valid email address.');
-      dispatch(setErrorInput('Please enter a valid email address.'));
-      return false;
+    if (!name.trim()) {
+      return 'Name is required.';
     }
-    if (password.length < 6 || confirmPassword.length < 6) {
-      console.log('Error', 'minimum 6 character require');
-      dispatch(setErrorInput('minimum 6 character require'));
-      return false;
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return 'Invalid email address.';
+    }
+    if (password.length < 6) {
+      return 'Password must be at least 6 characters.';
     }
     if (password !== confirmPassword) {
-      console.log('Error', 'Passwords do not match.');
-      dispatch(setErrorInput('Passwords do not match.'));
-      return false;
+      return 'Passwords do not match.';
     }
-    return true;
+    return null;
   };
 
+  // Function to create a user
   const createUser = async () => {
-    if (!userValidation()) {
+    const error = validateInputs();
+    if (error) {
+      setErrorInput(error);
       return;
     }
 
+    setErrorInput('');
+    setLoading(true);
+
     try {
-      dispatch(setLoading(true));
-      const userCredential = await auth().createUserWithEmailAndPassword(
-        email,
-        password,
-      );
-      const userId = userCredential.user.uid;
+      // Dispatch the sign-up action
+      await dispatch(
+        signUpUser({
+          name,
+          email,
+          password,
+        }),
+      ).unwrap();
 
-      await auth().currentUser?.updateProfile({displayName: name});
-
-      await firestore().collection('users').doc(userId).set({
-        id: userId,
-        name,
-        email,
-        createdAt: firestore.FieldValue.serverTimestamp(),
-      });
-
-      dispatch(resetForm());
-      Alert.alert('user successfully sign in!');
+      // Handle success (optional: navigate to another screen)
+      console.log('User signed up successfully!');
     } catch (error: any) {
-      if (error.code === 'auth/email-already-in-use') {
-        console.log('user already in use!');
-        dispatch(setErrorInput('user already in use!'));
-      } else if (error.code === 'auth/invalid-email') {
-        console.log('That email address is invalid!');
-        dispatch(setErrorInput('That email address is invalid!'));
-      } else {
-        console.error('Error: ', error);
-        dispatch(setErrorInput('An unexpected error occurred.'));
-      }
+      setErrorInput(error.message || 'An error occurred during sign up.');
     } finally {
       setLoading(false);
     }
   };
+
   return {
     name,
-    setName: (text: string) => dispatch(setName(text)),
+    setName,
     email,
-    setEmail: (text: string) => dispatch(setEmail(text)),
+    setEmail,
     password,
-    setPassword: (text: string) => dispatch(setPassword(text)),
+    setPassword,
     confirmPassword,
-    setConfirmPassword: (text: string) => dispatch(setConfirmPassword(text)),
+    setConfirmPassword,
     loading,
-    createUser,
     errorInput,
+    createUser,
   };
 };
 

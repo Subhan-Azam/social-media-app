@@ -1,10 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
+import UserBio from '../../components/userBio/UserBio';
 
 const SelfProfile = () => {
   return (
     <View style={styles.container}>
-      <Text>SelfProfile</Text>
+      <UserBio />
     </View>
   );
 };
