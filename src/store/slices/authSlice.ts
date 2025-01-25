@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
-export const signUpUser = createAsyncThunk(
+export const signUpSlice = createAsyncThunk(
   'signUp/Authentication',
   async (
     {name, email, password}: {name: string; email: string; password: string},
@@ -23,7 +23,7 @@ export const signUpUser = createAsyncThunk(
       });
 
       // Save user data to Firestore
-      await firestore().collection('Users').doc(user.uid).set({
+      await firestore().collection('Users').doc().set({
         id: user.uid,
         name,
         email,
@@ -46,7 +46,7 @@ export const signUpUser = createAsyncThunk(
   },
 );
 
-export const loginUser = createAsyncThunk(
+export const loginUserSlice = createAsyncThunk(
   'login/Authentication',
   async (
     {email, password}: {email: string; password: string},
@@ -73,6 +73,34 @@ export const loginUser = createAsyncThunk(
   },
 );
 
+// forgetPasswordSlice
+export const forgetPasswordSlice = createAsyncThunk(
+  'auth/reset-password',
+  async ({email}: {email: string}, {rejectWithValue}) =>
+    // {rejectWithValue},
+    {
+      try {
+        await auth().sendPasswordResetEmail(email);
+        return {
+          email,
+        };
+      } catch (error: any) {
+        let errorMessage = error.message;
+        if (error.message === 'auth/invalid-email') {
+          errorMessage('Invalid Email');
+          console.log('Invalid Email');
+        } else if (error.message === 'auth/user-not-found') {
+          errorMessage('user-not-found');
+          console.log('user-not-found');
+        } else {
+          errorMessage('Unexpected Error occur');
+          console.log('Unexpected Error occur');
+        }
+        return rejectWithValue(errorMessage);
+      }
+    },
+);
+
 const initialState = {
   username: '',
   email: '',
@@ -96,32 +124,45 @@ const authSlice = createSlice({
   extraReducers: builder => {
     builder
       // Sign up cases
-      .addCase(signUpUser.pending, state => {
+      .addCase(signUpSlice.pending, state => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(signUpUser.fulfilled, (state, action) => {
+      .addCase(signUpSlice.fulfilled, (state, action) => {
         state.loading = false;
         state.username = action.payload.userName;
         state.userId = action.payload.userId;
         state.email = action.payload.email;
       })
-      .addCase(signUpUser.rejected, (state, action) => {
+      .addCase(signUpSlice.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })
       // Login cases
-      .addCase(loginUser.pending, state => {
+      .addCase(loginUserSlice.pending, state => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(loginUserSlice.fulfilled, (state, action) => {
         state.loading = false;
         state.userId = action.payload.userId;
         state.username = action.payload.userName || ' ';
         state.email = action.payload.email || '';
       })
-      .addCase(loginUser.rejected, (state, action) => {
+      .addCase(loginUserSlice.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      // Forget password
+      .addCase(forgetPasswordSlice.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(forgetPasswordSlice.fulfilled, (state, action) => {
+        state.loading = false;
+        state.email = action.payload.email || '';
+      })
+      .addCase(forgetPasswordSlice.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
@@ -129,132 +170,3 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-
-// import auth from '@react-native-firebase/auth';
-// import firestore from '@react-native-firebase/firestore';
-// import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-
-// // for signUp
-
-// export const signUpUser = createAsyncThunk(
-//   'signUp/authentication',
-//   async (
-//     {name, email, password}: {name: string; email: string; password: string},
-//     {rejectWithValue},
-//   ) => {
-//     try {
-//       const userCredential = await auth().createUserWithEmailAndPassword(
-//         email,
-//         password,
-//       );
-
-//       console.log('userCredential', userCredential.user);
-//       const user = userCredential.user;
-
-//       await user.updateProfile({displayName: name});
-
-//       await firestore().collection('Users').doc(user.uid).set({
-//         id: user.uid,
-//         name,
-//         email,
-//         createdAt: firestore.Timestamp.now(),
-//       });
-
-//       return {
-//         userName: name,
-//         email: email,
-//         userId: user.uid,
-//       };
-//     } catch (error: any) {
-//       console.log('error', error);
-//       return rejectWithValue(
-//         error.message || 'An error occurred during log in',
-//       );
-//     }
-//   },
-// );
-
-// // For Login
-
-// export const loginUser = createAsyncThunk(
-//   'login/Authentication',
-//   async (
-//     {email, password}: {email: string; password: string},
-//     {rejectWithValue},
-//   ) => {
-//     try {
-//       const userCredentials = await auth().signInWithEmailAndPassword(
-//         email,
-//         password,
-//       );
-//       console.log('user userCredentials', userCredentials.user);
-//       const user = userCredentials.user;
-//       return {
-//         userName: user.displayName,
-//         userId: user.uid,
-//         email: user.email,
-//       };
-//     } catch (error: any) {
-//       console.log('An error occurred during log in');
-//       return rejectWithValue(
-//         error.message || 'An error occurred during log in',
-//       );
-//     }
-//   },
-// );
-
-// const initialState = {
-//   userName: '',
-//   email: '',
-//   password: '',
-//   userId: '',
-//   loading: false,
-//   error: null,
-// } as {
-//   userName: string;
-//   email: string;
-//   password: string;
-//   userId: string;
-//   loading: boolean;
-//   error: string | null;
-// };
-
-// const authSlice = createSlice({
-//   name: 'auth',
-//   initialState,
-//   reducers: {},
-//   extraReducers: builder => {
-//     builder
-//       .addCase(signUpUser.pending, state => {
-//         state.loading = true;
-//         state.error = null;
-//       })
-//       .addCase(signUpUser.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.userName = action.payload.userName;
-//         state.email = action.payload.email;
-//         state.userId = action.payload.userId;
-//       })
-//       .addCase(signUpUser.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload as string;
-//       });
-//     // Login cases
-//       .addCase(loginUser.pending, state => {
-//        state.loading = true;
-//        state.error = null;
-//      })
-//      .addCase(loginUser.fulfilled, (state, action) => {
-//        state.loading = false;
-//        state.userId = action.payload.userId;
-//        state.username = action.payload.userName || ' ';
-//        state.email = action.payload.email || '';
-//      })
-//      .addCase(loginUser.rejected, (state, action) => {
-//        state.loading = false;
-//        state.error = action.payload as string;
-//      });
-//        },
-//      });
-
-// export default authSlice.reducer;

@@ -1,12 +1,12 @@
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import type {AppDispatch, RootState} from '../store/store'; // Adjust path as needed
-import {loginUser} from '../store/slices/authSlice';
+import {loginUserSlice} from '../store/slices/authSlice';
 
 const useLogIn = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const {loading, error} = useSelector((state: RootState) => state.auth);
 
+  const {loading, error} = useSelector((state: RootState) => state.authStore);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorInput, setErrorInput] = useState('');
@@ -20,7 +20,7 @@ const useLogIn = () => {
 
     try {
       await dispatch(
-        loginUser({
+        loginUserSlice({
           email,
           password,
         }),

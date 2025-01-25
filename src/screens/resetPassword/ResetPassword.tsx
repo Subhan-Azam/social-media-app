@@ -1,5 +1,6 @@
 import {
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -27,7 +28,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
   } = useHideShowPass(false);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={styles.backIcon}>
@@ -43,7 +44,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
             <TextInput
               secureTextEntry={!showOldPass}
               style={styles.textInputPass}
-              placeholder="Enter Password"
+              placeholder="Old Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
             />
@@ -55,7 +56,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
             <TextInput
               secureTextEntry={!showNewPass}
               style={styles.textInputPass}
-              placeholder="Enter Password"
+              placeholder="New Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
             />
@@ -66,7 +67,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
             <TextInput
               secureTextEntry={!showConfirmPass}
               style={styles.textInputPass}
-              placeholder="Enter Password"
+              placeholder="Confirm Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
             />
@@ -80,7 +81,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
 
         <AuthBtn title="Reset Password" />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -101,7 +102,8 @@ const styles = StyleSheet.create({
   },
   box: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    marginTop: 120,
     alignItems: 'center',
     gap: 15,
     padding: 20,

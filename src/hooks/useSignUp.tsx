@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {signUpUser} from '../store/slices/authSlice';
+import {signUpSlice} from '../store/slices/authSlice';
 import {AppDispatch} from '../store/store';
 
 const useSignUp = () => {
@@ -47,7 +47,7 @@ const useSignUp = () => {
     try {
       // Dispatch the sign-up action
       await dispatch(
-        signUpUser({
+        signUpSlice({
           name,
           email,
           password,

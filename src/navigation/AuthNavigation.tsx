@@ -10,6 +10,7 @@ import ResetPassword from '../screens/resetPassword/ResetPassword';
 import {Provider} from 'react-redux';
 import {store} from '../store/store';
 import TabNavigation from './TabNavigation';
+import EditProfile from '../screens/editProfile/EditProfile';
 
 const AppNavigator = () => {
   const [initializing, setInitializing] = useState<boolean>(true);
@@ -32,7 +33,7 @@ const AppNavigator = () => {
   useEffect(() => {
     const timeoutHandler = setTimeout(() => {
       setSplashShow(false);
-    }, 1000); // Adjust splash screen duration if needed
+    }, 1500);
     return () => clearTimeout(timeoutHandler);
   }, [initializing]);
 
@@ -47,6 +48,16 @@ const AppNavigator = () => {
           <Stack.Screen
             name="Home"
             component={TabNavigation}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="EditProfile"
+            component={EditProfile}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
             options={{headerShown: false}}
           />
         </>
@@ -65,11 +76,6 @@ const AppNavigator = () => {
           <Stack.Screen
             name="forgetPassword"
             component={ForgetPassword}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="ResetPassword"
-            component={ResetPassword}
             options={{headerShown: false}}
           />
         </>

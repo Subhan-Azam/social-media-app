@@ -15,6 +15,7 @@ import React from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useSignUp from '../../hooks/useSignUp';
+import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
 
 type SignUpProps = {
   navigation: {
@@ -123,14 +124,19 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
               <Text>OR</Text>
               <View style={styles.line} />
             </View>
-            <View style={styles.signUpSec}>
+            <PageShiftAuth
+              title1="Already have an account? "
+              title2="Log In."
+              onPress={() => navigation.navigate('logIn')}
+            />
+            {/* <View style={styles.signUpSec}>
               <Text style={styles.signUpText1}>Already have an account? </Text>
               <Text
                 style={styles.signUpText2}
                 onPress={() => navigation.navigate('logIn')}>
                 Log In.
               </Text>
-            </View>
+            </View> */}
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>
@@ -218,7 +224,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 50,
-    marginBottom: 30,
   },
   line: {
     flex: 1,

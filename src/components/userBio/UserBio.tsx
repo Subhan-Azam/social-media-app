@@ -3,21 +3,23 @@ import React from 'react';
 
 const UserBio = () => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.lockText}>jacob_w</Text>
-      <View style={styles.profileImgSec}>
-        <Image
-          style={styles.profileImg}
-          source={require('../../assets/images/ProfileImg.png')}
-        />
-      </View>
-      <Text style={styles.officialNameText}>joshua_l</Text>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.lockText}>jacob_w</Text>
+        <View style={styles.profileImgSec}>
+          <Image
+            style={styles.profileImg}
+            source={require('../../assets/images/ProfileImg.png')}
+          />
+        </View>
+        <Text style={styles.officialNameText}>joshua_l</Text>
 
-      <Text style={styles.bio}>
-        Digital goodies designer
-        <Text style={styles.bioTag}> @joshua_l </Text>
-        Everything is designed.
-      </Text>
+        <Text style={styles.bio}>
+          Digital goodies designer
+          <Text style={styles.bioTag}> @joshua_l </Text>
+          Everything is designed.
+        </Text>
+      </View>
     </ScrollView>
   );
 };
@@ -43,6 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 3,
+    marginVertical: 8,
   },
   profileImg: {
     width: '100%',
@@ -57,6 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     width: 240,
     borderColor: '#C7C7CC',
+    marginBottom: 10,
   },
   bioTag: {
     color: '#05386B',
