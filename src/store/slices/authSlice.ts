@@ -14,7 +14,7 @@ export const signUpSlice = createAsyncThunk(
         password,
       );
 
-      console.log('user userCredential', userCredential.user);
+      // console.log('user userCredential', userCredential.user);
       const user = userCredential.user;
 
       // Update user profile with the username
@@ -30,7 +30,7 @@ export const signUpSlice = createAsyncThunk(
         createdAt: firestore.FieldValue.serverTimestamp(),
       });
 
-      console.log('User Successfully signUp');
+      // console.log('User Successfully signUp');
 
       return {
         userName: name,
@@ -38,7 +38,7 @@ export const signUpSlice = createAsyncThunk(
         email,
       };
     } catch (error: any) {
-      console.log('An error occurred during sign up');
+      // console.log('An error occurred during sign up');
       return rejectWithValue(
         error.message || 'An error occurred during sign up',
       );
@@ -57,7 +57,7 @@ export const loginUserSlice = createAsyncThunk(
         email,
         password,
       );
-      console.log('user userCredentials', userCredentials.user);
+      // console.log('user userCredentials', userCredentials.user);
       const user = userCredentials.user;
       return {
         userName: user.displayName,
@@ -65,7 +65,7 @@ export const loginUserSlice = createAsyncThunk(
         email: user.email,
       };
     } catch (error: any) {
-      console.log('An error occurred during log in');
+      // console.log('An error occurred during log in');
       return rejectWithValue(
         error.message || 'An error occurred during log in',
       );

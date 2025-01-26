@@ -25,7 +25,6 @@ const useLogIn = () => {
           password,
         }),
       ).unwrap();
-      console.log('Login successful!');
     } catch (err: any) {
       setErrorInput(err || 'Failed to log in. Please try again.');
     }
