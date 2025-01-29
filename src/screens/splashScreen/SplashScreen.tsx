@@ -1,7 +1,7 @@
 import {StyleSheet, Image, View} from 'react-native';
 import React from 'react';
 
-const SplashScreen = () => {
+const SplashScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Image

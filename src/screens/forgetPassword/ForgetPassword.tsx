@@ -9,23 +9,19 @@ import {
 } from 'react-native';
 import React from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
-import {NavigationProp} from '@react-navigation/native';
+import useForgetPass from '../../hooks/useForgetPass';
 
-type RootStackParamList = {
-  // ForgetPassword is name from AuthNavigation
-  ForgetPassword: undefined;
+type ForgetPasswordProps = {
+  navigation: {
+    navigate: (screen: 'string') => void;
+    goBack: () => void;
+  };
 };
 
-type SignUpScreenNavigationProp = NavigationProp<
-  RootStackParamList,
-  'ForgetPassword'
->;
+const ForgetPassword: React.FC<ForgetPasswordProps> = ({navigation}) => {
+  const {email, setEmail, loading, errorInput, handleForgetPassword} =
+    useForgetPass();
 
-interface Props {
-  navigation: SignUpScreenNavigationProp;
-}
-
-const ForgetPassword: React.FC<Props> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
@@ -41,15 +37,21 @@ const ForgetPassword: React.FC<Props> = ({navigation}) => {
         </Text>
         <View style={styles.inputsBox}>
           <TextInput
+            value={email}
+            onChangeText={setEmail}
             style={styles.textInput}
             placeholder="Enter Email"
             placeholderTextColor="#00000033"
             autoCapitalize="none"
           />
-          {/* <Text style={styles.error}>invalid email</Text> */}
         </View>
+        <Text style={styles.error}>{errorInput}</Text>
 
-        <AuthBtn title="Send Magic Link" />
+        <AuthBtn
+          onPress={handleForgetPassword}
+          loading={loading}
+          title="Send Magic Link"
+        />
       </View>
     </SafeAreaView>
   );
@@ -101,6 +103,8 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 12,
     marginTop: -15,
+    width: '100%',
+    textAlign: 'left',
   },
   MagicLinkBtn: {
     backgroundColor: '#3797EF',

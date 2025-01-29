@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "793741851762",
+    "project_id": "insta-app-d644e",
+    "storage_bucket": "insta-app-d644e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793741851762:android:ab72a039e0396df037d6eb",
+        "android_client_info": {
+          "package_name": "com.socialmediaapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMjU0FUYDjx9wQO9nX5GgJg4iPJpLlebQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

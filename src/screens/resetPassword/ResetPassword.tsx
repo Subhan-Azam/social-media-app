@@ -1,16 +1,50 @@
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import AuthBtn from '../../components/Buttons/AuthBtn';
+import useHideShowPass from '../../hooks/useHideShowPass';
+import useResetPassword from '../../hooks/useResetPassword';
 
-const ResetPassword: React.FC = () => {
-  const [showOldPass, setShowOldPass] = useState<boolean>(false);
-  const [showNewPass, setShowNewPass] = useState<boolean>(false);
-  const [showConfirmPass, setShowConfirmPass] = useState<boolean>(false);
+type ResetPasswordProps = {
+  navigation: {
+    navigate: (screen: string) => void;
+    goBack: () => void;
+  };
+};
+
+const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
+  const {showPassword: showOldPass, togglePasswordVisibility: toggleOldPass} =
+    useHideShowPass();
+  const {showPassword: showNewPass, togglePasswordVisibility: toggleNewPass} =
+    useHideShowPass();
+  const {
+    showPassword: showConfirmPass,
+    togglePasswordVisibility: toggleConfirmPass,
+  } = useHideShowPass();
+
+  const {
+    oldPassword,
+    setOldPassword,
+    newPassword,
+    setNewPassword,
+    confirmPassword,
+    setConfirmPassword,
+    loading,
+    error,
+    resetPassword,
+  } = useResetPassword();
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TouchableOpacity
-        // onPress={() => navigation.goBack()}
+        onPress={() => navigation.goBack()}
         style={styles.backIcon}>
         <Image source={require('../../assets/images/backIcon.png')} />
       </TouchableOpacity>
@@ -24,45 +58,50 @@ const ResetPassword: React.FC = () => {
             <TextInput
               secureTextEntry={!showOldPass}
               style={styles.textInputPass}
-              placeholder="Enter Password"
+              placeholder="Old Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
+              value={oldPassword}
+              onChangeText={setOldPassword}
             />
-
-            <Text onPress={() => setShowOldPass(!showOldPass)}>Chg</Text>
+            <Text onPress={toggleOldPass}>{showOldPass ? 'Hide' : 'Show'}</Text>
           </View>
-          {/* <Text style={styles.error}>invalid Name</Text> */}
           <View style={styles.textInput}>
             <TextInput
               secureTextEntry={!showNewPass}
               style={styles.textInputPass}
-              placeholder="Enter Password"
+              placeholder="New Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
+              value={newPassword}
+              onChangeText={setNewPassword}
             />
-
-            <Text onPress={() => setShowNewPass(!showNewPass)}>Chg</Text>
+            <Text onPress={toggleNewPass}>{showNewPass ? 'Hide' : 'Show'}</Text>
           </View>
-          {/* <Text style={styles.error}>invalid Name</Text> */}
           <View style={styles.textInput}>
             <TextInput
               secureTextEntry={!showConfirmPass}
               style={styles.textInputPass}
-              placeholder="Enter Password"
+              placeholder="Confirm Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
             />
-
-            <Text onPress={() => setShowConfirmPass(!showConfirmPass)}>
-              Chg
+            <Text onPress={toggleConfirmPass}>
+              {showConfirmPass ? 'Hide' : 'Show'}
             </Text>
           </View>
-          {/* <Text style={styles.error}>invalid Name</Text> */}
+          {error && <Text style={styles.error}>{error}</Text>}
         </View>
 
-        <AuthBtn title="Reset Password" />
+        <AuthBtn
+          loading={loading}
+          title="Reset Password"
+          onPress={resetPassword}
+        />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -83,7 +122,7 @@ const styles = StyleSheet.create({
   },
   box: {
     flex: 1,
-    justifyContent: 'center',
+    marginTop: 120,
     alignItems: 'center',
     gap: 15,
     padding: 20,
@@ -103,7 +142,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
     borderWidth: 1,
     borderRadius: 5,
-    borderBlockColor: '#0000001A',
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -117,18 +155,5 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 12,
     marginTop: -15,
-  },
-  resetBtn: {
-    backgroundColor: '#3797EF',
-    width: '100%',
-    height: 44,
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  resetBtnText: {
-    color: 'white',
-    fontWeight: 600,
   },
 });
