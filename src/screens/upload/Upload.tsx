@@ -160,7 +160,6 @@
 
 import React from 'react';
 import {
-  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -169,51 +168,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {launchImageLibrary} from 'react-native-image-picker';
-// import {useDispatch, useSelector} from 'react-redux';
-import {
-  setImageUri,
-  setDescription,
-  uploadPost,
-} from '../../store/slices/uploadPostSlice'; // Adjust the path accordingly
+
 import AuthBtn from '../../components/Buttons/AuthBtn';
-import useAppSelector from '../../hooks/useAppSelector';
-import useAppDispatch from '../../hooks/useAppDispatch';
+import useUploadPost from '../../hooks/useUploadPost';
 
 const Upload = () => {
-  const dispatch = useAppDispatch();
-  const imageUri = useAppSelector(state => state.uploadPostStore.imageUri);
-  const description = useAppSelector(
-    state => state.uploadPostStore.description,
-  );
-  const loading = useAppSelector(state => state.uploadPostStore.loading);
-  const error = useAppSelector(state => state.uploadPostStore.error);
-
-  const pickImage = () => {
-    launchImageLibrary({mediaType: 'photo', quality: 1}, response => {
-      if (response.didCancel) {
-        console.log('User canceled image picker');
-      } else if (response.errorCode) {
-        console.log('ImagePicker Error: ', response.errorCode);
-      } else {
-        if (response.assets && response.assets[0].uri) {
-          dispatch(setImageUri(response.assets[0].uri)); // Dispatch to Redux to set image URI
-        } else {
-          console.log('No URI found');
-        }
-      }
-    });
-  };
-
-  const uploadData = () => {
-    if (!imageUri || !description) {
-      Alert.alert('Please select an image and enter a description');
-      return;
-    }
-
-    dispatch(uploadPost({imageUri, description}));
-    Alert.alert('Post uploaded successfully!');
-  };
+  const {
+    imageUri,
+    description,
+    loading,
+    pickImage,
+    uploadData,
+    setDescription,
+  } = useUploadPost();
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -225,10 +192,7 @@ const Upload = () => {
       <View style={styles.centerUploadSec}>
         <TouchableOpacity style={styles.uploadImgBox} onPress={pickImage}>
           {imageUri ? (
-            <Image
-              source={{uri: imageUri}}
-              style={{height: '100%', width: '100%'}}
-            />
+            <Image source={{uri: imageUri}} style={styles.uploadedImage} />
           ) : (
             <Image source={require('../../assets/images/Upload.png')} />
           )}
@@ -240,10 +204,9 @@ const Upload = () => {
             style={styles.descInput}
             placeholder="Add post description"
             value={description}
-            onChangeText={text => dispatch(setDescription(text))} // Dispatch to Redux to set description
+            onChangeText={setDescription}
           />
         </View>
-        {error && <Text style={{color: 'red'}}>{error}</Text>}
 
         <View style={styles.AuthBtn}>
           <AuthBtn title="Upload" loading={loading} onPress={uploadData} />
@@ -288,6 +251,10 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 2,
     borderStyle: 'dashed',
+  },
+  uploadedImage: {
+    height: '100%',
+    width: '100%',
   },
   descSec: {
     justifyContent: 'center',

@@ -11,6 +11,7 @@ import {Provider} from 'react-redux';
 import {store} from '../store/store';
 import TabNavigation from './TabNavigation';
 import EditProfile from '../screens/editProfile/EditProfile';
+import UserProfile from '../screens/userProfile/UserProfile';
 
 const AppNavigator = () => {
   const [initializing, setInitializing] = useState<boolean>(true);
@@ -50,6 +51,12 @@ const AppNavigator = () => {
             component={TabNavigation}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="userProfile"
+            component={UserProfile}
+            options={{headerShown: false}}
+          />
+
           <Stack.Screen
             name="EditProfile"
             component={EditProfile}

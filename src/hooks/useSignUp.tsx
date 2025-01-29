@@ -55,8 +55,8 @@ const useSignUp = () => {
       ).unwrap();
 
       // Handle success (optional: navigate to another screen)
-    } catch (error: any) {
-      setErrorInput(error.message || 'An error occurred during sign up.');
+    } catch (err: any) {
+      setErrorInput(err.message || 'An error occurred during sign up.');
     } finally {
       setLoading(false);
     }

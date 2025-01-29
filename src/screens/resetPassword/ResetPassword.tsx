@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Image,
   ScrollView,
@@ -7,9 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
 import useHideShowPass from '../../hooks/useHideShowPass';
+import useResetPassword from '../../hooks/useResetPassword';
 
 type ResetPasswordProps = {
   navigation: {
@@ -17,15 +18,28 @@ type ResetPasswordProps = {
     goBack: () => void;
   };
 };
+
 const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
   const {showPassword: showOldPass, togglePasswordVisibility: toggleOldPass} =
-    useHideShowPass(false);
+    useHideShowPass();
   const {showPassword: showNewPass, togglePasswordVisibility: toggleNewPass} =
-    useHideShowPass(false);
+    useHideShowPass();
   const {
     showPassword: showConfirmPass,
     togglePasswordVisibility: toggleConfirmPass,
-  } = useHideShowPass(false);
+  } = useHideShowPass();
+
+  const {
+    oldPassword,
+    setOldPassword,
+    newPassword,
+    setNewPassword,
+    confirmPassword,
+    setConfirmPassword,
+    loading,
+    error,
+    resetPassword,
+  } = useResetPassword();
 
   return (
     <ScrollView style={styles.container}>
@@ -47,11 +61,11 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
               placeholder="Old Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
+              value={oldPassword}
+              onChangeText={setOldPassword}
             />
-
             <Text onPress={toggleOldPass}>{showOldPass ? 'Hide' : 'Show'}</Text>
           </View>
-          {/* <Text style={styles.error}>invalid Name</Text> */}
           <View style={styles.textInput}>
             <TextInput
               secureTextEntry={!showNewPass}
@@ -59,10 +73,11 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
               placeholder="New Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
+              value={newPassword}
+              onChangeText={setNewPassword}
             />
-            <Text onPress={toggleNewPass}>{showOldPass ? 'Hide' : 'Show'}</Text>
+            <Text onPress={toggleNewPass}>{showNewPass ? 'Hide' : 'Show'}</Text>
           </View>
-          {/* <Text style={styles.error}>invalid Name</Text> */}
           <View style={styles.textInput}>
             <TextInput
               secureTextEntry={!showConfirmPass}
@@ -70,16 +85,21 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
               placeholder="Confirm Password"
               placeholderTextColor="#00000033"
               autoCapitalize="none"
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
             />
-
             <Text onPress={toggleConfirmPass}>
-              {showOldPass ? 'Hide' : 'Show'}
+              {showConfirmPass ? 'Hide' : 'Show'}
             </Text>
           </View>
-          {/* <Text style={styles.error}>invalid Name</Text> */}
+          {error && <Text style={styles.error}>{error}</Text>}
         </View>
 
-        <AuthBtn title="Reset Password" />
+        <AuthBtn
+          loading={loading}
+          title="Reset Password"
+          onPress={resetPassword}
+        />
       </View>
     </ScrollView>
   );
@@ -102,7 +122,6 @@ const styles = StyleSheet.create({
   },
   box: {
     flex: 1,
-    // justifyContent: 'center',
     marginTop: 120,
     alignItems: 'center',
     gap: 15,
@@ -123,7 +142,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
     borderWidth: 1,
     borderRadius: 5,
-    borderBlockColor: '#0000001A',
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -137,18 +155,5 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 12,
     marginTop: -15,
-  },
-  resetBtn: {
-    backgroundColor: '#3797EF',
-    width: '100%',
-    height: 44,
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  resetBtnText: {
-    color: 'white',
-    fontWeight: 600,
   },
 });

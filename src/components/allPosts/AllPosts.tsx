@@ -1,25 +1,16 @@
 import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 
-const AllPosts = () => {
+interface props {
+  post: {
+    imageUrl: string;
+    // description:string;
+  };
+}
+const AllPosts: React.FC<props> = ({post}) => {
   return (
-    <View style={styles.posts}>
-      <Image
-        style={styles.postImage}
-        source={require('../../assets/images/post.png')}
-      />
-      <Image
-        style={styles.postImage}
-        source={require('../../assets/images/post.png')}
-      />
-      <Image
-        style={styles.postImage}
-        source={require('../../assets/images/post.png')}
-      />
-      <Image
-        style={styles.postImage}
-        source={require('../../assets/images/post.png')}
-      />
+    <View style={styles.postContainer}>
+      <Image style={styles.postImage} source={{uri: post.imageUrl}} />
     </View>
   );
 };
@@ -27,14 +18,12 @@ const AllPosts = () => {
 export default AllPosts;
 
 const styles = StyleSheet.create({
-  posts: {
-    flexDirection: 'row',
-    gap: 1,
-    flexWrap: 'wrap',
+  postContainer: {
+    width: '33.3%', // Ensure 3 items per row
+    padding: 1,
   },
   postImage: {
-    width: 119,
-    height: 125,
+    width: '100%',
     aspectRatio: 1,
   },
 });

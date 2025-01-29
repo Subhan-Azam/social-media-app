@@ -1,104 +1,105 @@
-// // import {useDispatch, useSelector} from 'react-redux';
-// // import {
-// //   setImageUri,
-// //   setDescription,
-// //   uploadPost,
-// //   resetPostState,
-// // } from '../store/slices/uploadPostSlice';
+import {useEffect} from 'react';
+import {launchImageLibrary} from 'react-native-image-picker';
+import Toast from 'react-native-toast-message';
+import {
+  setImageUri,
+  setDescription,
+  uploadPost,
+} from '../store/slices/uploadPostSlice';
+import type {AppDispatch, RootState} from '../store/store';
+import useAppSelector from './useAppSelector';
+import useAppDispatch from './useAppDispatch';
 
-// // export const usePostUpload = () => {
-// //   const dispatch = useDispatch();
-// //   const {imageUri, description, loading, error, success} = useSelector(
-// //     state => state.uploadPostStore,
-// //   );
+type UseUploadPostReturn = {
+  imageUri: string | null;
+  description: string;
+  loading: boolean;
+  pickImage: () => void;
+  uploadData: () => void;
+  setDescription: (text: string) => void;
+};
 
-// //   const selectImage = (uri: string) => {
-// //     dispatch(setImageUri(uri));
-// //   };
+const useUploadPost = (): UseUploadPostReturn => {
+  const dispatch: AppDispatch = useAppDispatch();
+  const imageUri = useAppSelector(state => state.uploadPostStore.imageUri);
+  const description = useAppSelector(
+    state => state.uploadPostStore.description,
+  );
+  const loading = useAppSelector(
+    (state: RootState) => state.uploadPostStore.loading,
+  );
+  const error = useAppSelector(
+    (state: RootState) => state.uploadPostStore.error,
+  );
 
-// //   const updateDescription = (desc: string) => {
-// //     dispatch(setDescription(desc));
-// //   };
+  const pickImage = () => {
+    launchImageLibrary({mediaType: 'photo', quality: 1}, response => {
+      if (response.didCancel) {
+        Toast.show({
+          type: 'info',
+          text1: 'Canceled',
+          text2: 'Image picker was canceled.',
+        });
+      } else if (response.errorCode) {
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: 'Failed to pick an image.',
+        });
+      } else {
+        if (response.assets && response.assets[0].uri) {
+          dispatch(setImageUri(response.assets[0].uri));
+        } else {
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: 'No valid image found.',
+          });
+        }
+      }
+    });
+  };
 
-// //   const handleUpload = () => {
-// //     if (!imageUri || !description) {
-// //       alert('Please select an image and enter a description');
-// //       return;
-// //     }
+  const uploadData = () => {
+    if (!imageUri || !description) {
+      Toast.show({
+        type: 'error',
+        text1: 'Incomplete Data',
+        text2: 'Please select an image and enter a description.',
+      });
+      return;
+    }
 
-// //     dispatch(uploadPost({imageUri, description}));
-// //   };
+    dispatch(uploadPost({imageUri, description})).then(() => {
+      Toast.show({
+        type: 'success',
+        text1: 'Success',
+        text2: 'Post uploaded successfully!',
+      });
 
-// //   const resetState = () => {
-// //     dispatch(resetPostState());
-// //   };
+      dispatch(setImageUri(null));
+      dispatch(setDescription(''));
+    });
+  };
 
-// //   return {
-// //     imageUri,
-// //     description,
-// //     loading,
-// //     error,
-// //     success,
-// //     selectImage,
-// //     updateDescription,
-// //     handleUpload,
-// //     resetState,
-// //   };
-// // };
+  useEffect(() => {
+    if (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Upload Error',
+        text2: error,
+      });
+    }
+  }, [error]);
 
-// import {useState} from 'react';
-// import {useDispatch, useSelector} from 'react-redux';
-// import {setImageUri, uploadPost} from '../store/slices/uploadPostSlice'; // Adjust path accordingly
-// import {AppDispatch} from '../store/store';
-// import {Alert} from 'react-native';
+  return {
+    imageUri,
+    description,
+    loading,
+    pickImage,
+    uploadData,
+    setDescription: (text: string) => dispatch(setDescription(text)),
+  };
+};
 
-// const useUploadPost = () => {
-//   const [imageUri, setLocalImageUri] = useState<string | null>(null);
-//   const [description, setLocalDescription] = useState<string>('');
-//   const dispatch = useDispatch<AppDispatch>();
-
-//   const {
-//     imageUri: reduxImageUri,
-//     description: reduxDescription,
-//     loading,
-//     error,
-//   } = useSelector(
-//     (state: any) => state.upload, // Replace with your state structure
-//   );
-
-//   // Function to pick an image
-//   const pickImage = () => {
-//     // Use ImagePicker logic here, then update the local state and Redux
-//     // For now we assume the image URI is updated locally
-//     setLocalImageUri('some_image_uri'); // Placeholder
-//     dispatch(setImageUri('some_image_uri')); // Update Redux state
-//   };
-
-//   // Function to upload the post
-//   const uploadData = async () => {
-//     if (!imageUri || !description) {
-//       Alert.alert('Please select an image and enter a description');
-//       return;
-//     }
-
-//     try {
-//       await dispatch(uploadPost({imageUri, description})).unwrap();
-//       Alert.alert('Post uploaded successfully');
-//     } catch (error) {
-//       Alert.alert('Failed to upload post');
-//     }
-//   };
-
-//   return {
-//     imageUri: reduxImageUri || imageUri,
-//     description: reduxDescription || description,
-//     setImageUri: setLocalImageUri,
-//     setDescription: setLocalDescription,
-//     pickImage,
-//     uploadData,
-//     loading,
-//     error,
-//   };
-// };
-
-// export default useUploadPost;
+export default useUploadPost;

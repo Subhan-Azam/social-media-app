@@ -1,7 +1,10 @@
 import {StyleSheet, Image, View, Text, ScrollView} from 'react-native';
 import React from 'react';
 
-const UserBio = () => {
+interface UserBioProps {
+  userName: string;
+}
+const UserBio: React.FC<UserBioProps> = ({userName}) => {
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -12,11 +15,11 @@ const UserBio = () => {
             source={require('../../assets/images/ProfileImg.png')}
           />
         </View>
-        <Text style={styles.officialNameText}>joshua_l</Text>
+        <Text style={styles.officialNameText}>{userName}</Text>
 
         <Text style={styles.bio}>
           Digital goodies designer
-          <Text style={styles.bioTag}> @joshua_l </Text>
+          <Text style={styles.bioTag}> @{userName} </Text>
           Everything is designed.
         </Text>
       </View>

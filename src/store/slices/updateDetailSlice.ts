@@ -1,12 +1,5 @@
-// import { createAsyncThunk } from "@reduxjs/toolkit";
-
-// export const updateuserDetails = createAsyncThunk(
-
-// )
-
-// store/profileSlice.ts
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import firestore from '@react-native-firebase/firestore'; // Assuming firebase is initialized properly
+import firestore from '@react-native-firebase/firestore';
 
 // Thunk to update profile in Firestore
 export const updateProfile = createAsyncThunk(
@@ -16,9 +9,9 @@ export const updateProfile = createAsyncThunk(
     thunkAPI,
   ) => {
     try {
-      const userRef = firestore().collection('Users').doc('user_id'); // Use dynamic user ID
+      const userRef = firestore().collection('Users').doc('user_id');
       await userRef.update(profileData);
-      return profileData; // Return updated data
+      return profileData;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -31,7 +24,7 @@ const profileSlice = createSlice({
     name: '',
     username: '',
     email: '',
-    status: 'idle', // idle, loading, succeeded, failed
+    status: 'idle',
     error: null,
   },
   reducers: {
@@ -43,19 +36,19 @@ const profileSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-    //   .addCase(updateProfile.pending, state => {
-    //     state.status = 'loading';
-    //   })
+      // .addCase(updateProfile.pending, state => {
+      //   state.status = 'loading';
+      // })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.name = action.payload.name;
         state.username = action.payload.username;
         state.email = action.payload.email;
-      })
-    //   .addCase(updateProfile.rejected, (state, action) => {
-    //     state.status = 'failed';
-    //     state.error = action.payload;
-    //   });
+      });
+    // .addCase(updateProfile.rejected, (state, action) => {
+    //   state.status = 'failed';
+    //   state.error = action.payload ;
+    // });
   },
 });
 
