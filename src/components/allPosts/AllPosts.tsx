@@ -19,7 +19,7 @@ export default AllPosts;
 
 const styles = StyleSheet.create({
   postContainer: {
-    width: '33.3%', // Ensure 3 items per row
+    width: '33.3%',
     padding: 1,
   },
   postImage: {

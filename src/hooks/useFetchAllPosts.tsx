@@ -21,7 +21,8 @@ import {useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
-import {setRealTimePosts} from '../store/slices/fetchAllPostsSlice';
+import {fetchPosts} from '../store/slices/fetchAllPostsSlice';
+// import {setRealTimePosts} from '../store/slices/fetchAllPostsSlice';
 
 const useFetchAllPosts = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +40,7 @@ const useFetchAllPosts = () => {
             ...doc.data(),
             createdAt: doc.data().createdAt?.toDate().toISOString(),
           }));
-          dispatch(setRealTimePosts(updatedPosts));
+          dispatch(fetchPosts(updatedPosts));
         },
         err => {
           console.error('Error fetching posts: ', err);

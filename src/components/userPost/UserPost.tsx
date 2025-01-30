@@ -1,6 +1,8 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../types/types';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 interface UserPostProps {
   post: {
@@ -8,24 +10,22 @@ interface UserPostProps {
     description: string;
     userName: string;
     userUID: string;
-    // location: string;
     createdAt: string;
   };
 }
 
 const UserPost: React.FC<UserPostProps> = ({post}) => {
-  const navigation = useNavigation();
-  const pressHandler = (userId: string) => {
-    console.log('userId', userId);
-  };
-
+  // const navigation = useNavigation();
+  const navigation =
+    useNavigation<
+      NativeStackNavigationProp<RootStackParamList, 'UserProfile'>
+    >();
   return (
     <>
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
-            pressHandler(post.userUID);
-            navigation.navigate('userProfile');
+            navigation.navigate('UserProfile', {userId: post.userUID});
           }}
           style={styles.profileHeader}>
           <Image source={require('../../assets/images/Oval.png')} />

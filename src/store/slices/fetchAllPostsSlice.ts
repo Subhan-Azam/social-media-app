@@ -65,9 +65,9 @@ const fetchAllPostSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    setRealTimePosts: (state, action) => {
-      state.posts = action.payload;
-    },
+    // setRealTimePosts: (state, action) => {
+    //   state.posts = action.payload;
+    // },
   },
   extraReducers: builder => {
     builder
@@ -86,5 +86,5 @@ const fetchAllPostSlice = createSlice({
   },
 });
 
-export const { setRealTimePosts } = fetchAllPostSlice.actions;
+// export const { setRealTimePosts } = fetchAllPostSlice.actions;
 export default fetchAllPostSlice.reducer;
