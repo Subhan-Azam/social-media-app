@@ -22,7 +22,7 @@ const SelfProfile: React.FC<LogInProps> = ({navigation}) => {
   const {posts, loading, error} = useSelfPost();
 
   const userName = posts.length > 0 ? posts[0].userName : 'Unknown User';
-
+  
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>

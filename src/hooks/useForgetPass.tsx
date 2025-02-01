@@ -2,7 +2,7 @@ import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../store/store';
 import {forgetPasswordSlice} from '../store/slices/authSlice';
 import {useState} from 'react';
-import {Alert} from 'react-native';
+import Toast from 'react-native-toast-message';
 
 const useForgetPass = () => {
   const [email, setEmail] = useState('');
@@ -34,7 +34,11 @@ const useForgetPass = () => {
       await dispatch(forgetPasswordSlice({email})).unwrap();
       setEmail('');
       setErrorInput('');
-      Alert.alert('Please check your email');
+      Toast.show({
+        type: 'info',
+        text1: 'Send Link',
+        text2: 'Please check your email for reset password',
+      });
     } catch (err: any) {
       setErrorInput(err.message || 'An unexpected error occurred.');
       console.error('Error resetting password:', err);

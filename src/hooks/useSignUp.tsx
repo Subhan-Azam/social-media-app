@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import {useDispatch} from 'react-redux';
 import {signUpSlice} from '../store/slices/authSlice';
-import {AppDispatch} from '../store/store';
+// import useAppSelector from './useAppSelector';
+import useAppDispatch from './useAppDispatch';
 
 const useSignUp = () => {
   const [name, setName] = useState('');
@@ -11,9 +11,8 @@ const useSignUp = () => {
   const [loading, setLoading] = useState(false);
   const [errorInput, setErrorInput] = useState('');
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
-  // Validation logic
   const validateInputs = () => {
     if (!name || !email || !password || !confirmPassword) {
       return 'All fields are required.';
@@ -33,7 +32,6 @@ const useSignUp = () => {
     return null;
   };
 
-  // Function to create a user
   const createUser = async () => {
     const error = validateInputs();
     if (error) {
@@ -45,7 +43,6 @@ const useSignUp = () => {
     setLoading(true);
 
     try {
-      // Dispatch the sign-up action
       await dispatch(
         signUpSlice({
           name,
@@ -53,8 +50,6 @@ const useSignUp = () => {
           password,
         }),
       ).unwrap();
-
-      // Handle success (optional: navigate to another screen)
     } catch (err: any) {
       setErrorInput(err.message || 'An error occurred during sign up.');
     } finally {

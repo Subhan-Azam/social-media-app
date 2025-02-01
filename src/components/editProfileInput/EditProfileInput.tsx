@@ -3,20 +3,20 @@ import React from 'react';
 
 interface EditProfileInputProps {
   title: string;
-  // value: string;
-  // onChange: (value: string) => void;
+  value: string;
+  onChange: (value: string) => void;
 }
 const EditProfileInput: React.FC<EditProfileInputProps> = ({
   title,
-  // value,
-  // onChange,
+  value,
+  onChange,
 }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.editName}>{title}</Text>
       <TextInput
-        // value={value}
-        // onChange={onChange}
+        value={value}
+        onChangeText={onChange}
         style={styles.editInput}
         placeholder="Name"
         placeholderTextColor={'#3C3C434D'}

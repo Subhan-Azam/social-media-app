@@ -214,6 +214,8 @@ import AuthBtn from '../../components/Buttons/AuthBtn';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useLogIn from '../../hooks/useLogIn';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
+// import {googleLoginSlice} from '../../store/slices/authSlice';
+// import useAppDispatch from '../../hooks/useAppDispatch';
 
 type LogInProps = {
   navigation: {
@@ -222,6 +224,7 @@ type LogInProps = {
 };
 
 const LogIn: React.FC<LogInProps> = ({navigation}) => {
+  // const dispatch = useAppDispatch();
   const {email, setEmail, password, setPassword, error, loading, logInUser} =
     useLogIn();
 
@@ -277,10 +280,12 @@ const LogIn: React.FC<LogInProps> = ({navigation}) => {
 
             <AuthBtn onPress={logInUser} title="Log In" loading={loading} />
 
-            <TouchableOpacity style={styles.logInWithGoogle}>
+            <TouchableOpacity
+              style={styles.logInWithGoogle}>
               <Image source={require('../../assets/images/Icon.png')} />
               <Text>Login with Google</Text>
             </TouchableOpacity>
+
             <View style={styles.OrSec}>
               <View style={styles.line} />
               <Text>OR</Text>
@@ -291,14 +296,6 @@ const LogIn: React.FC<LogInProps> = ({navigation}) => {
               title2="Sign up."
               onPress={() => navigation.navigate('signUp')}
             />
-            {/* <View style={styles.signUpSec}>
-              <Text style={styles.signUpText1}>Don’t have an account? </Text>
-              <Text
-                style={styles.signUpText2}
-                onPress={() => navigation.navigate('signUp')}>
-                Sign up.
-              </Text>
-            </View> */}
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>

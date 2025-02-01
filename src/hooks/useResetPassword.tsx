@@ -55,10 +55,6 @@ const useResetPassword = () => {
         text1: 'success',
         text2: 'Password changed successful',
       });
-      //   Alert.alert(
-      //     'Success',
-      //     'Password changed successfully. Please login again.',
-      //   );
     } catch (err2: any) {
       setError('Failed to update password');
     } finally {
