@@ -127,7 +127,7 @@ import TabNavigation from './TabNavigation';
 import EditProfile from '../screens/editProfile/EditProfile';
 import UserProfile from '../screens/userProfile/UserProfile';
 import {RootStackParamList} from '../types/types';
-// import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -136,13 +136,13 @@ const AppNavigator = () => {
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [splashShow, setSplashShow] = useState<boolean>(true);
 
-  // // google Login
-  // useEffect(() => {
-  //   GoogleSignin.configure({
-  //     webClientId:
-  //       '793741851762-hpcds8m113sc9sqhdb18a8vdqcbu7nve.apps.googleusercontent.com',
-  //   });
-  // }, []);
+  // google Login
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '793741851762-hpcds8m113sc9sqhdb18a8vdqcbu7nve.apps.googleusercontent.com',
+    });
+  }, []);
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(

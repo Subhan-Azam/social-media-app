@@ -16,6 +16,7 @@ import AuthBtn from '../../components/Buttons/AuthBtn';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useSignUp from '../../hooks/useSignUp';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
+import GoogleLogin from '../../components/googleLogin/GoogleLogin';
 
 type SignUpProps = {
   navigation: {
@@ -115,10 +116,8 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
 
             <AuthBtn onPress={createUser} title="Sign Up" loading={loading} />
 
-            <View style={styles.logInWithGoogle}>
-              <Image source={require('../../assets/images/Icon.png')} />
-              <Text>Sign Up with Google</Text>
-            </View>
+            <GoogleLogin title="Sign Up with google" />
+
             <View style={styles.OrSec}>
               <View style={styles.line} />
               <Text>OR</Text>
@@ -129,14 +128,6 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
               title2="Log In."
               onPress={() => navigation.navigate('logIn')}
             />
-            {/* <View style={styles.signUpSec}>
-              <Text style={styles.signUpText1}>Already have an account? </Text>
-              <Text
-                style={styles.signUpText2}
-                onPress={() => navigation.navigate('logIn')}>
-                Log In.
-              </Text>
-            </View> */}
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>
@@ -213,12 +204,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 600,
   },
-  logInWithGoogle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    paddingVertical: 30,
-  },
+
   OrSec: {
     flexDirection: 'row',
     justifyContent: 'center',
