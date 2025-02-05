@@ -19,8 +19,6 @@ const useEditProfile = () => {
     email,
     phone,
     gender,
-    // loading,
-    // error,
   } = useAppSelector(state => state.editPostStore);
 
   const [updateOfficialImg, setUpdateOfficialImg] = useState(officialImg);

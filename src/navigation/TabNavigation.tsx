@@ -1,5 +1,4 @@
 import React from 'react';
-// import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/home/Home';
 import Upload from '../screens/upload/Upload';
@@ -9,7 +8,6 @@ const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
 
   return (
-    // <NavigationContainer>
     <Tab.Navigator>
       <Tab.Screen name="home" component={Home} options={{headerShown: false}} />
       <Tab.Screen
@@ -23,7 +21,6 @@ const TabNavigation = () => {
         options={{headerShown: false}}
       />
     </Tab.Navigator>
-    // </NavigationContainer>
   );
 };
 

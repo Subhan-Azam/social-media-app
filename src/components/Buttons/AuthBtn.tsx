@@ -5,12 +5,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-
-type AuthBtnProps = {
-  title: string;
-  onPress: () => void;
-  loading: boolean;
-};
+import {AuthBtnProps} from '../../types/types';
 
 const AuthBtn: React.FC<AuthBtnProps> = ({title, onPress, loading = false}) => {
   return (

@@ -11,15 +11,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import useEditProfile from '../../hooks/useEditProfile';
 import EditProfileInput from '../../components/editProfileInput/EditProfileInput';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
+import {Props} from '../../types/types';
 
-interface props {
-  navigation: {
-    navigate: (screen: string) => void;
-    goBack: () => void;
-  };
-}
-
-const EditProfile: React.FC<props> = ({navigation}) => {
+const EditProfile: React.FC<Props> = ({navigation}) => {
   const {
     updateOfficialImg,
     updateName,
@@ -39,12 +33,37 @@ const EditProfile: React.FC<props> = ({navigation}) => {
   } = useEditProfile();
 
   const inputsFields = [
-    {title: 'Name', value: updateName, onChange: setUpdateName},
-    {title: 'User Name', value: updateUsername, onChange: setUpdateUsername},
-    {title: 'Bio', value: updateBio, onChange: setUpdateBio},
-    {title: 'Email', value: updateEmail, onChange: setUpdateEmail},
-    {title: 'Phone', value: updatePhone, onChange: setUpdatePhone},
-    {title: 'Gender', value: updateGender, onChange: setUpdateGender},
+    {
+      editable: true,
+      title: 'Name',
+      value: updateName,
+      onChange: setUpdateName,
+    },
+    {
+      editable: true,
+      title: 'User Name',
+      value: updateUsername,
+      onChange: setUpdateUsername,
+    },
+    {editable: true, title: 'Bio', value: updateBio, onChange: setUpdateBio},
+    {
+      editable: false,
+      title: 'Email',
+      value: updateEmail,
+      onChange: setUpdateEmail,
+    },
+    {
+      editable: true,
+      title: 'Phone',
+      value: updatePhone,
+      onChange: setUpdatePhone,
+    },
+    {
+      editable: true,
+      title: 'Gender',
+      value: updateGender,
+      onChange: setUpdateGender,
+    },
   ];
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -62,7 +81,10 @@ const EditProfile: React.FC<props> = ({navigation}) => {
           {updateOfficialImg ? (
             <Image source={{uri: updateOfficialImg}} style={styles.imgChange} />
           ) : (
-            <Text>Image not found</Text>
+            <Image
+              source={require('../../assets/images/unknownIcon.jpg')}
+              style={styles.imgChange}
+            />
           )}
           <TouchableOpacity onPress={imagePicker}>
             <Text style={styles.changeName}>Change Profile Photo</Text>
@@ -73,6 +95,7 @@ const EditProfile: React.FC<props> = ({navigation}) => {
           {inputsFields.slice(0, 3).map((field, index) => (
             <EditProfileInput
               key={index}
+              editable={field.editable}
               title={field.title}
               value={field.value}
               onChange={field.onChange}
@@ -86,6 +109,7 @@ const EditProfile: React.FC<props> = ({navigation}) => {
           {inputsFields.slice(3).map((field, index) => (
             <EditProfileInput
               key={index}
+              editable={field.editable}
               title={field.title}
               value={field.value}
               onChange={field.onChange}
@@ -119,7 +143,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(166, 166, 170, 0.16)',
   },
   cancelText: {
-    color: '#262626',
+    color: 'red',
     fontWeight: 400,
     fontSize: 16,
   },

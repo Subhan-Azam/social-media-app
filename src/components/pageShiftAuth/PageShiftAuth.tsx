@@ -1,12 +1,12 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {PageShiftAuthProps} from '../../types/types';
 
-interface props {
-  onPress: () => void;
-  title1: string;
-  title2: string;
-}
-const PageShiftAuth: React.FC<props> = ({onPress, title1, title2}) => {
+const PageShiftAuth: React.FC<PageShiftAuthProps> = ({
+  onPress,
+  title1,
+  title2,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.signUpSec}>

@@ -1,13 +1,8 @@
 import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
+import {UserProps} from '../../types/types';
 
-interface props {
-  post: {
-    imageUrl: string;
-    // description:string;
-  };
-}
-const AllPosts: React.FC<props> = ({post}) => {
+const AllPosts: React.FC<UserProps> = ({post}) => {
   return (
     <View style={styles.postContainer}>
       <Image style={styles.postImage} source={{uri: post.imageUrl}} />

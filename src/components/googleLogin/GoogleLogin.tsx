@@ -36,12 +36,9 @@ import React from 'react';
 import {googleLoginSlice} from '../../store/slices/authSlice';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import useAppSelector from '../../hooks/useAppSelector';
+import {EditProfileProps} from '../../types/types';
 
-interface GoogleLoginProps {
-  title: string;
-}
-
-const GoogleLogin: React.FC<GoogleLoginProps> = ({title}) => {
+const GoogleLogin: React.FC<EditProfileProps> = ({title}) => {
   const dispatch = useAppDispatch();
   const {loading} = useAppSelector(state => state.authStore);
 
@@ -61,7 +58,7 @@ const GoogleLogin: React.FC<GoogleLoginProps> = ({title}) => {
       ) : (
         <>
           <Image source={require('../../assets/images/Icon.png')} />
-          <Text style={styles.text}>{title}</Text>
+          <Text>{title}</Text>
         </>
       )}
     </TouchableOpacity>
@@ -72,17 +69,9 @@ export default GoogleLogin;
 
 const styles = StyleSheet.create({
   logInWithGoogle: {
-    borderRightColor: 'green',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
     paddingVertical: 30,
-    backgroundColor: '#DB4437',
-    borderRadius: 5,
-    justifyContent: 'center',
-  },
-  text: {
-    color: 'white',
-    fontWeight: 'bold',
   },
 });

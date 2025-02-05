@@ -16,18 +16,10 @@ import AuthBtn from '../../components/Buttons/AuthBtn';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useLogIn from '../../hooks/useLogIn';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
-import GoogleLogin from '../../components/googleLogin/googleLogin';
-// import {googleLoginSlice} from '../../store/slices/authSlice';
-// import useAppDispatch from '../../hooks/useAppDispatch';
+import GoogleLogin from '../../components/googleLogin/GoogleLogin';
+import {Props} from '../../types/types';
 
-type LogInProps = {
-  navigation: {
-    navigate: (screen: string) => void;
-  };
-};
-
-const LogIn: React.FC<LogInProps> = ({navigation}) => {
-  // const dispatch = useAppDispatch();
+const LogIn: React.FC<Props> = ({navigation}) => {
   const {email, setEmail, password, setPassword, error, loading, logInUser} =
     useLogIn();
 
@@ -67,7 +59,17 @@ const LogIn: React.FC<LogInProps> = ({navigation}) => {
                   secureTextEntry={!showPassword}
                 />
                 <Text onPress={togglePasswordVisibility}>
-                  {showPassword ? 'Hide' : 'Show'}
+                  {showPassword ? (
+                    <Image
+                      source={require('../../assets/images/eyeIcon.png')}
+                      style={{height: 25, width: 25}}
+                    />
+                  ) : (
+                    <Image
+                      source={require('../../assets/images/eyeSlash.png')}
+                      style={{height: 30, width: 30}}
+                    />
+                  )}
                 </Text>
               </View>
               {error && <Text style={styles.error}>{error}</Text>}

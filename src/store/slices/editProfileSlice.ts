@@ -1,8 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {Alert} from 'react-native';
-// import Toast from 'react-native-toast-message';
+import Toast from 'react-native-toast-message';
+// import {useNavigation} from '@react-navigation/native';
+// const navigation = useNavigation;
 
 interface UserProfileState {
   officialImg: string;
@@ -13,7 +14,6 @@ interface UserProfileState {
   phone: string;
   gender: string;
   loading: boolean;
-  // userData: [];
   error: string | null;
 }
 
@@ -26,7 +26,6 @@ const initialState: UserProfileState = {
   phone: '',
   gender: '',
   loading: false,
-  // userData: [],
   error: null,
 };
 
@@ -54,7 +53,6 @@ export const fetchUserProfile = createAsyncThunk(
         return snapshotData;
       } else {
         console.warn('User not found in Firestore');
-
         throw new Error('User not found in Firestore');
       }
     } catch (err: any) {
@@ -77,14 +75,12 @@ export const updateUserProfile = createAsyncThunk(
         .doc(currentUser.uid)
         .update(updatedData);
 
-      // Toast.show({
-      //   type: 'success',
-      //   text1: 'Congratulations',
-      //   text2: 'Data updated successfully',
-      // });
-      Alert.alert('Updated successfully');
+      Toast.show({
+        type: 'success',
+        text1: 'Congratulations',
+        text2: 'Data updated successfully',
+      });
 
-      console.log('updateData==============', updatedData);
       return updatedData;
     } catch (err: any) {
       rejectWithValue(err.message);
@@ -95,8 +91,7 @@ export const updateUserProfile = createAsyncThunk(
 export const editProfileSlice = createSlice({
   name: 'editProfile',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(updateUserProfile.pending, state => {

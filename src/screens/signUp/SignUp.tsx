@@ -17,15 +17,9 @@ import useHideShowPass from '../../hooks/useHideShowPass';
 import useSignUp from '../../hooks/useSignUp';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
 import GoogleLogin from '../../components/googleLogin/GoogleLogin';
+import {Props} from '../../types/types';
 
-type SignUpProps = {
-  navigation: {
-    navigate: (screen: string) => void;
-    goBack: () => void;
-  };
-};
-
-const SignUp: React.FC<SignUpProps> = ({navigation}) => {
+const SignUp: React.FC<Props> = ({navigation}) => {
   const {
     name,
     setName,

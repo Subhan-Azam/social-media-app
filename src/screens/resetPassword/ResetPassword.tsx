@@ -11,15 +11,10 @@ import {
 import AuthBtn from '../../components/Buttons/AuthBtn';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useResetPassword from '../../hooks/useResetPassword';
+import {Props} from '../../types/types';
 
-type ResetPasswordProps = {
-  navigation: {
-    navigate: (screen: string) => void;
-    goBack: () => void;
-  };
-};
 
-const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
+const ResetPassword: React.FC<Props> = ({navigation}) => {
   const {showPassword: showOldPass, togglePasswordVisibility: toggleOldPass} =
     useHideShowPass();
   const {showPassword: showNewPass, togglePasswordVisibility: toggleNewPass} =

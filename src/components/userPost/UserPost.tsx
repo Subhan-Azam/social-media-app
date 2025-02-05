@@ -1,21 +1,11 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../../types/types';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../types/types';
+import {UserProps} from '../../types/types';
 
-interface UserPostProps {
-  post: {
-    imageUrl: string;
-    description: string;
-    userName: string;
-    userUID: string;
-    createdAt: string;
-  };
-}
-
-const UserPost: React.FC<UserPostProps> = ({post}) => {
-  // const navigation = useNavigation();
+const UserPost: React.FC<UserProps> = ({post}) => {
   const navigation =
     useNavigation<
       NativeStackNavigationProp<RootStackParamList, 'UserProfile'>
@@ -28,7 +18,10 @@ const UserPost: React.FC<UserPostProps> = ({post}) => {
             navigation.navigate('UserProfile', {userId: post.userUID});
           }}
           style={styles.profileHeader}>
-          <Image source={require('../../assets/images/Oval.png')} />
+          <Image
+            style={styles.officialImg}
+            source={require('../../assets/images/unknownIcon.jpg')}
+          />
           <View>
             <View style={styles.officialName}>
               <Text style={styles.officialNameText}>{post.userName}</Text>
@@ -67,6 +60,11 @@ const styles = StyleSheet.create({
   profileHeader: {
     flexDirection: 'row',
     gap: 8,
+  },
+  officialImg: {
+    width: 32,
+    height: 32,
+    borderRadius: 50,
   },
   officialName: {
     flexDirection: 'row',

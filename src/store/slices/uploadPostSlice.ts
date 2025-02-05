@@ -1,7 +1,7 @@
-
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import {UploadPostSlice} from '../../types/types';
 
 export const uploadPost = createAsyncThunk(
   'post/addPost',
@@ -31,18 +31,12 @@ export const uploadPost = createAsyncThunk(
   },
 );
 
-const initialState = {
+const initialState: UploadPostSlice = {
   imageUri: '',
   description: '',
   loading: false,
   error: null,
   success: false,
-} as {
-  imageUri: string;
-  description: string;
-  loading: boolean;
-  error: string | null;
-  success: boolean;
 };
 
 const uploadPostSlice = createSlice({

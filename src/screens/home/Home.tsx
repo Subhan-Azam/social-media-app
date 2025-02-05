@@ -10,7 +10,6 @@ import React from 'react';
 import UserPost from '../../components/userPost/UserPost';
 import useFetchAllPosts from '../../hooks/useFetchAllPosts';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import LogOut from '../../components/logOut/LogOut';
 
 const Home = () => {
   const {posts, loading, error} = useFetchAllPosts();
@@ -22,8 +21,6 @@ const Home = () => {
           <Image source={require('../../assets/images/InstagramLogo.png')} />
         </View>
         <View style={styles.line} />
-
-        <LogOut />
 
         {error ? (
           <Text>Failed to fetch posts</Text>

@@ -30,9 +30,6 @@
 
 // export default useSelfPost;
 
-
-
-
 import {useEffect, useState} from 'react';
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
