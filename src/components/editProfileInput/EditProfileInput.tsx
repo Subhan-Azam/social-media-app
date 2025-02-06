@@ -1,22 +1,21 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
 
-interface EditProfileInputProps {
-  title: string;
-  // value: string;
-  // onChange: (value: string) => void;
-}
-const EditProfileInput: React.FC<EditProfileInputProps> = ({
+import {EditProfileProps} from '../../types/types';
+
+const EditProfileInput: React.FC<EditProfileProps> = ({
   title,
-  // value,
-  // onChange,
+  value,
+  onChange,
+  editable,
 }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.editName}>{title}</Text>
       <TextInput
-        // value={value}
-        // onChange={onChange}
+        value={value}
+        editable={editable}
+        onChangeText={onChange}
         style={styles.editInput}
         placeholder="Name"
         placeholderTextColor={'#3C3C434D'}

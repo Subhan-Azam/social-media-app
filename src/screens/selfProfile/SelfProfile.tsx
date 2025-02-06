@@ -1,39 +1,30 @@
-import {
-  ActivityIndicator,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import React from 'react';
-import UserBio from '../../components/userBio/UserBio';
-import ProfileGridIcon from '../../components/profileGridIcon/ProfileGridIcon';
 import EditProfileBtn from '../../components/Buttons/EditProfileBtn';
 import AllPosts from '../../components/allPosts/AllPosts';
 import useSelfPost from '../../hooks/useSelfPost';
+import SelfBio from '../../components/selfBio/SelfBio';
+import ProfileGridIcon from '../../components/profileGridIcon/ProfileGridIcon';
+import LogOut from '../../components/logOut/LogOut';
+import Loader from '../../components/loader/Loader';
+import {SelfProfileProps} from '../../types/types';
 
-type LogInProps = {
-  navigation: {
-    navigate: (screen: string) => void;
-  };
-};
-const SelfProfile: React.FC<LogInProps> = ({navigation}) => {
+const SelfProfile: React.FC<SelfProfileProps> = ({navigation}) => {
   const {posts, loading, error} = useSelfPost();
-
-  const userName = posts.length > 0 ? posts[0].userName : 'Unknown User';
 
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
-        <UserBio userName={userName} />
+        <SelfBio />
         <EditProfileBtn onPress={() => navigation.navigate('EditProfile')} />
+        <LogOut />
         <ProfileGridIcon />
 
         {error ? (
           <Text>Failed To load Posts</Text>
         ) : loading ? (
-          <ActivityIndicator />
+          <Loader />
         ) : posts.length > 0 ? (
           <View style={styles.postsContainer}>
             {posts.map((post, index) => (

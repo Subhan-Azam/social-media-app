@@ -1,11 +1,8 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {editProps} from '../../types/types';
 
-interface props {
-  onPress: () => void;
-}
-
-const EditProfileBtn: React.FC<props> = ({onPress}) => {
+const EditProfileBtn: React.FC<editProps> = ({onPress}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress} style={styles.box}>

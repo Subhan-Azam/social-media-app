@@ -10,15 +10,10 @@ import {
 import React from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
 import useForgetPass from '../../hooks/useForgetPass';
+import {ScreenProps} from '../../types/types';
 
-type ForgetPasswordProps = {
-  navigation: {
-    navigate: (screen: 'string') => void;
-    goBack: () => void;
-  };
-};
 
-const ForgetPassword: React.FC<ForgetPasswordProps> = ({navigation}) => {
+const ForgetPassword: React.FC<ScreenProps<'forgetPassword'>> = ({navigation}) => {
   const {email, setEmail, loading, errorInput, handleForgetPassword} =
     useForgetPass();
 

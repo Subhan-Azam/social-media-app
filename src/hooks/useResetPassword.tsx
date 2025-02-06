@@ -38,13 +38,11 @@ const useResetPassword = () => {
 
     try {
       const user = auth().currentUser;
-      console.log('user', user);
 
       const credential = auth.EmailAuthProvider.credential(
         user?.email || '',
         oldPassword,
       );
-      console.log('credential=============', credential);
       await user?.reauthenticateWithCredential(credential);
       await user?.updatePassword(newPassword);
 
@@ -55,10 +53,6 @@ const useResetPassword = () => {
         text1: 'success',
         text2: 'Password changed successful',
       });
-      //   Alert.alert(
-      //     'Success',
-      //     'Password changed successfully. Please login again.',
-      //   );
     } catch (err2: any) {
       setError('Failed to update password');
     } finally {

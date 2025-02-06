@@ -1,32 +1,40 @@
 import {StyleSheet, Image, View, Text, ScrollView} from 'react-native';
 import React from 'react';
-import {UserBioProps} from '../../types/types';
+import useEditProfile from '../../hooks/useEditProfile';
 
-const UserBio: React.FC<UserBioProps> = ({
-  officialImg,
-  name,
-  userName,
-  bio,
-}) => {
+const SelfBio = () => {
+  const {updateOfficialImg, updateName, updateUsername, updateBio} =
+    useEditProfile();
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <Text style={styles.lockText}>jacob_w</Text>
         <View style={styles.profileImgSec}>
-          <Image style={styles.profileImg} source={{uri: officialImg}} />
+          {updateOfficialImg ? (
+            <Image
+              style={styles.profileImg}
+              source={{uri: updateOfficialImg}}
+            />
+          ) : (
+            <Image
+              style={styles.profileImg}
+              source={require('../../assets/images/unknownIcon.jpg')}
+            />
+          )}
         </View>
-        <Text style={styles.officialNameText}>{name}</Text>
+        <Text style={styles.officialNameText}>{updateName}</Text>
 
         <Text style={styles.bio}>
-          <Text style={styles.bioTag}> @{userName} </Text>
-          {bio}
+          <Text style={styles.bioTag}> {updateUsername} </Text>
+          {updateBio}
         </Text>
       </View>
     </ScrollView>
   );
 };
 
-export default UserBio;
+export default SelfBio;
 
 const styles = StyleSheet.create({
   container: {
@@ -67,5 +75,6 @@ const styles = StyleSheet.create({
   },
   bioTag: {
     color: '#05386B',
+    fontWeight: 'bold',
   },
 });

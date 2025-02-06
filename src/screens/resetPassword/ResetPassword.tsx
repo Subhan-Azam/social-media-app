@@ -11,15 +11,11 @@ import {
 import AuthBtn from '../../components/Buttons/AuthBtn';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useResetPassword from '../../hooks/useResetPassword';
+import {ScreenProps} from '../../types/types';
 
-type ResetPasswordProps = {
-  navigation: {
-    navigate: (screen: string) => void;
-    goBack: () => void;
-  };
-};
-
-const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
+const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
+  navigation,
+}) => {
   const {showPassword: showOldPass, togglePasswordVisibility: toggleOldPass} =
     useHideShowPass();
   const {showPassword: showNewPass, togglePasswordVisibility: toggleNewPass} =
@@ -64,7 +60,16 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
               value={oldPassword}
               onChangeText={setOldPassword}
             />
-            <Text onPress={toggleOldPass}>{showOldPass ? 'Hide' : 'Show'}</Text>
+            <TouchableOpacity onPress={toggleOldPass}>
+              <Image
+                source={
+                  showOldPass
+                    ? require('../../assets/images/eyeIcon.png')
+                    : require('../../assets/images/eyeSlash.png')
+                }
+                style={styles.changeIcon}
+              />
+            </TouchableOpacity>
           </View>
           <View style={styles.textInput}>
             <TextInput
@@ -76,7 +81,16 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
               value={newPassword}
               onChangeText={setNewPassword}
             />
-            <Text onPress={toggleNewPass}>{showNewPass ? 'Hide' : 'Show'}</Text>
+            <TouchableOpacity onPress={toggleNewPass}>
+              <Image
+                source={
+                  showNewPass
+                    ? require('../../assets/images/eyeIcon.png')
+                    : require('../../assets/images/eyeSlash.png')
+                }
+                style={styles.changeIcon}
+              />
+            </TouchableOpacity>
           </View>
           <View style={styles.textInput}>
             <TextInput
@@ -88,9 +102,16 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
               value={confirmPassword}
               onChangeText={setConfirmPassword}
             />
-            <Text onPress={toggleConfirmPass}>
-              {showConfirmPass ? 'Hide' : 'Show'}
-            </Text>
+            <TouchableOpacity onPress={toggleConfirmPass}>
+              <Image
+                source={
+                  showConfirmPass
+                    ? require('../../assets/images/eyeIcon.png')
+                    : require('../../assets/images/eyeSlash.png')
+                }
+                style={styles.changeIcon}
+              />
+            </TouchableOpacity>
           </View>
           {error && <Text style={styles.error}>{error}</Text>}
         </View>
@@ -150,6 +171,10 @@ const styles = StyleSheet.create({
   textInputPass: {
     width: '90%',
     color: 'black',
+  },
+  changeIcon: {
+    height: 25,
+    width: 25,
   },
   error: {
     color: 'red',

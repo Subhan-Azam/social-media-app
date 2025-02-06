@@ -16,15 +16,11 @@ import AuthBtn from '../../components/Buttons/AuthBtn';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useSignUp from '../../hooks/useSignUp';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
+import GoogleLogin from '../../components/googleLogin/GoogleLogin';
+import {ScreenProps} from '../../types/types';
 
-type SignUpProps = {
-  navigation: {
-    navigate: (screen: string) => void;
-    goBack: () => void;
-  };
-};
 
-const SignUp: React.FC<SignUpProps> = ({navigation}) => {
+const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
   const {
     name,
     setName,
@@ -92,9 +88,16 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
                   placeholderTextColor="#00000033"
                   autoCapitalize="none"
                 />
-                <Text onPress={toggleShowPassword}>
-                  {showPassword ? 'Hide' : 'Show'}
-                </Text>
+                <TouchableOpacity onPress={toggleShowPassword}>
+                  <Image
+                    source={
+                      showPassword
+                        ? require('../../assets/images/eyeIcon.png')
+                        : require('../../assets/images/eyeSlash.png')
+                    }
+                    style={styles.changeIcon}
+                  />
+                </TouchableOpacity>
               </View>
               <View style={styles.textInput}>
                 <TextInput
@@ -106,19 +109,24 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
                   placeholderTextColor="#00000033"
                   autoCapitalize="none"
                 />
-                <Text onPress={toggleConfirmShowPass}>
-                  {confirmShowPass ? 'Hide' : 'Show'}
-                </Text>
+                <TouchableOpacity onPress={toggleConfirmShowPass}>
+                  <Image
+                    source={
+                      confirmShowPass
+                        ? require('../../assets/images/eyeIcon.png')
+                        : require('../../assets/images/eyeSlash.png')
+                    }
+                    style={styles.changeIcon}
+                  />
+                </TouchableOpacity>
               </View>
               {errorInput && <Text style={styles.error}>{errorInput}</Text>}
             </View>
 
             <AuthBtn onPress={createUser} title="Sign Up" loading={loading} />
 
-            <View style={styles.logInWithGoogle}>
-              <Image source={require('../../assets/images/Icon.png')} />
-              <Text>Sign Up with Google</Text>
-            </View>
+            <GoogleLogin title="Sign Up with google" />
+
             <View style={styles.OrSec}>
               <View style={styles.line} />
               <Text>OR</Text>
@@ -129,14 +137,6 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
               title2="Log In."
               onPress={() => navigation.navigate('logIn')}
             />
-            {/* <View style={styles.signUpSec}>
-              <Text style={styles.signUpText1}>Already have an account? </Text>
-              <Text
-                style={styles.signUpText2}
-                onPress={() => navigation.navigate('logIn')}>
-                Log In.
-              </Text>
-            </View> */}
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>
@@ -194,6 +194,10 @@ const styles = StyleSheet.create({
     width: '90%',
     color: 'black',
   },
+  changeIcon: {
+    height: 25,
+    width: 25,
+  },
   error: {
     color: 'red',
     fontSize: 12,
@@ -213,12 +217,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 600,
   },
-  logInWithGoogle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    paddingVertical: 30,
-  },
+
   OrSec: {
     flexDirection: 'row',
     justifyContent: 'center',
