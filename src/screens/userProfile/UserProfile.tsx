@@ -1,78 +1,4 @@
-// import {
-//   ScrollView,
-//   StyleSheet,
-//   View,
-//   Text,
-//   ActivityIndicator,
-// } from 'react-native';
-// import React from 'react';
-// import {SafeAreaView} from 'react-native-safe-area-context';
-// import UserBio from '../../components/userBio/UserBio';
-// import ProfileGridIcon from '../../components/profileGridIcon/ProfileGridIcon';
-// import {useRoute} from '@react-navigation/native';
-// import useEachUserPost from '../../hooks/useEachUserPost';
-// import AllPosts from '../../components/allPosts/AllPosts';
-// import {UserProfileRouteProp} from '../../types/types';
-
-// const UserProfile = () => {
-//   const route = useRoute<UserProfileRouteProp>();
-//   const {userId} = route.params;
-//   const {posts, loading, error} = useEachUserPost(userId);
-
-//   const userName = posts.length > 0 ? posts[0].userName : 'Unknown User';
-
-//   return (
-//     <ScrollView>
-//       <SafeAreaView style={styles.container}>
-//         <UserBio userName={userName} />
-
-//         <ProfileGridIcon />
-
-//         <View style={styles.postsContainer}>
-//           {loading ? (
-//             <ActivityIndicator size="large" color="#0000ff" />
-//           ) : error ? (
-//             <Text style={styles.errorText}>Error fetching posts</Text>
-//           ) : posts.length === 0 ? (
-//             <Text style={styles.noPostText}>No posts available.</Text>
-//           ) : (
-//             posts.map((post, index) => <AllPosts key={index} post={post} />)
-//           )}
-//         </View>
-//       </SafeAreaView>
-//     </ScrollView>
-//   );
-// };
-
-// export default UserProfile;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     marginTop: 10,
-//   },
-//   postsContainer: {
-//     flexDirection: 'row',
-//     flexWrap: 'wrap',
-//   },
-//   errorText: {
-//     color: 'red',
-//     textAlign: 'center',
-//     marginTop: 20,
-//   },
-//   noPostText: {
-//     textAlign: 'center',
-//     marginTop: 20,
-//   },
-// });
-
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  Text,
-  ActivityIndicator,
-} from 'react-native';
+import {ScrollView, StyleSheet, View, Text} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import UserBio from '../../components/userBio/UserBio';
@@ -80,19 +6,23 @@ import ProfileGridIcon from '../../components/profileGridIcon/ProfileGridIcon';
 import {useRoute} from '@react-navigation/native';
 import useEachUserPost from '../../hooks/useEachUserPost';
 import AllPosts from '../../components/allPosts/AllPosts';
+import Loader from '../../components/loader/Loader';
 import {UserProfileRouteProp} from '../../types/types';
 
 const UserProfile = () => {
   const route = useRoute<UserProfileRouteProp>();
   const {userId} = route.params;
-  const {posts, loading, error} = useEachUserPost(userId);
-
-  const userName = posts.length > 0 ? posts[0].userName : 'Unknown User';
+  const {posts, userData, loading, error} = useEachUserPost(userId);
 
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
-        <UserBio userName={userName} />
+        <UserBio
+          officialImg={userData?.officialImg}
+          name={userData?.name}
+          userName={userData?.userName}
+          bio={userData?.bio}
+        />
 
         <ProfileGridIcon />
 
@@ -100,7 +30,7 @@ const UserProfile = () => {
           {error ? (
             <Text style={styles.errorText}>Error fetching posts</Text>
           ) : loading ? (
-            <ActivityIndicator size="large" color="#0000ff" />
+            <Loader />
           ) : posts.length === 0 ? (
             <Text style={styles.noPostText}>No posts available.</Text>
           ) : (
@@ -127,6 +57,10 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     marginTop: 20,
+  },
+  activityIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   noPostText: {
     textAlign: 'center',

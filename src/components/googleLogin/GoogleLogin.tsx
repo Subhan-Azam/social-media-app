@@ -1,30 +1,3 @@
-// import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
-// import React from 'react';
-
-// interface googleLoginProps {
-//   title: string;
-// }
-
-// const GoogleLogin: React.FC<googleLoginProps> = ({title}) => {
-//   return (
-//     <TouchableOpacity style={styles.logInWithGoogle}>
-//       <Image source={require('../../assets/images/Icon.png')} />
-//       <Text>{title}</Text>
-//     </TouchableOpacity>
-//   );
-// };
-
-// export default GoogleLogin;
-
-// const styles = StyleSheet.create({
-//   logInWithGoogle: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     gap: 10,
-//     paddingVertical: 30,
-//   },
-// });
-
 import {
   Image,
   StyleSheet,
@@ -44,7 +17,6 @@ const GoogleLogin: React.FC<EditProfileProps> = ({title}) => {
 
   const handleGoogleLogin = () => {
     dispatch(googleLoginSlice());
-    console.log('google working');
   };
 
   return (
@@ -52,7 +24,6 @@ const GoogleLogin: React.FC<EditProfileProps> = ({title}) => {
       style={styles.logInWithGoogle}
       onPress={handleGoogleLogin}
       disabled={loading}>
-      {/* Disable button while loading */}
       {loading ? (
         <ActivityIndicator color="white" />
       ) : (

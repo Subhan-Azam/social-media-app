@@ -1,23 +1,25 @@
 import {StyleSheet, Image, View, Text, ScrollView} from 'react-native';
 import React from 'react';
-import {Post} from '../../types/types';
+import {UserBioProps} from '../../types/types';
 
-const UserBio: React.FC<Post> = ({userName}) => {
+const UserBio: React.FC<UserBioProps> = ({
+  officialImg,
+  name,
+  userName,
+  bio,
+}) => {
   return (
     <ScrollView>
       <View style={styles.container}>
         <Text style={styles.lockText}>jacob_w</Text>
         <View style={styles.profileImgSec}>
-          <Image
-            style={styles.profileImg}
-            source={require('../../assets/images/unknownIcon.jpg')}
-          />
+          <Image style={styles.profileImg} source={{uri: officialImg}} />
         </View>
-        <Text style={styles.officialNameText}>{userName}</Text>
+        <Text style={styles.officialNameText}>{name}</Text>
 
         <Text style={styles.bio}>
           <Text style={styles.bioTag}> @{userName} </Text>
-          Digital goodies designer Everything is designed.
+          {bio}
         </Text>
       </View>
     </ScrollView>

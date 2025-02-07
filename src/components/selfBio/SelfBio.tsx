@@ -1,9 +1,8 @@
 import {StyleSheet, Image, View, Text, ScrollView} from 'react-native';
 import React from 'react';
-import {Post} from '../../types/types';
 import useEditProfile from '../../hooks/useEditProfile';
 
-const SelfBio: React.FC<Post> = () => {
+const SelfBio = () => {
   const {updateOfficialImg, updateName, updateUsername, updateBio} =
     useEditProfile();
 

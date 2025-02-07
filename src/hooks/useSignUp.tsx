@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import {signUpSlice} from '../store/slices/authSlice';
-// import useAppSelector from './useAppSelector';
 import useAppDispatch from './useAppDispatch';
 
 const useSignUp = () => {

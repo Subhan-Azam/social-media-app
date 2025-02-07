@@ -11,9 +11,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import useEditProfile from '../../hooks/useEditProfile';
 import EditProfileInput from '../../components/editProfileInput/EditProfileInput';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
-import {Props} from '../../types/types';
+import {ScreenProps} from '../../types/types';
 
-const EditProfile: React.FC<Props> = ({navigation}) => {
+const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
   const {
     updateOfficialImg,
     updateName,

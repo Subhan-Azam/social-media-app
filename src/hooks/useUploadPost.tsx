@@ -76,7 +76,6 @@ const useUploadPost = (): UseUploadPostReturn => {
         text1: 'Success',
         text2: 'Post uploaded successfully!',
       });
-
       dispatch(setImageUri(null));
       dispatch(setDescription(''));
     });

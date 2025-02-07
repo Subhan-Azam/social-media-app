@@ -27,6 +27,7 @@ const Upload = () => {
       <View style={styles.header}>
         <Text style={styles.headerText1}>cancel</Text>
         <Text style={styles.headerText2}>Image</Text>
+        <Text style={styles.headerText3} />
       </View>
 
       <View style={styles.centerUploadSec}>
@@ -34,7 +35,10 @@ const Upload = () => {
           {imageUri ? (
             <Image source={{uri: imageUri}} style={styles.uploadedImage} />
           ) : (
-            <Image source={require('../../assets/images/Upload.png')} />
+            <>
+              <Image source={require('../../assets/images/Upload.png')} />
+              <Text style={styles.uploadImgText}>Upload Image</Text>
+            </>
           )}
         </TouchableOpacity>
 
@@ -43,6 +47,7 @@ const Upload = () => {
           <TextInput
             style={styles.descInput}
             placeholder="Add post description"
+            placeholderTextColor="#00000033"
             value={description}
             onChangeText={setDescription}
           />
@@ -67,17 +72,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
     alignItems: 'center',
     height: 60,
   },
   headerText1: {
     fontSize: 16,
     fontWeight: '400',
+    color: 'red',
   },
   headerText2: {
     fontSize: 16,
     fontWeight: '600',
+  },
+  headerText3: {
+    width: 40,
   },
   centerUploadSec: {
     marginTop: 20,
@@ -91,6 +101,11 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 2,
     borderStyle: 'dashed',
+  },
+  uploadImgText: {
+    fontWeight: 600,
+    fontSize: 14,
+    marginTop: 5,
   },
   uploadedImage: {
     height: '100%',

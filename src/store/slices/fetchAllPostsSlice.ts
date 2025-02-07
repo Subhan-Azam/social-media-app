@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk, PayloadAction} from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
@@ -19,28 +19,6 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 
   return data;
 });
-
-export const eachUserPosts = createAsyncThunk(
-  'posts/eachUserPosts',
-  async () => {
-    const res = await firestore()
-      .collection('posts')
-      .orderBy('createdAt', 'desc')
-      .get();
-
-    const data = res.docs.map(doc => {
-      const postData = doc.data();
-
-      return {
-        id: doc.id,
-        ...postData,
-        createdAt: postData.createdAt.toDate().toISOString(),
-      };
-    }) as Post[];
-
-    return data;
-  },
-);
 
 interface Post {
   id: string;
@@ -65,9 +43,9 @@ const fetchAllPostSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    // setRealTimePosts: (state, action) => {
-    //   state.posts = action.payload;
-    // },
+    setPosts: (state, action: PayloadAction<Post[]>) => {
+      state.posts = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -86,5 +64,5 @@ const fetchAllPostSlice = createSlice({
   },
 });
 
-// export const { setRealTimePosts } = fetchAllPostSlice.actions;
+export const {setPosts} = fetchAllPostSlice.actions;
 export default fetchAllPostSlice.reducer;

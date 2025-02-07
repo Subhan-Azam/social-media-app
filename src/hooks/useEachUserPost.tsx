@@ -1,9 +1,17 @@
 import {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
-import {Post} from '../types/types';
+import {UserProps} from '../types/types';
+
+interface UserData {
+  officialImg: string;
+  name: string;
+  userName: string;
+  bio: string;
+}
 
 const useEachUserPost = (userId: string) => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<UserProps[]>([]);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -12,19 +20,32 @@ const useEachUserPost = (userId: string) => {
       return;
     }
 
-    const fetchPosts = async () => {
+    const fetchData = async () => {
+      setLoading(true);
       try {
-        const querySnapshot = await firestore()
-          .collection('posts')
-          .where('userUID', '==', userId)
-          .get();
+        const [postSnapshot, userDoc] = await Promise.all([
+          firestore().collection('posts').where('userUID', '==', userId).get(),
+          firestore().collection('Users').doc(userId).get(),
+        ]);
 
-        const userPosts: Post[] = querySnapshot.docs.map(doc => ({
+        const userPosts: UserProps[] = postSnapshot.docs.map(doc => ({
           uid: doc.id,
-          ...(doc.data() as Post),
+          ...(doc.data() as UserProps),
         }));
-
         setPosts(userPosts);
+
+        const getUserData = userDoc?.data();
+
+        if (getUserData) {
+          setUserData({
+            officialImg: getUserData.officialImg || '',
+            name: getUserData.name || '',
+            userName: getUserData.userName || '',
+            bio: getUserData.bio || '',
+          });
+        } else {
+          setUserData(null);
+        }
       } catch (err) {
         setError((err as Error).message);
       } finally {
@@ -32,10 +53,10 @@ const useEachUserPost = (userId: string) => {
       }
     };
 
-    fetchPosts();
+    fetchData();
   }, [userId]);
 
-  return {posts, loading, error};
+  return {posts, userData, loading, error};
 };
 
 export default useEachUserPost;

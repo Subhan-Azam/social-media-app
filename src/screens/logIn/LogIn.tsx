@@ -17,9 +17,10 @@ import useHideShowPass from '../../hooks/useHideShowPass';
 import useLogIn from '../../hooks/useLogIn';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
 import GoogleLogin from '../../components/googleLogin/GoogleLogin';
-import {Props} from '../../types/types';
+import {ScreenProps} from '../../types/types';
 
-const LogIn: React.FC<Props> = ({navigation}) => {
+
+const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
   const {email, setEmail, password, setPassword, error, loading, logInUser} =
     useLogIn();
 
@@ -58,19 +59,16 @@ const LogIn: React.FC<Props> = ({navigation}) => {
                   autoCapitalize="none"
                   secureTextEntry={!showPassword}
                 />
-                <Text onPress={togglePasswordVisibility}>
-                  {showPassword ? (
-                    <Image
-                      source={require('../../assets/images/eyeIcon.png')}
-                      style={{height: 25, width: 25}}
-                    />
-                  ) : (
-                    <Image
-                      source={require('../../assets/images/eyeSlash.png')}
-                      style={{height: 30, width: 30}}
-                    />
-                  )}
-                </Text>
+                <TouchableOpacity onPress={togglePasswordVisibility}>
+                  <Image
+                    source={
+                      showPassword
+                        ? require('../../assets/images/eyeIcon.png')
+                        : require('../../assets/images/eyeSlash.png')
+                    }
+                    style={styles.changeIcon}
+                  />
+                </TouchableOpacity>
               </View>
               {error && <Text style={styles.error}>{error}</Text>}
 
@@ -144,6 +142,10 @@ const styles = StyleSheet.create({
   textInputPass: {
     width: '90%',
     color: 'black',
+  },
+  changeIcon: {
+    height: 25,
+    width: 25,
   },
   error: {
     color: 'red',

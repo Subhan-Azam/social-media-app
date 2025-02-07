@@ -38,21 +38,14 @@ export const fetchUserProfile = createAsyncThunk(
         return;
       }
 
-      console.log('currentUser ID================', currentUser.uid);
-      console.log('currentUser================', currentUser);
-
       const snapshot = await firestore()
         .collection('Users')
         .doc(currentUser?.uid)
         .get();
 
-      console.log('snapshot============', snapshot);
       if (snapshot.exists) {
-        const snapshotData = snapshot.data();
-        console.log('snapshotData:', snapshotData);
-        return snapshotData;
+        return snapshot.data();
       } else {
-        console.warn('User not found in Firestore');
         throw new Error('User not found in Firestore');
       }
     } catch (err: any) {
@@ -100,7 +93,6 @@ export const editProfileSlice = createSlice({
       })
       .addCase(updateUserProfile.fulfilled, (state, action) => {
         state.loading = false;
-        // state.userData = action.payload;
         Object.assign(state, action.payload);
       })
       .addCase(updateUserProfile.rejected, (state, action) => {

@@ -13,7 +13,6 @@ const LogOut = () => {
   const [loading, setLoading] = useState(false);
 
   const handleLogout = async () => {
-    console.log('logout working');
     setLoading(true);
     try {
       await auth().signOut();

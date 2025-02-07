@@ -17,9 +17,10 @@ import useHideShowPass from '../../hooks/useHideShowPass';
 import useSignUp from '../../hooks/useSignUp';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
 import GoogleLogin from '../../components/googleLogin/GoogleLogin';
-import {Props} from '../../types/types';
+import {ScreenProps} from '../../types/types';
 
-const SignUp: React.FC<Props> = ({navigation}) => {
+
+const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
   const {
     name,
     setName,
@@ -87,9 +88,16 @@ const SignUp: React.FC<Props> = ({navigation}) => {
                   placeholderTextColor="#00000033"
                   autoCapitalize="none"
                 />
-                <Text onPress={toggleShowPassword}>
-                  {showPassword ? 'Hide' : 'Show'}
-                </Text>
+                <TouchableOpacity onPress={toggleShowPassword}>
+                  <Image
+                    source={
+                      showPassword
+                        ? require('../../assets/images/eyeIcon.png')
+                        : require('../../assets/images/eyeSlash.png')
+                    }
+                    style={styles.changeIcon}
+                  />
+                </TouchableOpacity>
               </View>
               <View style={styles.textInput}>
                 <TextInput
@@ -101,9 +109,16 @@ const SignUp: React.FC<Props> = ({navigation}) => {
                   placeholderTextColor="#00000033"
                   autoCapitalize="none"
                 />
-                <Text onPress={toggleConfirmShowPass}>
-                  {confirmShowPass ? 'Hide' : 'Show'}
-                </Text>
+                <TouchableOpacity onPress={toggleConfirmShowPass}>
+                  <Image
+                    source={
+                      confirmShowPass
+                        ? require('../../assets/images/eyeIcon.png')
+                        : require('../../assets/images/eyeSlash.png')
+                    }
+                    style={styles.changeIcon}
+                  />
+                </TouchableOpacity>
               </View>
               {errorInput && <Text style={styles.error}>{errorInput}</Text>}
             </View>
@@ -178,6 +193,10 @@ const styles = StyleSheet.create({
   textInputPass: {
     width: '90%',
     color: 'black',
+  },
+  changeIcon: {
+    height: 25,
+    width: 25,
   },
   error: {
     color: 'red',

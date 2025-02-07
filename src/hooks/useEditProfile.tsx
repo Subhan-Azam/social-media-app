@@ -8,18 +8,13 @@ import {
 import {launchImageLibrary} from 'react-native-image-picker';
 import Toast from 'react-native-toast-message';
 import {Alert} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const useEditProfile = () => {
+  const navigation = useNavigation();
   const dispatch = useAppDispatch();
-  const {
-    officialImg,
-    name,
-    userName,
-    bio,
-    email,
-    phone,
-    gender,
-  } = useAppSelector(state => state.editPostStore);
+  const {officialImg, name, userName, bio, email, phone, gender} =
+    useAppSelector(state => state.editPostStore);
 
   const [updateOfficialImg, setUpdateOfficialImg] = useState(officialImg);
   const [updateName, setUpdateName] = useState(name);
@@ -77,7 +72,9 @@ const useEditProfile = () => {
       phone: updatePhone,
       gender: updateGender,
     };
-    dispatch(updateUserProfile(updateData));
+    dispatch(updateUserProfile(updateData)).then(() => {
+      navigation.goBack();
+    });
   };
 
   return {

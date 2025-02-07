@@ -1,6 +1,6 @@
 // src/types/Post.ts
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RouteProp} from '@react-navigation/native';
+import {RouteProp, NavigationProp} from '@react-navigation/native';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -12,19 +12,34 @@ export type RootStackParamList = {
   forgetPassword: undefined;
 };
 
+export type ScreenProps<T extends keyof RootStackParamList> = {
+  navigation: NativeStackNavigationProp<RootStackParamList, T>;
+  route: RouteProp<RootStackParamList, T>;
+};
 export type UserProfileRouteProp = RouteProp<RootStackParamList, 'UserProfile'>;
 export type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   'Home'
 >;
 
-export interface Post {
-  id: string;
-  imageUrl: string;
-  description: string;
-  userName: string;
-  userUID: string;
-  createdAt: string;
+export type Screens = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
+  route: any;
+};
+
+// export interface Props {
+//   navigation: NativeStackNavigationProp<RootStackParamList, 'EditProfile'>;
+//   route: RouteProp<RootStackParamList, 'EditProfile'>;
+//   title: string;
+//   onPress: () => void;
+//   loading: boolean;
+// }
+
+export interface UserBioProps {
+  officialImg?: string;
+  name?: string;
+  userName?: string;
+  bio?: string;
 }
 
 export interface AuthSliceProps {
@@ -36,18 +51,11 @@ export interface AuthSliceProps {
   error: string | null;
 }
 
-// export interface EditProfileProps {
-//   officialImg: string;
-//   name: string;
-//   userName: string;
-//   email: string;
-//   bio: string;
-//   phone: string;
-//   gender: string;
-//   loading: boolean;
-//   error: string | null;
-// }
-
+export interface AuthBtnProps {
+  title: string;
+  onPress: () => void;
+  loading: boolean;
+}
 export interface FetchAllPostSlice {
   id: string;
   imageUrl: string;
@@ -63,11 +71,14 @@ export interface UploadPostSlice {
   error: string | null;
   success: boolean;
 }
-export interface Props {
-  navigation: {
-    navigate: (screen: string) => void;
-    goBack: () => void;
-  };
+
+export interface SelfProfileProps {
+  navigation: NavigationProp<any>;
+  route: RouteProp<any>;
+}
+
+export interface editProps {
+  onPress: () => void;
 }
 
 export interface UserProps {
@@ -80,6 +91,15 @@ export interface UserProps {
   };
 }
 
+export interface Posts {
+  uid: string;
+  imageUrl: string;
+  description: string;
+  userName: string;
+  userUID: string;
+  createdAt: string;
+}
+
 export interface EditProfileProps {
   title?: string;
   value?: string;
@@ -87,10 +107,13 @@ export interface EditProfileProps {
   editable?: boolean;
 }
 
-export interface AuthBtnProps {
-  title: string;
-  onPress: () => void;
-  loading: boolean;
+export interface Post {
+  uid: string;
+  imageUrl: string;
+  description: string;
+  userUID: string;
+  userName: string;
+  createdAt: string;
 }
 
 export interface PageShiftAuthProps {

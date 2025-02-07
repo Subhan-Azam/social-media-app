@@ -3,6 +3,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {AuthSliceProps} from '../../types/types';
+
 // signUpSlice
 export const signUpSlice = createAsyncThunk(
   'signUp/Authentication',
@@ -93,65 +94,17 @@ export const forgetPasswordSlice = createAsyncThunk(
       let errorMessage = error.message;
       if (error.message === 'auth/invalid-email') {
         errorMessage('Invalid Email');
-        console.log('Invalid Email');
       } else if (error.message === 'auth/user-not-found') {
         errorMessage('user-not-found');
-        console.log('user-not-found');
       } else {
         errorMessage('Unexpected Error occur');
-        console.log('Unexpected Error occur');
       }
-      console.log('error in sending email link=====', errorMessage);
       return rejectWithValue(errorMessage);
     }
   },
 );
 
-// // Google Login
-// export const googleLoginSlice = createAsyncThunk(
-//   'auth/googleLogin',
-//   async (_, {rejectWithValue}) => {
-//     try {
-//       await GoogleSignin.hasPlayServices();
-//       const signInResult = await GoogleSignin.signIn();
-//       const idToken = signInResult.data?.idToken;
-
-//       if (!idToken) {
-//         throw new Error('No ID token found!');
-//       }
-
-//       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-//       const userCredential = await auth().signInWithCredential(
-//         googleCredential,
-//       );
-//       const user = userCredential.user;
-
-//       if (user) {
-//         const userDocRef = firestore().collection('Users').doc(user.uid);
-//         await userDocRef.set(
-//           {
-//             email: user.email || '',
-//             name: user.displayName || '',
-//             officialImg: user.photoURL || '',
-//             createdAt: firestore.FieldValue.serverTimestamp(),
-//             bio: '',
-//             gender: '',
-//             phone: '',
-//             userName: '',
-//           },
-//           {merge: true},
-//         );
-//       }
-
-//       return userCredential;
-//     } catch (err: any) {
-//       console.log('Error in Google login:', err);
-//       return rejectWithValue(err?.message || 'Google login failed');
-//     }
-//   },
-// );
-
-
+// google login
 export const googleLoginSlice = createAsyncThunk(
   'auth/googleLogin',
   async (_, {rejectWithValue}) => {
@@ -205,7 +158,6 @@ export const googleLoginSlice = createAsyncThunk(
 
       return userCredential;
     } catch (err: any) {
-      console.log('Error in Google login:', err);
       return rejectWithValue(err?.message || 'Google login failed');
     }
   },
@@ -269,21 +221,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
-      // // Google Login cases
-      // .addCase(googleLoginSlice.pending, state => {
-      //   state.loading = true;
-      //   state.error = null;
-      // })
-      // .addCase(googleLoginSlice.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.userId = action.payload.user.uid;
-      //   state.username = action.payload.user.displayName || '';
-      //   state.email = action.payload.user.email || '';
-      // })
-      // .addCase(googleLoginSlice.rejected, (state, action) => {
-      //   state.loading = false;
-      //   state.error = action.payload as string;
-      // });
+
       .addCase(googleLoginSlice.pending, state => {
         state.loading = true;
         state.error = null;
