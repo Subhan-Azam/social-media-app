@@ -95,11 +95,11 @@ const styles = StyleSheet.create({
   },
   uploadImgBox: {
     height: 360,
-    width: 330,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: 'black',
-    borderWidth: 2,
+    borderWidth: 1,
     borderStyle: 'dashed',
   },
   uploadImgText: {

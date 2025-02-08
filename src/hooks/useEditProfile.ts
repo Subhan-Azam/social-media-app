@@ -39,27 +39,32 @@ const useEditProfile = () => {
   }, [officialImg, name, userName, email, bio, phone, gender]);
 
   const imagePicker = () => {
-    launchImageLibrary({mediaType: 'photo', quality: 1}, res => {
-      if (res.didCancel) {
-        Toast.show({
-          type: 'info',
-          text1: 'Canceled',
-          text2: 'Image is not pick.',
-        });
-      } else if (res.errorCode) {
-        Toast.show({
-          type: 'info',
-          text1: 'Error',
-          text2: res.errorCode,
-        });
-      } else {
-        if (res.assets && res.assets[0].uri) {
-          setUpdateOfficialImg(res.assets[0].uri);
+    launchImageLibrary(
+      {mediaType: 'photo', quality: 1, includeBase64: true},
+      res => {
+        if (res.didCancel) {
+          Toast.show({
+            type: 'info',
+            text1: 'Canceled',
+            text2: 'Image is not pick.',
+          });
+        } else if (res.errorCode) {
+          Toast.show({
+            type: 'info',
+            text1: 'Error',
+            text2: res.errorCode,
+          });
         } else {
-          Alert.alert('there was an error in image picker');
+          if (res.assets && res.assets[0].base64) {
+            const baseUrl = `data:image/png;base64,${res.assets[0].base64}`;
+            console.log('img uri========', baseUrl);
+            setUpdateOfficialImg(baseUrl);
+          } else {
+            Alert.alert('there was an error in image picker');
+          }
         }
-      }
-    });
+      },
+    );
   };
 
   const handleUpdateProfile = () => {

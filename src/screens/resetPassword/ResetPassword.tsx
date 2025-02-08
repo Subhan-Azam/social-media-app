@@ -158,9 +158,9 @@ const styles = StyleSheet.create({
   textInput: {
     width: '100%',
     height: 44,
-    borderColor: 'gray',
-    color: 'black',
+    borderColor: '#0000001A',
     backgroundColor: '#FAFAFA',
+    color: 'black',
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,

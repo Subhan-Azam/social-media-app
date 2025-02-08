@@ -19,7 +19,6 @@ import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
 import GoogleLogin from '../../components/googleLogin/GoogleLogin';
 import {ScreenProps} from '../../types/types';
 
-
 const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
   const {
     name,
@@ -179,9 +178,9 @@ const styles = StyleSheet.create({
   textInput: {
     width: '100%',
     height: 44,
-    borderColor: 'gray',
-    color: 'black',
+    borderColor: '#0000001A',
     backgroundColor: '#FAFAFA',
+    color: 'black',
     borderWidth: 1,
     borderRadius: 5,
     borderBlockColor: '#0000001A',
