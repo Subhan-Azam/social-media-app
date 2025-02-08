@@ -6,26 +6,27 @@ import SelfProfile from '../screens/selfProfile/SelfProfile';
 import {Image, StyleSheet} from 'react-native';
 import useEditProfile from '../hooks/useEditProfile';
 import {View} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/Ionicons';
+import UserIcon from 'react-native-vector-icons/FontAwesome';
+
 const TabNavigation = () => {
   const {updateOfficialImg} = useEditProfile();
   const Tab = createBottomTabNavigator();
 
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveBackgroundColor: '#e0e0e0',
-        tabBarInactiveBackgroundColor: '#fff',
-      }}>
+    <Tab.Navigator>
       <Tab.Screen
         name="home"
         component={Home}
         options={{
           headerShown: false,
           tabBarLabel: () => null,
-          tabBarIcon: () => (
-            <Image
-              source={require('../assets/images/Icon(2).png')}
-              style={styles.bottomIcon}
+          tabBarIcon: ({focused}) => (
+            <Icon2
+              name="home-outline"
+              size={24}
+              color={focused ? '#3797EF' : 'black'}
             />
           ),
         }}
@@ -36,10 +37,11 @@ const TabNavigation = () => {
         options={{
           headerShown: false,
           tabBarLabel: () => null,
-          tabBarIcon: () => (
-            <Image
-              source={require('../assets/images/Icon(1).png')}
-              style={styles.bottomIcon}
+          tabBarIcon: ({focused}) => (
+            <Icon
+              name="plus-square-o"
+              size={25}
+              color={focused ? '#3797EF' : 'black'}
             />
           ),
         }}
@@ -50,16 +52,17 @@ const TabNavigation = () => {
         options={{
           headerShown: false,
           tabBarLabel: () => null,
-          tabBarIcon: () => (
-            <View style={styles.bottomIconImgSec}>
-              <Image
-                source={
-                  updateOfficialImg
-                    ? {uri: updateOfficialImg}
-                    : require('../assets/images/unknownIcon.jpg')
-                }
-                style={styles.bottomIconImg}
-              />
+          tabBarIcon: ({focused}) => (
+            <View
+              style={[styles.bottomIconImgSec, focused && styles.activeBorder]}>
+              {updateOfficialImg ? (
+                <Image
+                  source={{uri: updateOfficialImg}}
+                  style={styles.bottomIconImg}
+                />
+              ) : (
+                <UserIcon name="user-circle" size={21} color="gray" />
+              )}
             </View>
           ),
         }}
@@ -78,10 +81,16 @@ const styles = StyleSheet.create({
   bottomIconImgSec: {
     width: 27,
     height: 27,
+    alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: 1,
     borderColor: 'rgba(38, 38, 38, 1)',
     borderRadius: 50,
     padding: 1,
+  },
+  activeBorder: {
+    borderColor: '#3797EF',
+    borderWidth: 1.5,
   },
   bottomIconImg: {
     width: '100%',

@@ -9,6 +9,7 @@ import AllPosts from '../../components/allPosts/AllPosts';
 import Loader from '../../components/loader/Loader';
 import {UserProfileRouteProp} from '../../types/types';
 
+
 const UserProfile = () => {
   const route = useRoute<UserProfileRouteProp>();
   const {userId} = route.params;

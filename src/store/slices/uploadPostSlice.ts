@@ -3,6 +3,14 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {UploadPostSlice} from '../../types/types';
 
+const initialState: UploadPostSlice = {
+  imageUri: '',
+  description: '',
+  loading: false,
+  error: null,
+  success: false,
+};
+
 export const uploadPost = createAsyncThunk(
   'post/addPost',
   async (
@@ -30,14 +38,6 @@ export const uploadPost = createAsyncThunk(
     }
   },
 );
-
-const initialState: UploadPostSlice = {
-  imageUri: '',
-  description: '',
-  loading: false,
-  error: null,
-  success: false,
-};
 
 const uploadPostSlice = createSlice({
   name: 'uploadPost',

@@ -6,7 +6,7 @@ import Toast from 'react-native-toast-message';
 import {useNavigation} from '@react-navigation/native';
 
 const useForgetPass = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [errorInput, setErrorInput] = useState<string | null>('');
 

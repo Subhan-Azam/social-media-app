@@ -2,20 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import Toast from 'react-native-toast-message';
-// import {useNavigation} from '@react-navigation/native';
-// const navigation = useNavigation;
-
-interface UserProfileState {
-  officialImg: string;
-  name: string;
-  userName: string;
-  email: string;
-  bio: string;
-  phone: string;
-  gender: string;
-  loading: boolean;
-  error: string | null;
-}
+import {UserProfileState} from '../../types/types';
 
 const initialState: UserProfileState = {
   officialImg: '',

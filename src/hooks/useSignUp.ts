@@ -3,12 +3,12 @@ import {signUpSlice} from '../store/slices/authSlice';
 import useAppDispatch from './useAppDispatch';
 
 const useSignUp = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [errorInput, setErrorInput] = useState('');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorInput, setErrorInput] = useState<string>('');
 
   const dispatch = useAppDispatch();
 

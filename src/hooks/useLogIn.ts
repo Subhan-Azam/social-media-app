@@ -1,15 +1,15 @@
 import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import type {AppDispatch, RootState} from '../store/store'; // Adjust path as needed
 import {loginUserSlice} from '../store/slices/authSlice';
+import useAppDispatch from './useAppDispatch';
+import useAppSelector from './useAppSelector';
 
 const useLogIn = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
-  const {loading, error} = useSelector((state: RootState) => state.authStore);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorInput, setErrorInput] = useState('');
+  const {loading, error} = useAppSelector(state => state.authStore);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [errorInput, setErrorInput] = useState<string>('');
 
   const logInUser = async () => {
     setErrorInput('');

@@ -22,7 +22,7 @@ const SelfProfile: React.FC<SelfProfileProps> = ({navigation}) => {
         <ProfileGridIcon />
 
         {error ? (
-          <Text>Failed To load Posts</Text>
+          <Text style={styles.noPostText}>Failed To load Posts</Text>
         ) : loading ? (
           <Loader />
         ) : posts.length > 0 ? (
@@ -32,7 +32,7 @@ const SelfProfile: React.FC<SelfProfileProps> = ({navigation}) => {
             ))}
           </View>
         ) : (
-          <Text>No post found</Text>
+          <Text style={styles.noPostText}>No post found</Text>
         )}
       </SafeAreaView>
     </ScrollView>
@@ -44,6 +44,13 @@ export default SelfProfile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 10,
+  },
+  noPostText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'gray',
+    textAlign: 'center',
     marginTop: 10,
   },
   postsContainer: {

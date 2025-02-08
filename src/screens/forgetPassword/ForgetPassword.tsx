@@ -12,8 +12,9 @@ import AuthBtn from '../../components/Buttons/AuthBtn';
 import useForgetPass from '../../hooks/useForgetPass';
 import {ScreenProps} from '../../types/types';
 
-
-const ForgetPassword: React.FC<ScreenProps<'forgetPassword'>> = ({navigation}) => {
+const ForgetPassword: React.FC<ScreenProps<'forgetPassword'>> = ({
+  navigation,
+}) => {
   const {email, setEmail, loading, errorInput, handleForgetPassword} =
     useForgetPass();
 
@@ -86,9 +87,9 @@ const styles = StyleSheet.create({
   textInput: {
     width: '100%',
     height: 44,
-    borderColor: 'gray',
-    color: 'black',
+    borderColor: '#0000001A',
     backgroundColor: '#FAFAFA',
+    color: 'black',
     borderWidth: 1,
     borderRadius: 5,
     borderBlockColor: '#0000001A',

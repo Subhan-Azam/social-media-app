@@ -27,28 +27,11 @@ export type Screens = {
   route: any;
 };
 
-// export interface Props {
-//   navigation: NativeStackNavigationProp<RootStackParamList, 'EditProfile'>;
-//   route: RouteProp<RootStackParamList, 'EditProfile'>;
-//   title: string;
-//   onPress: () => void;
-//   loading: boolean;
-// }
-
 export interface UserBioProps {
   officialImg?: string;
   name?: string;
   userName?: string;
   bio?: string;
-}
-
-export interface AuthSliceProps {
-  username: string;
-  email: string;
-  password: string;
-  loading: boolean;
-  userId: string;
-  error: string | null;
 }
 
 export interface AuthBtnProps {
@@ -64,13 +47,6 @@ export interface FetchAllPostSlice {
   userName: string;
   createdAt: string;
 }
-export interface UploadPostSlice {
-  imageUri: string;
-  description: string;
-  loading: boolean;
-  error: string | null;
-  success: boolean;
-}
 
 export interface SelfProfileProps {
   navigation: NavigationProp<any>;
@@ -83,6 +59,7 @@ export interface editProps {
 
 export interface UserProps {
   post: {
+    officialImg: string;
     imageUrl: string;
     description: string;
     userName: string;
@@ -105,6 +82,7 @@ export interface EditProfileProps {
   value?: string;
   onChange?: (value: string) => void;
   editable?: boolean;
+  placeholder?: string;
 }
 
 export interface Post {
@@ -120,4 +98,62 @@ export interface PageShiftAuthProps {
   onPress: () => void;
   title1: string;
   title2?: string;
+}
+
+// slices
+
+export interface AuthSliceProps {
+  username: string;
+  email: string;
+  password: string;
+  loading: boolean;
+  userId: string;
+  error: string | null;
+}
+
+export interface UserProfileState {
+  officialImg: string;
+  name: string;
+  userName: string;
+  email: string;
+  bio: string;
+  phone: string;
+  gender: string;
+  loading: boolean;
+  error: string | null;
+}
+
+export interface PostSliceProps {
+  id: string;
+  officialImg: string;
+  imageUrl: string;
+  description: string;
+  userUID: string;
+  userName: string;
+  createdAt: string;
+}
+
+export interface UploadPostSlice {
+  imageUri: string;
+  description: string;
+  loading: boolean;
+  error: string | null;
+  success: boolean;
+}
+
+// hook
+export interface UseUploadPostReturn {
+  imageUri: string | null;
+  description: string;
+  loading: boolean;
+  pickImage: () => void;
+  uploadData: () => void;
+  setDescription: (text: string) => void;
+}
+
+export interface UserData {
+  officialImg: string;
+  name: string;
+  userName: string;
+  bio: string;
 }
