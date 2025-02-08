@@ -6,30 +6,14 @@ import {
   setDescription,
   uploadPost,
 } from '../store/slices/uploadPostSlice';
-import type {AppDispatch, RootState} from '../store/store';
 import useAppSelector from './useAppSelector';
 import useAppDispatch from './useAppDispatch';
-
-type UseUploadPostReturn = {
-  imageUri: string | null;
-  description: string;
-  loading: boolean;
-  pickImage: () => void;
-  uploadData: () => void;
-  setDescription: (text: string) => void;
-};
+import {UseUploadPostReturn} from '../types/types';
 
 const useUploadPost = (): UseUploadPostReturn => {
-  const dispatch: AppDispatch = useAppDispatch();
-  const imageUri = useAppSelector(state => state.uploadPostStore.imageUri);
-  const description = useAppSelector(
-    state => state.uploadPostStore.description,
-  );
-  const loading = useAppSelector(
-    (state: RootState) => state.uploadPostStore.loading,
-  );
-  const error = useAppSelector(
-    (state: RootState) => state.uploadPostStore.error,
+  const dispatch = useAppDispatch();
+  const {imageUri, description, loading, error} = useAppSelector(
+    state => state.uploadPostStore,
   );
 
   const pickImage = () => {

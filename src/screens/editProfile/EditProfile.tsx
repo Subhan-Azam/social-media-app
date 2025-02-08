@@ -38,12 +38,14 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
       title: 'Name',
       value: updateName,
       onChange: setUpdateName,
+      placeholder: 'Name',
     },
     {
       editable: true,
       title: 'User Name',
       value: updateUsername,
       onChange: setUpdateUsername,
+      placeholder: 'User Name',
     },
     {editable: true, title: 'Bio', value: updateBio, onChange: setUpdateBio},
     {
@@ -51,18 +53,21 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
       title: 'Email',
       value: updateEmail,
       onChange: setUpdateEmail,
+      placeholder: 'Email',
     },
     {
       editable: true,
       title: 'Phone',
       value: updatePhone,
       onChange: setUpdatePhone,
+      placeholder: 'Phone',
     },
     {
       editable: true,
       title: 'Gender',
       value: updateGender,
       onChange: setUpdateGender,
+      placeholder: 'Gender',
     },
   ];
   return (
@@ -99,6 +104,7 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
               title={field.title}
               value={field.value}
               onChange={field.onChange}
+              placeholder={field.placeholder}
             />
           ))}
         </View>
@@ -113,6 +119,7 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
               title={field.title}
               value={field.value}
               onChange={field.onChange}
+              placeholder={field.placeholder}
             />
           ))}
         </View>

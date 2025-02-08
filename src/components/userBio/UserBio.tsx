@@ -13,7 +13,14 @@ const UserBio: React.FC<UserBioProps> = ({
       <View style={styles.container}>
         <Text style={styles.lockText}>jacob_w</Text>
         <View style={styles.profileImgSec}>
-          <Image style={styles.profileImg} source={{uri: officialImg}} />
+          <Image
+            style={styles.profileImg}
+            source={
+              officialImg
+                ? {uri: officialImg}
+                : require('../../assets/images/unknownIcon.jpg')
+            }
+          />
         </View>
         <Text style={styles.officialNameText}>{name}</Text>
 

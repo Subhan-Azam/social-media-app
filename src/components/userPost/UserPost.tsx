@@ -20,7 +20,11 @@ const UserPost: React.FC<UserProps> = ({post}) => {
           style={styles.profileHeader}>
           <Image
             style={styles.officialImg}
-            source={require('../../assets/images/unknownIcon.jpg')}
+            source={
+              post.officialImg
+                ? {uri: post.officialImg}
+                : require('../../assets/images/unknownIcon.jpg')
+            }
           />
           <View>
             <View style={styles.officialName}>

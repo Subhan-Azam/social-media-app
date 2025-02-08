@@ -11,17 +11,14 @@ const SelfBio = () => {
       <View style={styles.container}>
         <Text style={styles.lockText}>jacob_w</Text>
         <View style={styles.profileImgSec}>
-          {updateOfficialImg ? (
-            <Image
-              style={styles.profileImg}
-              source={{uri: updateOfficialImg}}
-            />
-          ) : (
-            <Image
-              style={styles.profileImg}
-              source={require('../../assets/images/unknownIcon.jpg')}
-            />
-          )}
+          <Image
+            style={styles.profileImg}
+            source={
+              updateOfficialImg
+                ? {uri: updateOfficialImg}
+                : require('../../assets/images/unknownIcon.jpg')
+            }
+          />
         </View>
         <Text style={styles.officialNameText}>{updateName}</Text>
 

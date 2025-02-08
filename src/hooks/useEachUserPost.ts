@@ -1,13 +1,7 @@
 import {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {UserProps} from '../types/types';
-
-interface UserData {
-  officialImg: string;
-  name: string;
-  userName: string;
-  bio: string;
-}
+import {UserData} from '../types/types';
 
 const useEachUserPost = (userId: string) => {
   const [posts, setPosts] = useState<UserProps[]>([]);

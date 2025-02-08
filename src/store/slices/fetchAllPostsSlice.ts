@@ -1,40 +1,50 @@
 import {createSlice, createAsyncThunk, PayloadAction} from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
+import {PostSliceProps} from '../../types/types';
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const res = await firestore()
-    .collection('posts')
-    .orderBy('createdAt', 'desc')
-    .get();
+  try {
+    const postRes = await firestore()
+      .collection('posts')
+      .orderBy('createdAt', 'desc')
+      .get();
 
-  const data = res.docs.map(doc => {
-    const postData = doc.data();
+    const posts = await Promise.all(
+      postRes.docs.map(async doc => {
+        const postData = doc.data();
+        const userUID = postData.userUID;
 
-    return {
-      id: doc.id,
-      ...postData,
-      createdAt: postData.createdAt.toDate().toISOString(),
-    };
-  }) as Post[];
+        const userDoc = await firestore()
+          .collection('Users')
+          .doc(userUID)
+          .get({source: 'server'});
 
-  return data;
+        const userData = userDoc.exists ? userDoc.data() : {};
+
+        return {
+          id: doc.id,
+          imageUrl: postData.imageUrl || '',
+          description: postData.description || '',
+          userUID: postData.userUID || '',
+          userName: postData.userName || '',
+          createdAt: postData.createdAt?.toDate().toISOString() || '',
+          officialImg: userData?.officialImg || '',
+        };
+      }),
+    );
+
+    return posts;
+  } catch (error) {
+    throw new Error('Failed to fetch posts with user data');
+  }
 });
-
-interface Post {
-  id: string;
-  imageUrl: string;
-  description: string;
-  userUID: string;
-  userName: string;
-  createdAt: string;
-}
 
 const initialState = {
   posts: [],
   loading: true,
   error: null,
 } as {
-  posts: Post[];
+  posts: PostSliceProps[];
   loading: boolean;
   error: string | null;
 };
@@ -43,7 +53,7 @@ const fetchAllPostSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    setPosts: (state, action: PayloadAction<Post[]>) => {
+    setPosts: (state, action: PayloadAction<PostSliceProps[]>) => {
       state.posts = action.payload;
     },
   },
