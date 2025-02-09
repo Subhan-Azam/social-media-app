@@ -11,6 +11,7 @@ import {
 
 import AuthBtn from '../../components/Buttons/AuthBtn';
 import useUploadPost from '../../hooks/useUploadPost';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Upload = () => {
   const {
@@ -36,7 +37,7 @@ const Upload = () => {
             <Image source={{uri: imageUri}} style={styles.uploadedImage} />
           ) : (
             <>
-              <Image source={require('../../assets/images/Upload.png')} />
+              <Icon name="cloud-upload" size={50} color="black" />
               <Text style={styles.uploadImgText}>Upload Image</Text>
             </>
           )}

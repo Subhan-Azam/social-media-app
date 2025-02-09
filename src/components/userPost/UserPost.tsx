@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../types/types';
 import {UserProps} from '../../types/types';
+import UserIcon from 'react-native-vector-icons/FontAwesome';
 
 const UserPost: React.FC<UserProps> = ({post}) => {
   const navigation =
@@ -18,14 +19,14 @@ const UserPost: React.FC<UserProps> = ({post}) => {
             navigation.navigate('UserProfile', {userId: post.userUID});
           }}
           style={styles.profileHeader}>
-          <Image
-            style={styles.officialImg}
-            source={
-              post.officialImg
-                ? {uri: post.officialImg}
-                : require('../../assets/images/unknownIcon.jpg')
-            }
-          />
+          {post.officialImg ? (
+            <Image
+              style={styles.officialImg}
+              source={{uri: post.officialImg}}
+            />
+          ) : (
+            <UserIcon name="user-circle" size={32} color="gray" />
+          )}
           <View>
             <View style={styles.officialName}>
               <Text style={styles.officialNameText}>{post.userName}</Text>
@@ -36,10 +37,7 @@ const UserPost: React.FC<UserProps> = ({post}) => {
             </View>
           </View>
         </TouchableOpacity>
-
-        <Image source={require('../../assets/images/MoreIcon.png')} />
       </View>
-
       <Image source={{uri: post.imageUrl}} style={styles.postImage} />
       <View style={styles.postDescDate}>
         <Text style={styles.desc}>
@@ -63,6 +61,8 @@ const styles = StyleSheet.create({
   },
   profileHeader: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 8,
   },
   officialImg: {

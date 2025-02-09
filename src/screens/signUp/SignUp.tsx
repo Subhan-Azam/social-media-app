@@ -18,6 +18,8 @@ import useSignUp from '../../hooks/useSignUp';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
 import GoogleLogin from '../../components/googleLogin/GoogleLogin';
 import {ScreenProps} from '../../types/types';
+import EyeIcon from 'react-native-vector-icons/FontAwesome';
+import EyeSlash from 'react-native-vector-icons/FontAwesome';
 
 const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
   const {
@@ -88,14 +90,11 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
                   autoCapitalize="none"
                 />
                 <TouchableOpacity onPress={toggleShowPassword}>
-                  <Image
-                    source={
-                      showPassword
-                        ? require('../../assets/images/eyeIcon.png')
-                        : require('../../assets/images/eyeSlash.png')
-                    }
-                    style={styles.changeIcon}
-                  />
+                  {showPassword ? (
+                    <EyeIcon name="eye" size={21} color="black" />
+                  ) : (
+                    <EyeSlash name="eye-slash" size={21} color="black" />
+                  )}
                 </TouchableOpacity>
               </View>
               <View style={styles.textInput}>
@@ -109,14 +108,11 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
                   autoCapitalize="none"
                 />
                 <TouchableOpacity onPress={toggleConfirmShowPass}>
-                  <Image
-                    source={
-                      confirmShowPass
-                        ? require('../../assets/images/eyeIcon.png')
-                        : require('../../assets/images/eyeSlash.png')
-                    }
-                    style={styles.changeIcon}
-                  />
+                  {confirmShowPass ? (
+                    <EyeIcon name="eye" size={21} color="black" />
+                  ) : (
+                    <EyeSlash name="eye-slash" size={21} color="black" />
+                  )}
                 </TouchableOpacity>
               </View>
               {errorInput && <Text style={styles.error}>{errorInput}</Text>}

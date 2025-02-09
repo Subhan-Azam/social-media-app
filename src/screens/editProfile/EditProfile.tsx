@@ -12,6 +12,7 @@ import useEditProfile from '../../hooks/useEditProfile';
 import EditProfileInput from '../../components/editProfileInput/EditProfileInput';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
 import {ScreenProps} from '../../types/types';
+import UserIcon from 'react-native-vector-icons/FontAwesome';
 
 const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
   const {
@@ -86,10 +87,7 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
           {updateOfficialImg ? (
             <Image source={{uri: updateOfficialImg}} style={styles.imgChange} />
           ) : (
-            <Image
-              source={require('../../assets/images/unknownIcon.jpg')}
-              style={styles.imgChange}
-            />
+            <UserIcon name="user-circle" size={95} color="gray" />
           )}
           <TouchableOpacity onPress={imagePicker}>
             <Text style={styles.changeName}>Change Profile Photo</Text>

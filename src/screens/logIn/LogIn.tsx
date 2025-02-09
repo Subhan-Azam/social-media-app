@@ -18,6 +18,8 @@ import useLogIn from '../../hooks/useLogIn';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
 import GoogleLogin from '../../components/googleLogin/GoogleLogin';
 import {ScreenProps} from '../../types/types';
+import EyeIcon from 'react-native-vector-icons/FontAwesome';
+import EyeSlash from 'react-native-vector-icons/FontAwesome';
 
 const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
   const {email, setEmail, password, setPassword, error, loading, logInUser} =
@@ -59,14 +61,11 @@ const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
                   secureTextEntry={!showPassword}
                 />
                 <TouchableOpacity onPress={togglePasswordVisibility}>
-                  <Image
-                    source={
-                      showPassword
-                        ? require('../../assets/images/eyeIcon.png')
-                        : require('../../assets/images/eyeSlash.png')
-                    }
-                    style={styles.changeIcon}
-                  />
+                  {showPassword ? (
+                    <EyeIcon name="eye" size={21} color="black" />
+                  ) : (
+                    <EyeSlash name="eye-slash" size={21} color="black" />
+                  )}
                 </TouchableOpacity>
               </View>
               {error && <Text style={styles.error}>{error}</Text>}

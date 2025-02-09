@@ -1,7 +1,7 @@
 import {StyleSheet, Image, View, Text, ScrollView} from 'react-native';
 import React from 'react';
 import useEditProfile from '../../hooks/useEditProfile';
-
+import UserIcon from 'react-native-vector-icons/FontAwesome';
 const SelfBio = () => {
   const {updateOfficialImg, updateName, updateUsername, updateBio} =
     useEditProfile();
@@ -11,14 +11,14 @@ const SelfBio = () => {
       <View style={styles.container}>
         <Text style={styles.lockText}>jacob_w</Text>
         <View style={styles.profileImgSec}>
-          <Image
-            style={styles.profileImg}
-            source={
-              updateOfficialImg
-                ? {uri: updateOfficialImg}
-                : require('../../assets/images/unknownIcon.jpg')
-            }
-          />
+          {updateOfficialImg ? (
+            <Image
+              style={styles.profileImg}
+              source={{uri: updateOfficialImg}}
+            />
+          ) : (
+            <UserIcon name="user-circle" size={86} color="gray" />
+          )}
         </View>
         <Text style={styles.officialNameText}>{updateName}</Text>
 
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
   profileImgSec: {
     borderWidth: 2,
     borderColor: '#C7C7CC',
-    width: 100,
-    height: 100,
+    width: 96,
+    height: 96,
     borderRadius: '100%',
     alignItems: 'center',
     justifyContent: 'center',
