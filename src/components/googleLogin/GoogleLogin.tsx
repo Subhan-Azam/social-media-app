@@ -29,7 +29,7 @@ const GoogleLogin: React.FC<EditProfileProps> = ({title}) => {
       ) : (
         <>
           <Image source={require('../../assets/images/Icon.png')} />
-          <Text>{title}</Text>
+          <Text style={styles.logInWithGoogleText}>{title}</Text>
         </>
       )}
     </TouchableOpacity>
@@ -43,6 +43,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    paddingVertical: 30,
+    marginVertical: 20,
+  },
+  logInWithGoogleText: {
+    fontWeight: 600,
   },
 });

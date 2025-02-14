@@ -31,9 +31,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 25,
   },
   logInBtnText: {
     color: 'white',
-    fontWeight: '600',
+    fontWeight: 'bold',
   },
 });

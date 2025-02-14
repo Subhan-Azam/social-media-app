@@ -1,4 +1,3 @@
-// src/types/Post.ts
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp, NavigationProp} from '@react-navigation/native';
 
@@ -101,7 +100,6 @@ export interface PageShiftAuthProps {
 }
 
 // slices
-
 export interface AuthSliceProps {
   username: string;
   email: string;
@@ -141,7 +139,7 @@ export interface UploadPostSlice {
   success: boolean;
 }
 
-// hook
+// hooks
 export interface UseUploadPostReturn {
   imageUri: string | null;
   description: string;

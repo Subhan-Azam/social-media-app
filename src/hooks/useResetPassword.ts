@@ -1,5 +1,4 @@
 import {useState} from 'react';
-// import Toast from 'react-native-toast-message';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
 import {useNavigation} from '@react-navigation/native';

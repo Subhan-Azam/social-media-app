@@ -16,10 +16,10 @@ const Home = () => {
         </View>
         <View style={styles.line} />
 
-        {error ? (
-          <Text>Failed to fetch posts</Text>
-        ) : loading ? (
+        {loading ? (
           <Loader />
+        ) : error ? (
+          <Text>Failed to fetch posts</Text>
         ) : posts.length === 0 ? (
           <Text style={styles.noPostText}>No posts available.</Text>
         ) : (

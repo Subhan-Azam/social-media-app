@@ -2,6 +2,7 @@ import {StyleSheet, Image, View, Text, ScrollView} from 'react-native';
 import React from 'react';
 import {UserBioProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const UserBio: React.FC<UserBioProps> = ({
   officialImg,
@@ -12,7 +13,14 @@ const UserBio: React.FC<UserBioProps> = ({
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.lockText}>jacob_w</Text>
+        <View style={styles.lockSec}>
+          {userName && (
+            <>
+              <Icon name="lock" size={15} />
+              <Text style={styles.lockText}>{userName}</Text>
+            </>
+          )}
+        </View>
         <View style={styles.profileImgSec}>
           {officialImg ? (
             <Image style={styles.profileImg} source={{uri: officialImg}} />
@@ -22,10 +30,7 @@ const UserBio: React.FC<UserBioProps> = ({
         </View>
         <Text style={styles.officialNameText}>{name}</Text>
 
-        <Text style={styles.bio}>
-          <Text style={styles.bioTag}> @{userName} </Text>
-          {bio}
-        </Text>
+        <Text style={styles.bio}>{bio}</Text>
       </View>
     </ScrollView>
   );
@@ -38,10 +43,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  lockText: {
+  lockSec: {
     fontWeight: 600,
     fontSize: 16,
     marginBottom: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  lockText: {
+    marginTop: -2,
+    fontWeight: 600,
   },
   profileImgSec: {
     borderWidth: 2,
@@ -69,8 +81,5 @@ const styles = StyleSheet.create({
     width: 240,
     borderColor: '#C7C7CC',
     marginBottom: 10,
-  },
-  bioTag: {
-    color: '#05386B',
   },
 });

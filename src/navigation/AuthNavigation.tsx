@@ -24,7 +24,6 @@ const AppNavigator = () => {
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [splashShow, setSplashShow] = useState<boolean>(true);
 
-  // google Login
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:

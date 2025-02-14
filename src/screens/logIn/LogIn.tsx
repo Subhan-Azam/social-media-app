@@ -20,6 +20,7 @@ import GoogleLogin from '../../components/googleLogin/GoogleLogin';
 import {ScreenProps} from '../../types/types';
 import EyeIcon from 'react-native-vector-icons/FontAwesome';
 import EyeSlash from 'react-native-vector-icons/FontAwesome';
+import OrSec from '../../components/orSec/OrSec';
 
 const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
   const {email, setEmail, password, setPassword, error, loading, logInUser} =
@@ -62,9 +63,9 @@ const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
                 />
                 <TouchableOpacity onPress={togglePasswordVisibility}>
                   {showPassword ? (
-                    <EyeIcon name="eye" size={21} color="black" />
+                    <EyeIcon name="eye" size={21} color="gray" />
                   ) : (
-                    <EyeSlash name="eye-slash" size={21} color="black" />
+                    <EyeSlash name="eye-slash" size={21} color="gray" />
                   )}
                 </TouchableOpacity>
               </View>
@@ -83,11 +84,7 @@ const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
 
             <GoogleLogin title="Login with google" />
 
-            <View style={styles.OrSec}>
-              <View style={styles.line} />
-              <Text>OR</Text>
-              <View style={styles.line} />
-            </View>
+            <OrSec />
             <PageShiftAuth
               title1="Don’t have an account? "
               title2="Sign up."
@@ -153,7 +150,6 @@ const styles = StyleSheet.create({
   forgetPassLink: {
     width: '100%',
     alignItems: 'flex-end',
-    marginBottom: 15,
   },
   forgotText: {
     color: '#3797EF',
@@ -162,17 +158,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
-  OrSec: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 50,
-  },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#00000033',
-  },
   signUpSec: {
     flexDirection: 'row',
   },

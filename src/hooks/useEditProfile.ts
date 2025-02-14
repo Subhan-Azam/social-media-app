@@ -57,7 +57,6 @@ const useEditProfile = () => {
         } else {
           if (res.assets && res.assets[0].base64) {
             const baseUrl = `data:image/png;base64,${res.assets[0].base64}`;
-            console.log('img uri========', baseUrl);
             setUpdateOfficialImg(baseUrl);
           } else {
             Alert.alert('there was an error in image picker');

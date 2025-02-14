@@ -11,6 +11,7 @@ const UserPost: React.FC<UserProps> = ({post}) => {
     useNavigation<
       NativeStackNavigationProp<RootStackParamList, 'UserProfile'>
     >();
+
   return (
     <>
       <View style={styles.header}>
@@ -37,6 +38,8 @@ const UserPost: React.FC<UserProps> = ({post}) => {
             </View>
           </View>
         </TouchableOpacity>
+
+        <Image source={require('../../assets/images/MoreIcon.png')} />
       </View>
       <Image source={{uri: post.imageUrl}} style={styles.postImage} />
       <View style={styles.postDescDate}>
@@ -44,7 +47,7 @@ const UserPost: React.FC<UserProps> = ({post}) => {
           <Text style={styles.descName}>{post.userName}</Text>{' '}
           {post.description}
         </Text>
-        <Text style={styles.date}>{post.createdAt}</Text>
+        <Text style={styles.date}>{post.createdAt.split('T')[0]}</Text>
       </View>
     </>
   );

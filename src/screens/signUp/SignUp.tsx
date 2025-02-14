@@ -20,6 +20,7 @@ import GoogleLogin from '../../components/googleLogin/GoogleLogin';
 import {ScreenProps} from '../../types/types';
 import EyeIcon from 'react-native-vector-icons/FontAwesome';
 import EyeSlash from 'react-native-vector-icons/FontAwesome';
+import OrSec from '../../components/orSec/OrSec';
 
 const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
   const {
@@ -91,9 +92,9 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
                 />
                 <TouchableOpacity onPress={toggleShowPassword}>
                   {showPassword ? (
-                    <EyeIcon name="eye" size={21} color="black" />
+                    <EyeIcon name="eye" size={21} color="gray" />
                   ) : (
-                    <EyeSlash name="eye-slash" size={21} color="black" />
+                    <EyeSlash name="eye-slash" size={21} color="gray" />
                   )}
                 </TouchableOpacity>
               </View>
@@ -109,9 +110,9 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
                 />
                 <TouchableOpacity onPress={toggleConfirmShowPass}>
                   {confirmShowPass ? (
-                    <EyeIcon name="eye" size={21} color="black" />
+                    <EyeIcon name="eye" size={21} color="gray" />
                   ) : (
-                    <EyeSlash name="eye-slash" size={21} color="black" />
+                    <EyeSlash name="eye-slash" size={21} color="gray" />
                   )}
                 </TouchableOpacity>
               </View>
@@ -122,11 +123,8 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
 
             <GoogleLogin title="Sign Up with google" />
 
-            <View style={styles.OrSec}>
-              <View style={styles.line} />
-              <Text>OR</Text>
-              <View style={styles.line} />
-            </View>
+            <OrSec />
+
             <PageShiftAuth
               title1="Already have an account? "
               title2="Log In."
@@ -213,17 +211,6 @@ const styles = StyleSheet.create({
     fontWeight: 600,
   },
 
-  OrSec: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 50,
-  },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#00000033',
-  },
   signUpSec: {
     flexDirection: 'row',
   },

@@ -5,7 +5,9 @@ import {UserProps} from '../../types/types';
 const AllPosts: React.FC<UserProps> = ({post}) => {
   return (
     <View style={styles.postContainer}>
-      <Image style={styles.postImage} source={{uri: post.imageUrl}} />
+      {post.imageUrl && (
+        <Image style={styles.postImage} source={{uri: post.imageUrl}} />
+      )}
     </View>
   );
 };

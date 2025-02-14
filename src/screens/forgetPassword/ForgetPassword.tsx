@@ -42,12 +42,13 @@ const ForgetPassword: React.FC<ScreenProps<'forgetPassword'>> = ({
           />
         </View>
         <Text style={styles.error}>{errorInput}</Text>
-
-        <AuthBtn
-          onPress={handleForgetPassword}
-          loading={loading}
-          title="Send Magic Link"
-        />
+        <View style={styles.authBtn}>
+          <AuthBtn
+            onPress={handleForgetPassword}
+            loading={loading}
+            title="Send Magic Link"
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -82,7 +83,6 @@ const styles = StyleSheet.create({
   },
   inputsBox: {
     width: '100%',
-    gap: 15,
   },
   textInput: {
     width: '100%',
@@ -101,6 +101,11 @@ const styles = StyleSheet.create({
     marginTop: -15,
     width: '100%',
     textAlign: 'left',
+  },
+
+  authBtn: {
+    marginTop: -25,
+    width: '100%',
   },
   MagicLinkBtn: {
     backgroundColor: '#3797EF',

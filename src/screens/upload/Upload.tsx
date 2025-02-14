@@ -12,8 +12,10 @@ import {
 import AuthBtn from '../../components/Buttons/AuthBtn';
 import useUploadPost from '../../hooks/useUploadPost';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useNavigation} from '@react-navigation/native';
 
 const Upload = () => {
+  const navigation = useNavigation();
   const {
     imageUri,
     description,
@@ -26,7 +28,9 @@ const Upload = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText1}>cancel</Text>
+        <Text onPress={() => navigation.goBack()} style={styles.headerText1}>
+          Cancel
+        </Text>
         <Text style={styles.headerText2}>Image</Text>
         <Text style={styles.headerText3} />
       </View>
@@ -44,11 +48,11 @@ const Upload = () => {
         </TouchableOpacity>
 
         <View style={styles.descSec}>
-          <Text>Post Description</Text>
+          <Text style={styles.descText}>Post Description</Text>
           <TextInput
             style={styles.descInput}
             placeholder="Add post description"
-            placeholderTextColor="#00000033"
+            placeholderTextColor="#0000001A"
             value={description}
             onChangeText={setDescription}
           />
@@ -76,12 +80,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 15,
     alignItems: 'center',
-    height: 60,
+    height: 50,
   },
   headerText1: {
     fontSize: 16,
     fontWeight: '400',
-    color: 'red',
   },
   headerText2: {
     fontSize: 16,
@@ -117,18 +120,22 @@ const styles = StyleSheet.create({
     marginTop: 15,
     gap: 5,
   },
+  descText: {
+    fontWeight: 600,
+    fontSize: 13,
+    marginTop: 5,
+  },
   descInput: {
     width: '100%',
-    backgroundColor: '#FAFAFA',
     color: 'black',
-    borderWidth: 0.5,
-    borderBlockColor: '#0000001A',
+    borderWidth: 1,
+    borderColor: '#0000001A',
+    backgroundColor: '#FAFAFA',
     borderRadius: 5,
     height: 44,
     paddingHorizontal: 10,
   },
   AuthBtn: {
     marginTop: 60,
-    marginBottom: 20,
   },
 });

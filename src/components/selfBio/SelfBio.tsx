@@ -1,7 +1,8 @@
 import {StyleSheet, Image, View, Text, ScrollView} from 'react-native';
 import React from 'react';
 import useEditProfile from '../../hooks/useEditProfile';
-import UserIcon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 const SelfBio = () => {
   const {updateOfficialImg, updateName, updateUsername, updateBio} =
     useEditProfile();
@@ -9,7 +10,15 @@ const SelfBio = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.lockText}>jacob_w</Text>
+        <View style={styles.lockSec}>
+          {updateUsername && (
+            <>
+              <Icon name="lock" size={15} />
+              <Text style={styles.lockText}>{updateUsername}</Text>
+            </>
+          )}
+        </View>
+
         <View style={styles.profileImgSec}>
           {updateOfficialImg ? (
             <Image
@@ -17,15 +26,12 @@ const SelfBio = () => {
               source={{uri: updateOfficialImg}}
             />
           ) : (
-            <UserIcon name="user-circle" size={86} color="gray" />
+            <Icon name="user-circle" size={86} color="gray" />
           )}
         </View>
         <Text style={styles.officialNameText}>{updateName}</Text>
 
-        <Text style={styles.bio}>
-          <Text style={styles.bioTag}> {updateUsername} </Text>
-          {updateBio}
-        </Text>
+        <Text style={styles.bio}>{updateBio}</Text>
       </View>
     </ScrollView>
   );
@@ -38,10 +44,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  lockText: {
+  lockSec: {
     fontWeight: 600,
     fontSize: 16,
     marginBottom: 5,
+    marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  lockText: {
+    marginTop: -2,
+    fontWeight: 600,
   },
   profileImgSec: {
     borderWidth: 2,
