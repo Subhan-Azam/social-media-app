@@ -5,6 +5,8 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../types/types';
 import {UserProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
+import {IMAGES} from '../../constants/images';
+import { COLORS } from '../../constants/colors';
 
 const UserPost: React.FC<UserProps> = ({post}) => {
   const navigation =
@@ -31,7 +33,7 @@ const UserPost: React.FC<UserProps> = ({post}) => {
           <View>
             <View style={styles.officialName}>
               <Text style={styles.officialNameText}>{post.userName}</Text>
-              <Image source={require('../../assets/images/OfficialIcon.png')} />
+              <Image source={IMAGES.OFFICIALICON} />
             </View>
             <View>
               <Text style={styles.userLocationText}>Tokyo, Japan</Text>
@@ -39,7 +41,7 @@ const UserPost: React.FC<UserProps> = ({post}) => {
           </View>
         </TouchableOpacity>
 
-        <Image source={require('../../assets/images/MoreIcon.png')} />
+        <Image source={IMAGES.MOREICON} />
       </View>
       <Image source={{uri: post.imageUrl}} style={styles.postImage} />
       <View style={styles.postDescDate}>
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
   officialNameText: {
     fontWeight: 600,
     fontSize: 13,
-    color: '#262626',
+    color: COLORS.MINE_SHAFT,
   },
   userLocationText: {
     fontSize: 11,
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
     fontWeight: 600,
   },
   date: {
-    color: '#00000066',
+    color: COLORS.BLACK,
     fontSize: 11,
   },
 });

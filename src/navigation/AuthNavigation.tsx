@@ -1,5 +1,3 @@
-
-
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -26,8 +24,7 @@ const AppNavigator = () => {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId:
-        '793741851762-hpcds8m113sc9sqhdb18a8vdqcbu7nve.apps.googleusercontent.com',
+      webClientId: process.env.WEB_CLIENT_ID, // '793741851762-hpcds8m113sc9sqhdb18a8vdqcbu7nve.apps.googleusercontent.com',
     });
   }, []);
 

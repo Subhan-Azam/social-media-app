@@ -8,6 +8,7 @@ import {
 import React, {useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
+import {COLORS} from '../../constants/colors';
 
 const LogOut = () => {
   const [loading, setLoading] = useState(false);
@@ -56,9 +57,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '90%',
     height: 29,
-    backgroundColor: '#F44336',
+    backgroundColor: COLORS.POMEGRANATE,
     borderWidth: 1,
-    borderColor: '#3C3C432E',
+    borderColor: COLORS.TUNA,
     borderRadius: 6,
   },
   btnText: {

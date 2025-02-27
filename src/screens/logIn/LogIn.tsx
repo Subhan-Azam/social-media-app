@@ -21,6 +21,8 @@ import {ScreenProps} from '../../types/types';
 import EyeIcon from 'react-native-vector-icons/FontAwesome';
 import EyeSlash from 'react-native-vector-icons/FontAwesome';
 import OrSec from '../../components/orSec/OrSec';
+import {IMAGES} from '../../constants/images';
+import {COLORS} from '../../constants/colors';
 
 const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
   const {email, setEmail, password, setPassword, error, loading, logInUser} =
@@ -37,10 +39,7 @@ const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
           contentContainerStyle={styles.scrollView}
           keyboardShouldPersistTaps="handled">
           <View style={styles.box}>
-            <Image
-              style={styles.instagramImg}
-              source={require('../../assets/images/InstagramLogo.png')}
-            />
+            <Image style={styles.instagramImg} source={IMAGES.INSTAGRAMLOGO} />
             <View style={styles.inputsBox}>
               <TextInput
                 value={email}
@@ -123,12 +122,12 @@ const styles = StyleSheet.create({
   textInput: {
     width: '100%',
     height: 44,
-    borderColor: '#0000001A',
-    backgroundColor: '#FAFAFA',
+    borderColor: COLORS.BORDER_COLOR,
+    backgroundColor: COLORS.ALABASTER,
     color: 'black',
     borderWidth: 1,
     borderRadius: 5,
-    borderBlockColor: '#0000001A',
+    borderBlockColor: COLORS.BORDER_COLOR,
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -152,7 +151,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   forgotText: {
-    color: '#3797EF',
+    color: COLORS.PICTON_BLUE,
     textAlign: 'right',
     fontWeight: '500',
     fontSize: 12,
@@ -165,6 +164,6 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   signUpText2: {
-    color: '#3797EF',
+    color: COLORS.PICTON_BLUE,
   },
 });

@@ -6,13 +6,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import {AuthBtnProps} from '../../types/types';
+import { COLORS } from '../../constants/colors';
 
 const AuthBtn: React.FC<AuthBtnProps> = ({title, onPress, loading = false}) => {
   return (
     <>
       <TouchableOpacity onPress={onPress} style={styles.logInBtn}>
         {loading ? (
-          <ActivityIndicator color="#ffffff" />
+          <ActivityIndicator color={COLORS.WHITE} />
         ) : (
           <Text style={styles.logInBtnText}>{title}</Text>
         )}
@@ -25,7 +26,7 @@ export default AuthBtn;
 
 const styles = StyleSheet.create({
   logInBtn: {
-    backgroundColor: '#3797EF',
+    backgroundColor: COLORS.PICTON_BLUE,
     width: '100%',
     height: 44,
     borderRadius: 5,

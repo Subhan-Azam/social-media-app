@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import { COLORS } from '../../constants/colors';
 
 const OrSec = () => {
   return (
@@ -22,11 +23,11 @@ const styles = StyleSheet.create({
     gap: 50,
   },
   orText: {
-    color: '#00000066',
+    color: COLORS.BLACK,
   },
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: '#00000033',
+    backgroundColor: COLORS.BLACK_SEC,
   },
 });

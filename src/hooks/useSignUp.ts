@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {signUpSlice} from '../store/slices/authSlice';
-import useAppDispatch from './useAppDispatch';
+import { useAppDispatch } from './useRedux';
 
 const useSignUp = () => {
   const [name, setName] = useState<string>('');

@@ -1,6 +1,7 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
 import {EditProfileProps} from '../../types/types';
+import {COLORS} from '../../constants/colors';
 
 const EditProfileInput: React.FC<EditProfileProps> = ({
   title,
@@ -18,7 +19,7 @@ const EditProfileInput: React.FC<EditProfileProps> = ({
         onChangeText={onChange}
         style={styles.editInput}
         placeholder={placeholder}
-        placeholderTextColor={'#3C3C434D'}
+        placeholderTextColor={COLORS.TUNA}
       />
     </View>
   );
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   },
   editInput: {
     borderBottomWidth: 0.3,
-    borderColor: '#3C3C434A',
+    borderColor: COLORS.TUNA,
     width: '75%',
     color: 'black',
   },

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import useAppDispatch from './useAppDispatch';
-import useAppSelector from './useAppSelector';
+import { useAppDispatch, useAppSelector } from './useRedux';
+
 import {
   fetchUserProfile,
   updateUserProfile,
@@ -40,7 +40,7 @@ const useEditProfile = () => {
 
   const imagePicker = () => {
     launchImageLibrary(
-      {mediaType: 'photo', quality: 1, includeBase64: true},
+      {mediaType: 'photo', quality: 0, includeBase64: true},
       res => {
         if (res.didCancel) {
           Toast.show({

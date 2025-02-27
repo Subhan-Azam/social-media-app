@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {PageShiftAuthProps} from '../../types/types';
+import { COLORS } from '../../constants/colors';
 
 const PageShiftAuth: React.FC<PageShiftAuthProps> = ({
   onPress,
@@ -33,6 +34,6 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   signUpText2: {
-    color: '#3797EF',
+    color: COLORS.PICTON_BLUE,
   },
 });

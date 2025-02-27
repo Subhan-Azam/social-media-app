@@ -4,6 +4,8 @@ import UserPost from '../../components/userPost/UserPost';
 import useFetchAllPosts from '../../hooks/useFetchAllPosts';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Loader from '../../components/loader/Loader';
+import {IMAGES} from '../../constants/images';
+import {COLORS} from '../../constants/colors';
 
 const Home = () => {
   const {posts, loading, error} = useFetchAllPosts();
@@ -12,7 +14,7 @@ const Home = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.instaImgBox}>
-          <Image source={require('../../assets/images/InstagramLogo.png')} />
+          <Image source={IMAGES.INSTAGRAMLOGO} />
         </View>
         <View style={styles.line} />
 
@@ -41,13 +43,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     marginTop: 10,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: COLORS.ALABASTER,
     width: '100%',
   },
   line: {
     height: 1,
     width: '100%',
-    backgroundColor: '#A6A6AA',
+    backgroundColor: COLORS.SPUN_PEARL,
   },
   noPostText: {
     position: 'absolute',

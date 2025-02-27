@@ -9,6 +9,7 @@ import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
+import { COLORS } from '../constants/colors';
 
 const TabNavigation = () => {
   const {updateOfficialImg} = useEditProfile();
@@ -26,7 +27,7 @@ const TabNavigation = () => {
             <Icon2
               name="home-outline"
               size={24}
-              color={focused ? '#3797EF' : 'black'}
+              color={focused ? COLORS.PICTON_BLUE : 'black'}
             />
           ),
         }}
@@ -41,7 +42,7 @@ const TabNavigation = () => {
             <Icon
               name="plus-square-o"
               size={25}
-              color={focused ? '#3797EF' : 'black'}
+              color={focused ? COLORS.PICTON_BLUE : 'black'}
             />
           ),
         }}
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     padding: 1,
   },
   activeBorder: {
-    borderColor: '#3797EF',
+    borderColor: COLORS.PICTON_BLUE,
     borderWidth: 1.5,
   },
   bottomIconImg: {

@@ -13,6 +13,7 @@ import AuthBtn from '../../components/Buttons/AuthBtn';
 import useUploadPost from '../../hooks/useUploadPost';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
+import { COLORS } from '../../constants/colors';
 
 const Upload = () => {
   const navigation = useNavigation();
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   header: {
-    backgroundColor: '#FAFAFA',
+    backgroundColor: COLORS.ALABASTER,
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
@@ -129,8 +130,8 @@ const styles = StyleSheet.create({
     width: '100%',
     color: 'black',
     borderWidth: 1,
-    borderColor: '#0000001A',
-    backgroundColor: '#FAFAFA',
+    borderColor: COLORS.BORDER_COLOR,
+    backgroundColor: COLORS.ALABASTER,
     borderRadius: 5,
     height: 44,
     paddingHorizontal: 10,

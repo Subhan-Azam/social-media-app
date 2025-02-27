@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import {loginUserSlice} from '../store/slices/authSlice';
-import useAppDispatch from './useAppDispatch';
-import useAppSelector from './useAppSelector';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useLogIn = () => {
   const dispatch = useAppDispatch();

@@ -7,9 +7,10 @@ import {
 } from 'react-native';
 import React from 'react';
 import {googleLoginSlice} from '../../store/slices/authSlice';
-import useAppDispatch from '../../hooks/useAppDispatch';
-import useAppSelector from '../../hooks/useAppSelector';
 import {EditProfileProps} from '../../types/types';
+import {IMAGES} from '../../constants/images';
+import { COLORS } from '../../constants/colors';
+import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 
 const GoogleLogin: React.FC<EditProfileProps> = ({title}) => {
   const dispatch = useAppDispatch();
@@ -25,10 +26,10 @@ const GoogleLogin: React.FC<EditProfileProps> = ({title}) => {
       onPress={handleGoogleLogin}
       disabled={loading}>
       {loading ? (
-        <ActivityIndicator color="white" />
+        <ActivityIndicator color={COLORS.WHITE} />
       ) : (
         <>
-          <Image source={require('../../assets/images/Icon.png')} />
+          <Image source={IMAGES.ICON} />
           <Text style={styles.logInWithGoogleText}>{title}</Text>
         </>
       )}

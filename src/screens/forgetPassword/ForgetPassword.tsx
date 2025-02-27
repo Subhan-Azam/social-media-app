@@ -11,6 +11,8 @@ import React from 'react';
 import AuthBtn from '../../components/Buttons/AuthBtn';
 import useForgetPass from '../../hooks/useForgetPass';
 import {ScreenProps} from '../../types/types';
+import {IMAGES} from '../../constants/images';
+import {COLORS} from '../../constants/colors';
 
 const ForgetPassword: React.FC<ScreenProps<'forgetPassword'>> = ({
   navigation,
@@ -23,10 +25,10 @@ const ForgetPassword: React.FC<ScreenProps<'forgetPassword'>> = ({
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={styles.backIcon}>
-        <Image source={require('../../assets/images/backIcon.png')} />
+        <Image source={IMAGES.BACKICON} />
       </TouchableOpacity>
       <View style={styles.box}>
-        <Image source={require('../../assets/images/InstagramLogo.png')} />
+        <Image source={IMAGES.INSTAGRAMLOGO} />
         <Text style={styles.forgetPassDesc}>
           Forgot your password? write your email and we will send you a magic
           link to reset your password
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
   },
   forgetPassDesc: {
     textAlign: 'center',
-    color: '#00000066',
+    color: COLORS.BLACK,
     marginBottom: 50,
   },
   inputsBox: {
@@ -87,12 +89,12 @@ const styles = StyleSheet.create({
   textInput: {
     width: '100%',
     height: 44,
-    borderColor: '#0000001A',
-    backgroundColor: '#FAFAFA',
+    borderColor: COLORS.BORDER_COLOR,
+    backgroundColor: COLORS.ALABASTER,
     color: 'black',
     borderWidth: 1,
     borderRadius: 5,
-    borderBlockColor: '#0000001A',
+    borderBlockColor: COLORS.BORDER_COLOR,
     paddingHorizontal: 10,
   },
   error: {
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   MagicLinkBtn: {
-    backgroundColor: '#3797EF',
+    backgroundColor: COLORS.PICTON_BLUE,
     width: '100%',
     height: 44,
     borderRadius: 5,
@@ -124,6 +126,6 @@ const styles = StyleSheet.create({
     bottom: 50,
     width: '100%',
     height: 1,
-    backgroundColor: '#00000033',
+    backgroundColor: COLORS.BLACK_SEC,
   },
 });

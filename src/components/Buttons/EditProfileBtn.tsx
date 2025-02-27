@@ -1,6 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {editProps} from '../../types/types';
+import { COLORS } from '../../constants/colors';
 
 const EditProfileBtn: React.FC<editProps> = ({onPress}) => {
   return (
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 29,
     borderWidth: 1,
-    borderColor: '#3C3C432E',
+    borderColor: COLORS.TUNA,
     borderRadius: 6,
   },
   editProfileText: {

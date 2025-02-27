@@ -6,9 +6,8 @@ import {
   setDescription,
   uploadPost,
 } from '../store/slices/uploadPostSlice';
-import useAppSelector from './useAppSelector';
-import useAppDispatch from './useAppDispatch';
 import {UseUploadPostReturn} from '../types/types';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useUploadPost = (): UseUploadPostReturn => {
   const dispatch = useAppDispatch();
@@ -20,7 +19,7 @@ const useUploadPost = (): UseUploadPostReturn => {
     launchImageLibrary(
       {
         mediaType: 'photo',
-        quality: 1,
+        quality: 0,
         includeBase64: true,
       },
       response => {

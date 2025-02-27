@@ -3,6 +3,7 @@ import React from 'react';
 import {UserBioProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { COLORS } from '../../constants/colors';
 
 const UserBio: React.FC<UserBioProps> = ({
   officialImg,
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
   },
   profileImgSec: {
     borderWidth: 2,
-    borderColor: '#C7C7CC',
+    borderColor: COLORS.FRENCH_GRAY,
     width: 96,
     height: 96,
     borderRadius: '100%',
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 12,
     width: 240,
-    borderColor: '#C7C7CC',
+    borderColor: COLORS.FRENCH_GRAY,
     marginBottom: 10,
   },
 });

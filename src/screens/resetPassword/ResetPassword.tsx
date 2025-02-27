@@ -14,6 +14,8 @@ import useResetPassword from '../../hooks/useResetPassword';
 import {ScreenProps} from '../../types/types';
 import EyeIcon from 'react-native-vector-icons/FontAwesome';
 import EyeSlash from 'react-native-vector-icons/FontAwesome';
+import {IMAGES} from '../../constants/images';
+import { COLORS } from '../../constants/colors';
 
 const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
   navigation,
@@ -44,13 +46,10 @@ const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={styles.backIcon}>
-        <Image source={require('../../assets/images/backIcon.png')} />
+        <Image source={IMAGES.BACKICON} />
       </TouchableOpacity>
       <View style={styles.box}>
-        <Image
-          style={styles.instagramImg}
-          source={require('../../assets/images/InstagramLogo.png')}
-        />
+        <Image style={styles.instagramImg} source={IMAGES.INSTAGRAMLOGO} />
         <View style={styles.inputsBox}>
           <View style={styles.textInput}>
             <TextInput
@@ -151,8 +150,8 @@ const styles = StyleSheet.create({
   textInput: {
     width: '100%',
     height: 44,
-    borderColor: '#0000001A',
-    backgroundColor: '#FAFAFA',
+    borderColor: COLORS.BORDER_COLOR,
+    backgroundColor: COLORS.ALABASTER,
     color: 'black',
     borderWidth: 1,
     borderRadius: 5,

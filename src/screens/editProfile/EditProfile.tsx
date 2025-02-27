@@ -13,6 +13,7 @@ import EditProfileInput from '../../components/editProfileInput/EditProfileInput
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
 import {ScreenProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
+import {COLORS} from '../../constants/colors';
 
 const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
   const {
@@ -153,12 +154,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   editText: {
-    color: '#262626',
+    color: COLORS.MINE_SHAFT,
     fontWeight: 600,
     fontSize: 16,
   },
   doneText: {
-    color: '#3897F0',
+    color: COLORS.PICTON_BLUE,
     fontWeight: 600,
     fontSize: 16,
   },
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
   line: {
     width: '100%',
     height: 0.5,
-    backgroundColor: '#3C3C434A',
+    backgroundColor: COLORS.TUNA,
     marginTop: 20,
     marginBottom: 10,
   },
@@ -196,13 +197,13 @@ const styles = StyleSheet.create({
   },
   bioName: {
     fontWeight: 600,
-    color: '#05386B',
+    color: COLORS.CATALINA_BLUE,
     marginLeft: 5,
   },
   changeName: {
     fontWeight: 600,
     fontSize: 13,
-    color: '#3897F0',
+    color: COLORS.PICTON_BLUE,
     marginTop: 10,
   },
 

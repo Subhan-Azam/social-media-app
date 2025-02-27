@@ -1,8 +1,7 @@
 import {useEffect, useState} from 'react';
-import useAppDispatch from './useAppDispatch';
-import useAppSelector from './useAppSelector';
 import {fetchPosts} from '../store/slices/fetchAllPostsSlice';
 import auth from '@react-native-firebase/auth';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useSelfPost = () => {
   const [currentUserUID, setCurrentUserUID] = useState<string | null>(null);
