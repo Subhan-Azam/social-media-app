@@ -12,7 +12,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import AuthBtn from '../../components/Buttons/AuthBtn';
+import AuthBtn from '../../components/buttons/AuthBtn';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useSignUp from '../../hooks/useSignUp';
 import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';

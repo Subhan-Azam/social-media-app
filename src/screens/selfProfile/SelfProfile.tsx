@@ -1,7 +1,7 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import React from 'react';
-import EditProfileBtn from '../../components/Buttons/EditProfileBtn';
+import EditProfileBtn from '../../components/buttons/EditProfileBtn';
 import AllPosts from '../../components/allPosts/AllPosts';
 import useSelfPost from '../../hooks/useSelfPost';
 import SelfBio from '../../components/selfBio/SelfBio';

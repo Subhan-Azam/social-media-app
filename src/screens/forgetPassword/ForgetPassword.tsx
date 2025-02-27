@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import AuthBtn from '../../components/Buttons/AuthBtn';
+import AuthBtn from '../../components/buttons/AuthBtn';
 import useForgetPass from '../../hooks/useForgetPass';
 import {ScreenProps} from '../../types/types';
 import {IMAGES} from '../../constants/images';

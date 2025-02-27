@@ -14,6 +14,7 @@ import EditProfile from '../screens/editProfile/EditProfile';
 import UserProfile from '../screens/userProfile/UserProfile';
 import {RootStackParamList} from '../types/types';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+// import {GOOGLE_WEB_CLIENT_ID} from '@env';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -24,7 +25,8 @@ const AppNavigator = () => {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId: process.env.WEB_CLIENT_ID, // '793741851762-hpcds8m113sc9sqhdb18a8vdqcbu7nve.apps.googleusercontent.com',
+      webClientId:
+        '793741851762-hpcds8m113sc9sqhdb18a8vdqcbu7nve.apps.googleusercontent.com',
     });
   }, []);
 

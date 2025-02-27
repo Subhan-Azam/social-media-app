@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 
-import AuthBtn from '../../components/Buttons/AuthBtn';
+import AuthBtn from '../../components/buttons/AuthBtn';
 import useUploadPost from '../../hooks/useUploadPost';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';

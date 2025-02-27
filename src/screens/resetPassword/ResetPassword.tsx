@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import AuthBtn from '../../components/Buttons/AuthBtn';
+import AuthBtn from '../../components/buttons/AuthBtn';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useResetPassword from '../../hooks/useResetPassword';
 import {ScreenProps} from '../../types/types';
