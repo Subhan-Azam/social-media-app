@@ -3,7 +3,7 @@ import React from 'react';
 import {EditProfileProps} from '../../types/types';
 import {COLORS} from '../../constants/colors';
 
-const EditProfileInput: React.FC<EditProfileProps> = ({
+const Input: React.FC<EditProfileProps> = ({
   title,
   value,
   onChange,
@@ -25,7 +25,7 @@ const EditProfileInput: React.FC<EditProfileProps> = ({
   );
 };
 
-export default EditProfileInput;
+export default Input;
 
 const styles = StyleSheet.create({
   container: {

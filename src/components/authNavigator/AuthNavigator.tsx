@@ -1,9 +1,9 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {PageShiftAuthProps} from '../../types/types';
+import {AuthNavigatorProps} from '../../types/types';
 import { COLORS } from '../../constants/colors';
 
-const PageShiftAuth: React.FC<PageShiftAuthProps> = ({
+const AuthNavigator: React.FC<AuthNavigatorProps> = ({
   onPress,
   title1,
   title2,
@@ -20,7 +20,7 @@ const PageShiftAuth: React.FC<PageShiftAuthProps> = ({
   );
 };
 
-export default PageShiftAuth;
+export default AuthNavigator;
 
 const styles = StyleSheet.create({
   container: {

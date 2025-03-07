@@ -9,11 +9,11 @@ import {
   View,
 } from 'react-native';
 
-import AuthBtn from '../../components/buttons/AuthBtn';
+import Button from '../../components/button/Button';
 import useUploadPost from '../../hooks/useUploadPost';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
-import { COLORS } from '../../constants/colors';
+import {COLORS} from '../../constants/colors';
 
 const Upload = () => {
   const navigation = useNavigation();
@@ -60,7 +60,7 @@ const Upload = () => {
         </View>
 
         <View style={styles.AuthBtn}>
-          <AuthBtn title="Upload" loading={loading} onPress={uploadData} />
+          <Button title="Upload" loading={loading} onPress={uploadData} />
         </View>
       </View>
     </ScrollView>

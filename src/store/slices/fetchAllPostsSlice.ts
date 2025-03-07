@@ -10,7 +10,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
       .get();
 
     const posts = await Promise.all(
-      postRes.docs.map(async doc => {
+      postRes.docs?.map(async doc => {
         const postData = doc.data();
         const userUID = postData.userUID;
 

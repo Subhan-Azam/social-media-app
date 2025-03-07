@@ -2,7 +2,7 @@ import {Image, StyleSheet} from 'react-native';
 import React from 'react';
 import { IMAGES } from '../../constants/images';
 
-const ProfileGridIcon = () => {
+const GridIcon = () => {
   return (
     <Image
       style={styles.gridIcon}
@@ -11,7 +11,7 @@ const ProfileGridIcon = () => {
   );
 };
 
-export default ProfileGridIcon;
+export default GridIcon;
 
 const styles = StyleSheet.create({
   gridIcon: {

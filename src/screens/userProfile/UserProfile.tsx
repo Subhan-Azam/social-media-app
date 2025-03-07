@@ -2,7 +2,7 @@ import {ScrollView, StyleSheet, View, Text} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import UserBio from '../../components/userBio/UserBio';
-import ProfileGridIcon from '../../components/profileGridIcon/ProfileGridIcon';
+import GridIcon from '../../components/gridIcon/GridIcon';
 import {useRoute} from '@react-navigation/native';
 import useEachUserPost from '../../hooks/useEachUserPost';
 import AllPosts from '../../components/allPosts/AllPosts';
@@ -24,7 +24,7 @@ const UserProfile = () => {
           bio={userData?.bio}
         />
 
-        <ProfileGridIcon />
+        <GridIcon />
 
         <View style={styles.postsContainer}>
           {error ? (
@@ -34,7 +34,7 @@ const UserProfile = () => {
           ) : posts.length === 0 ? (
             <Text style={styles.noPostText}>No posts available.</Text>
           ) : (
-            posts.map((post, index) => <AllPosts key={index} post={post} />)
+            posts?.map((post, index) => <AllPosts key={index} post={post} />)
           )}
         </View>
       </SafeAreaView>

@@ -25,7 +25,7 @@ const Home = () => {
         ) : posts.length === 0 ? (
           <Text style={styles.noPostText}>No posts available.</Text>
         ) : (
-          posts.map(post => <UserPost key={post.id} post={post} />)
+          posts?.map(post => <UserPost key={post.id} post={post} />)
         )}
       </ScrollView>
     </SafeAreaView>

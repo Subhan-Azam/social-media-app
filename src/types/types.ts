@@ -36,7 +36,7 @@ export interface UserBioProps {
 export interface AuthBtnProps {
   title: string;
   onPress: () => void;
-  loading: boolean;
+  loading?: boolean;
 }
 export interface FetchAllPostSlice {
   id: string;
@@ -50,10 +50,6 @@ export interface FetchAllPostSlice {
 export interface SelfProfileProps {
   navigation: NavigationProp<any>;
   route: RouteProp<any>;
-}
-
-export interface editProps {
-  onPress: () => void;
 }
 
 export interface UserProps {
@@ -93,7 +89,7 @@ export interface Post {
   createdAt: string;
 }
 
-export interface PageShiftAuthProps {
+export interface AuthNavigatorProps {
   onPress: () => void;
   title1: string;
   title2?: string;

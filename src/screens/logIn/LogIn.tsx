@@ -12,15 +12,15 @@ import {
   Keyboard,
 } from 'react-native';
 import React from 'react';
-import AuthBtn from '../../components/buttons/AuthBtn';
+import Button from '../../components/button/Button';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useLogIn from '../../hooks/useLogIn';
-import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
+import AuthNavigator from '../../components/authNavigator/AuthNavigator';
 import GoogleLogin from '../../components/googleLogin/GoogleLogin';
 import {ScreenProps} from '../../types/types';
 import EyeIcon from 'react-native-vector-icons/FontAwesome';
 import EyeSlash from 'react-native-vector-icons/FontAwesome';
-import OrSec from '../../components/orSec/OrSec';
+import Divider from '../../components/divider/Divider';
 import {IMAGES} from '../../constants/images';
 import {COLORS} from '../../constants/colors';
 
@@ -79,12 +79,12 @@ const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
               </TouchableOpacity>
             </View>
 
-            <AuthBtn onPress={logInUser} title="Log In" loading={loading} />
+            <Button onPress={logInUser} title="Log In" loading={loading} />
 
             <GoogleLogin title="Login with google" />
 
-            <OrSec />
-            <PageShiftAuth
+            <Divider />
+            <AuthNavigator
               title1="Don’t have an account? "
               title2="Sign up."
               onPress={() => navigation.navigate('signUp')}

@@ -6,7 +6,7 @@ import {RootStackParamList} from '../../types/types';
 import {UserProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
 import {IMAGES} from '../../constants/images';
-import { COLORS } from '../../constants/colors';
+import {COLORS} from '../../constants/colors';
 
 const UserPost: React.FC<UserProps> = ({post}) => {
   const navigation =

@@ -8,14 +8,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import AuthBtn from '../../components/buttons/AuthBtn';
+import Button from '../../components/button/Button';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useResetPassword from '../../hooks/useResetPassword';
 import {ScreenProps} from '../../types/types';
 import EyeIcon from 'react-native-vector-icons/FontAwesome';
 import EyeSlash from 'react-native-vector-icons/FontAwesome';
 import {IMAGES} from '../../constants/images';
-import { COLORS } from '../../constants/colors';
+import {COLORS} from '../../constants/colors';
 
 const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
   navigation,
@@ -108,7 +108,7 @@ const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
           {error && <Text style={styles.error}>{error}</Text>}
         </View>
 
-        <AuthBtn
+        <Button
           loading={loading}
           title="Reset Password"
           onPress={resetPassword}

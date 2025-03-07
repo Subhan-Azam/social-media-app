@@ -22,7 +22,7 @@ const useEachUserPost = (userId: string) => {
           firestore().collection('Users').doc(userId).get(),
         ]);
 
-        const userPosts: UserProps[] = postSnapshot.docs.map(doc => ({
+        const userPosts: UserProps[] = postSnapshot.docs?.map(doc => ({
           uid: doc.id,
           ...(doc.data() as UserProps),
         }));

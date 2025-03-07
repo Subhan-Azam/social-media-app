@@ -14,7 +14,6 @@ import EditProfile from '../screens/editProfile/EditProfile';
 import UserProfile from '../screens/userProfile/UserProfile';
 import {RootStackParamList} from '../types/types';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-// import {GOOGLE_WEB_CLIENT_ID} from '@env';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

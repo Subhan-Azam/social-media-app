@@ -9,8 +9,8 @@ import {
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useEditProfile from '../../hooks/useEditProfile';
-import EditProfileInput from '../../components/editProfileInput/EditProfileInput';
-import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
+import Input from '../../components/input/Input';
+import AuthNavigator from '../../components/authNavigator/AuthNavigator';
 import {ScreenProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
 import {COLORS} from '../../constants/colors';
@@ -96,8 +96,8 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
         </View>
         <View style={styles.line} />
         <View style={styles.box}>
-          {inputsFields.slice(0, 3).map((field, index) => (
-            <EditProfileInput
+          {inputsFields.slice(0, 3)?.map((field, index) => (
+            <Input
               key={index}
               editable={field.editable}
               title={field.title}
@@ -111,8 +111,8 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
         <View style={styles.line} />
         <View style={styles.box}>
           <Text style={styles.privateInfo}>Private Information</Text>
-          {inputsFields.slice(3).map((field, index) => (
-            <EditProfileInput
+          {inputsFields.slice(3)?.map((field, index) => (
+            <Input
               key={index}
               editable={field.editable}
               title={field.title}
@@ -122,7 +122,7 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
             />
           ))}
         </View>
-        <PageShiftAuth
+        <AuthNavigator
           title1="Want to change your password? "
           title2="Reset Password."
           onPress={() => navigation.navigate('ResetPassword')}

@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import AuthBtn from '../../components/buttons/AuthBtn';
+import Button from '../../components/button/Button';
 import useForgetPass from '../../hooks/useForgetPass';
 import {ScreenProps} from '../../types/types';
 import {IMAGES} from '../../constants/images';
@@ -45,7 +45,7 @@ const ForgetPassword: React.FC<ScreenProps<'forgetPassword'>> = ({
         </View>
         <Text style={styles.error}>{errorInput}</Text>
         <View style={styles.authBtn}>
-          <AuthBtn
+          <Button
             onPress={handleForgetPassword}
             loading={loading}
             title="Send Magic Link"

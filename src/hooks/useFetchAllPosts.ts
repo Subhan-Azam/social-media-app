@@ -13,7 +13,7 @@ const useFetchAllPosts = () => {
       .orderBy('createdAt', 'desc')
       .onSnapshot(
         snapshot => {
-          const updatedPosts = snapshot.docs.map(doc => ({
+          const updatedPosts = snapshot.docs?.map(doc => ({
             id: doc.id,
             ...doc.data(),
             createdAt: doc.data().createdAt?.toDate().toISOString(),

@@ -12,15 +12,15 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import AuthBtn from '../../components/buttons/AuthBtn';
+import Button from '../../components/button/Button';
 import useHideShowPass from '../../hooks/useHideShowPass';
 import useSignUp from '../../hooks/useSignUp';
-import PageShiftAuth from '../../components/pageShiftAuth/PageShiftAuth';
+import AuthNavigator from '../../components/authNavigator/AuthNavigator';
 import GoogleLogin from '../../components/googleLogin/GoogleLogin';
 import {ScreenProps} from '../../types/types';
 import EyeIcon from 'react-native-vector-icons/FontAwesome';
 import EyeSlash from 'react-native-vector-icons/FontAwesome';
-import OrSec from '../../components/orSec/OrSec';
+import Divider from '../../components/divider/Divider';
 import {IMAGES} from '../../constants/images';
 import {COLORS} from '../../constants/colors';
 
@@ -118,13 +118,13 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
               {errorInput && <Text style={styles.error}>{errorInput}</Text>}
             </View>
 
-            <AuthBtn onPress={createUser} title="Sign Up" loading={loading} />
+            <Button onPress={createUser} title="Sign Up" loading={loading} />
 
             <GoogleLogin title="Sign Up with google" />
 
-            <OrSec />
+            <Divider />
 
-            <PageShiftAuth
+            <AuthNavigator
               title1="Already have an account? "
               title2="Log In."
               onPress={() => navigation.navigate('logIn')}

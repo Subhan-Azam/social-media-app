@@ -2,9 +2,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import { COLORS } from '../../constants/colors';
 
-const OrSec = () => {
+const Divider = () => {
   return (
-    <View style={styles.OrSec}>
+    <View style={styles.Divider}>
       <View style={styles.line} />
       <Text style={styles.orText}>OR</Text>
       <View style={styles.line} />
@@ -12,10 +12,10 @@ const OrSec = () => {
   );
 };
 
-export default OrSec;
+export default Divider;
 
 const styles = StyleSheet.create({
-  OrSec: {
+  Divider: {
     marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'center',
