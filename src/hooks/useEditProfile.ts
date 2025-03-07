@@ -1,20 +1,20 @@
 import {useEffect, useState} from 'react';
-import { useAppDispatch, useAppSelector } from './useRedux';
+import {useAppDispatch, useAppSelector} from './useRedux';
 
 import {
   fetchUserProfile,
   updateUserProfile,
 } from '../store/slices/editProfileSlice';
 import {launchImageLibrary} from 'react-native-image-picker';
-import Toast from 'react-native-toast-message';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {ShowToast} from '../components/toastMessage/ToastMessage';
 
 const useEditProfile = () => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const {officialImg, name, userName, bio, email, phone, gender} =
-    useAppSelector(state => state.editPostStore);
+    useAppSelector(state => state.editPostReducer);
 
   const [updateOfficialImg, setUpdateOfficialImg] = useState(officialImg);
   const [updateName, setUpdateName] = useState(name);
@@ -43,17 +43,9 @@ const useEditProfile = () => {
       {mediaType: 'photo', quality: 0, includeBase64: true},
       res => {
         if (res.didCancel) {
-          Toast.show({
-            type: 'info',
-            text1: 'Canceled',
-            text2: 'Image is not pick.',
-          });
+          ShowToast('info', 'Canceled', 'Image is not pick');
         } else if (res.errorCode) {
-          Toast.show({
-            type: 'info',
-            text1: 'Error',
-            text2: res.errorCode,
-          });
+          ShowToast('info', 'Error', res.errorCode);
         } else {
           if (res.assets && res.assets[0].base64) {
             const baseUrl = `data:image/png;base64,${res.assets[0].base64}`;

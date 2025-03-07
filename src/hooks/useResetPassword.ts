@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import auth from '@react-native-firebase/auth';
-import Toast from 'react-native-toast-message';
 import {useNavigation} from '@react-navigation/native';
+import {ShowToast} from '../components/toastMessage/ToastMessage';
 
 const useResetPassword = () => {
   const [oldPassword, setOldPassword] = useState<string>('');
@@ -47,11 +47,7 @@ const useResetPassword = () => {
 
       navigation.goBack();
 
-      Toast.show({
-        type: 'success',
-        text1: 'success',
-        text2: 'Password changed successful',
-      });
+      ShowToast('success', 'success', 'Password changed successful');
     } catch (err2: any) {
       setError('Failed to update password');
     } finally {

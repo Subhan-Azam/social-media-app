@@ -15,6 +15,7 @@ export type ScreenProps<T extends keyof RootStackParamList> = {
   navigation: NativeStackNavigationProp<RootStackParamList, T>;
   route: RouteProp<RootStackParamList, T>;
 };
+
 export type UserProfileRouteProp = RouteProp<RootStackParamList, 'UserProfile'>;
 export type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -113,8 +114,8 @@ export interface UserProfileState {
   bio: string;
   phone: string;
   gender: string;
-  loading: boolean;
-  error: string | null;
+  loading?: boolean;
+  error?: string | null;
 }
 
 export interface PostSliceProps {

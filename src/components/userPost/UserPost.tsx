@@ -7,6 +7,7 @@ import {UserProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
 import {IMAGES} from '../../constants/images';
 import {COLORS} from '../../constants/colors';
+import { SCREEN } from '../../constants/screens';
 
 const UserPost: React.FC<UserProps> = ({post}) => {
   const navigation =
@@ -19,7 +20,7 @@ const UserPost: React.FC<UserProps> = ({post}) => {
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('UserProfile', {userId: post.userUID});
+            navigation.navigate(SCREEN.USER_PROFILE, {userId: post.userUID});
           }}
           style={styles.profileHeader}>
           {post.officialImg ? (

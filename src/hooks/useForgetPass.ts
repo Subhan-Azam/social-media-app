@@ -2,8 +2,8 @@ import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../store/store';
 import {forgetPasswordSlice} from '../store/slices/authSlice';
 import {useState} from 'react';
-import Toast from 'react-native-toast-message';
 import {useNavigation} from '@react-navigation/native';
+import {ShowToast} from '../components/toastMessage/ToastMessage';
 
 const useForgetPass = () => {
   const [email, setEmail] = useState<string>('');
@@ -33,11 +33,12 @@ const useForgetPass = () => {
 
     try {
       await dispatch(forgetPasswordSlice({email})).unwrap();
-      Toast.show({
-        type: 'info',
-        text1: 'Send Link',
-        text2: 'Please check your email for reset password',
-      });
+      ShowToast(
+        'info',
+        'Send Link',
+        'Please check your email for reset password',
+      );
+
       navigation.goBack();
     } catch (err: any) {
       setErrorInput(err.message || 'An unexpected error occurred.');

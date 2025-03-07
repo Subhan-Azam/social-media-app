@@ -8,6 +8,7 @@ import SelfBio from '../../components/selfBio/SelfBio';
 import GridIcon from '../../components/gridIcon/GridIcon';
 import Loader from '../../components/loader/Loader';
 import {SelfProfileProps} from '../../types/types';
+import {SCREEN} from '../../constants/screens';
 
 const SelfProfile: React.FC<SelfProfileProps> = ({navigation}) => {
   const {posts, loading, error, handleLogout, logoutLoading} = useSelfPost();
@@ -19,7 +20,7 @@ const SelfProfile: React.FC<SelfProfileProps> = ({navigation}) => {
         <View style={styles.editBtnSec}>
           <Button
             title="Edit Profile"
-            onPress={() => navigation.navigate('EditProfile')}
+            onPress={() => navigation.navigate(SCREEN.EDIT_PROFILE)}
           />
 
           <Button

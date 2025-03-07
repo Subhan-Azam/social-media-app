@@ -23,6 +23,7 @@ import EyeSlash from 'react-native-vector-icons/FontAwesome';
 import Divider from '../../components/divider/Divider';
 import {IMAGES} from '../../constants/images';
 import {COLORS} from '../../constants/colors';
+import {SCREEN} from '../../constants/screens';
 
 const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
   const {email, setEmail, password, setPassword, error, loading, logInUser} =
@@ -73,7 +74,7 @@ const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
               <TouchableOpacity style={styles.forgetPassLink}>
                 <Text
                   style={styles.forgotText}
-                  onPress={() => navigation.navigate('forgetPassword')}>
+                  onPress={() => navigation.navigate(SCREEN.FORGET_PASSWORD)}>
                   Forget Password?
                 </Text>
               </TouchableOpacity>
@@ -87,7 +88,7 @@ const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
             <AuthNavigator
               title1="Don’t have an account? "
               title2="Sign up."
-              onPress={() => navigation.navigate('signUp')}
+              onPress={() => navigation.navigate(SCREEN.SIGN_UP)}
             />
           </View>
         </ScrollView>

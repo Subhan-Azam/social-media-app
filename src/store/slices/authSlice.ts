@@ -222,6 +222,7 @@ const authSlice = createSlice({
         state.error = action.payload as string;
       })
 
+      // google login
       .addCase(googleLoginSlice.pending, state => {
         state.loading = true;
         state.error = null;

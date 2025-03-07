@@ -2,14 +2,14 @@ import {useEffect, useState} from 'react';
 import {fetchPosts} from '../store/slices/fetchAllPostsSlice';
 import auth from '@react-native-firebase/auth';
 import {useAppDispatch, useAppSelector} from './useRedux';
-import Toast from 'react-native-toast-message';
+import {ShowToast} from '../components/toastMessage/ToastMessage';
 
 const useSelfPost = () => {
   const [currentUserUID, setCurrentUserUID] = useState<string | null>(null);
   const [logoutLoading, setLogoutLoading] = useState(false);
 
   const dispatch = useAppDispatch();
-  const {posts, loading, error} = useAppSelector(state => state.allPostStore);
+  const {posts, loading, error} = useAppSelector(state => state.allPostReducer);
 
   useEffect(() => {
     const user = auth().currentUser;
@@ -31,17 +31,9 @@ const useSelfPost = () => {
     setLogoutLoading(true);
     try {
       await auth().signOut();
-      Toast.show({
-        type: 'info',
-        text1: 'LogOut',
-        text2: 'You are successfully logged out',
-      });
+      ShowToast('info', 'LogOut', 'You are successfully logged out.');
     } catch (error: any) {
-      Toast.show({
-        type: 'error',
-        text1: error.message,
-        text2: 'Error in logout',
-      });
+      ShowToast('error', error.message, 'Error in logout.');
     } finally {
       setLogoutLoading(false);
     }

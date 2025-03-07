@@ -23,6 +23,7 @@ import EyeSlash from 'react-native-vector-icons/FontAwesome';
 import Divider from '../../components/divider/Divider';
 import {IMAGES} from '../../constants/images';
 import {COLORS} from '../../constants/colors';
+import {SCREEN} from '../../constants/screens';
 
 const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
   const {
@@ -127,7 +128,7 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
             <AuthNavigator
               title1="Already have an account? "
               title2="Log In."
-              onPress={() => navigation.navigate('logIn')}
+              onPress={() => navigation.navigate(SCREEN.LOGIN)}
             />
           </View>
         </ScrollView>

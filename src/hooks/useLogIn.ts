@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from './useRedux';
 const useLogIn = () => {
   const dispatch = useAppDispatch();
 
-  const {loading, error} = useAppSelector(state => state.authStore);
+  const {loading, error} = useAppSelector(state => state.authReducer);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errorInput, setErrorInput] = useState<string>('');

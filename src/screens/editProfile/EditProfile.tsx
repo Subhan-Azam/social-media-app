@@ -14,6 +14,7 @@ import AuthNavigator from '../../components/authNavigator/AuthNavigator';
 import {ScreenProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
 import {COLORS} from '../../constants/colors';
+import {SCREEN} from '../../constants/screens';
 
 const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
   const {
@@ -125,7 +126,7 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
         <AuthNavigator
           title1="Want to change your password? "
           title2="Reset Password."
-          onPress={() => navigation.navigate('ResetPassword')}
+          onPress={() => navigation.navigate(SCREEN.RESET_PASSWORD)}
         />
       </ScrollView>
     </SafeAreaView>

@@ -1,8 +1,8 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import Toast from 'react-native-toast-message';
 import {UserProfileState} from '../../types/types';
+import {ShowToast} from '../../components/toastMessage/ToastMessage';
 
 const initialState: UserProfileState = {
   officialImg: '',
@@ -55,11 +55,7 @@ export const updateUserProfile = createAsyncThunk(
         .doc(currentUser.uid)
         .update(updatedData);
 
-      Toast.show({
-        type: 'success',
-        text1: 'Congratulations',
-        text2: 'Data updated successfully',
-      });
+      ShowToast('success', 'Congratulations', 'Data updated successfully');
 
       return updatedData;
     } catch (err: any) {
@@ -74,18 +70,7 @@ export const editProfileSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(updateUserProfile.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(updateUserProfile.fulfilled, (state, action) => {
-        state.loading = false;
-        Object.assign(state, action.payload);
-      })
-      .addCase(updateUserProfile.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      })
+      // fetch user profile
       .addCase(fetchUserProfile.pending, state => {
         state.loading = true;
         state.error = null;
@@ -95,6 +80,20 @@ export const editProfileSlice = createSlice({
         Object.assign(state, action.payload);
       })
       .addCase(fetchUserProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      // update user profile
+      .addCase(updateUserProfile.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        Object.assign(state, action.payload);
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

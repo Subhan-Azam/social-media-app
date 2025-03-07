@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useFetchAllPosts = () => {
   const dispatch = useAppDispatch();
-  const {posts, loading, error} = useAppSelector(state => state.allPostStore);
+  const {posts, loading, error} = useAppSelector(state => state.allPostReducer);
 
   useEffect(() => {
     const unsubscribe = firestore()

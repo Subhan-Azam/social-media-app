@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 
 const GoogleLogin: React.FC<EditProfileProps> = ({title}) => {
   const dispatch = useAppDispatch();
-  const {loading} = useAppSelector(state => state.authStore);
+  const {loading} = useAppSelector(state => state.authReducer);
 
   const handleGoogleLogin = () => {
     dispatch(googleLoginSlice());
