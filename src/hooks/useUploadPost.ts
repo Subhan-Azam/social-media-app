@@ -19,7 +19,7 @@ const useUploadPost = (): UseUploadPostReturn => {
     launchImageLibrary(
       {
         mediaType: 'photo',
-        quality: 0,
+        quality: 1,
         includeBase64: true,
       },
       response => {

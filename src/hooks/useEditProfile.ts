@@ -40,7 +40,7 @@ const useEditProfile = () => {
 
   const imagePicker = () => {
     launchImageLibrary(
-      {mediaType: 'photo', quality: 0, includeBase64: true},
+      {mediaType: 'photo', quality: 1, includeBase64: true},
       res => {
         if (res.didCancel) {
           ShowToast('info', 'Canceled', 'Image is not pick');

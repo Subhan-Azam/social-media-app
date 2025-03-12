@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import React from 'react';
-import { COLORS } from '../../constants/colors';
+import {styles} from './dividerStyle';
 
 const Divider = () => {
   return (
@@ -13,21 +13,3 @@ const Divider = () => {
 };
 
 export default Divider;
-
-const styles = StyleSheet.create({
-  Divider: {
-    marginTop: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 50,
-  },
-  orText: {
-    color: COLORS.BLACK,
-  },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: COLORS.BLACK_SEC,
-  },
-});

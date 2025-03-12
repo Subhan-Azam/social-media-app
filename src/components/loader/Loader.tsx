@@ -1,6 +1,7 @@
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import React from 'react';
-import { COLORS } from '../../constants/colors';
+import {COLORS} from '../../constants/colors';
+import {styles} from './loaderStyle';
 
 const Loader = () => {
   return (
@@ -11,11 +12,3 @@ const Loader = () => {
 };
 
 export default Loader;
-
-const styles = StyleSheet.create({
-  activityIndicator: {
-    flex: 1,
-    justifyContent: 'center',
-    marginTop: 10,
-  },
-});

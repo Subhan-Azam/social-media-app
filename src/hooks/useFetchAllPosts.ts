@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {fetchPosts} from '../store/slices/fetchAllPostsSlice';
-import { useAppDispatch, useAppSelector } from './useRedux';
+import {useAppDispatch, useAppSelector} from './useRedux';
 
 const useFetchAllPosts = () => {
   const dispatch = useAppDispatch();

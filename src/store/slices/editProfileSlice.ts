@@ -35,8 +35,11 @@ export const fetchUserProfile = createAsyncThunk(
       } else {
         throw new Error('User not found in Firestore');
       }
-    } catch (err: any) {
-      rejectWithValue(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        return rejectWithValue(err.message);
+      }
+      return rejectWithValue('Failed to update profile');
     }
   },
 );
@@ -58,8 +61,10 @@ export const updateUserProfile = createAsyncThunk(
       ShowToast('success', 'Congratulations', 'Data updated successfully');
 
       return updatedData;
-    } catch (err: any) {
-      rejectWithValue(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        return rejectWithValue(err.message);
+      }
     }
   },
 );

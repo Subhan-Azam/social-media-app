@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, View, Text} from 'react-native';
+import {ScrollView, View, Text} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import UserBio from '../../components/userBio/UserBio';
@@ -8,6 +8,7 @@ import useEachUserPost from '../../hooks/useEachUserPost';
 import AllPosts from '../../components/allPosts/AllPosts';
 import Loader from '../../components/loader/Loader';
 import {UserProfileRouteProp} from '../../types/types';
+import {styles} from './userProfileStyle';
 
 const UserProfile = () => {
   const route = useRoute<UserProfileRouteProp>();
@@ -43,27 +44,3 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 10,
-  },
-  postsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  errorText: {
-    color: 'red',
-    textAlign: 'center',
-    marginTop: 20,
-  },
-  activityIndicator: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  noPostText: {
-    textAlign: 'center',
-    marginTop: 20,
-  },
-});

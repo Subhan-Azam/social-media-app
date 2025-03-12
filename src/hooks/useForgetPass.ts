@@ -40,8 +40,12 @@ const useForgetPass = () => {
       );
 
       navigation.goBack();
-    } catch (err: any) {
-      setErrorInput(err.message || 'An unexpected error occurred.');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setErrorInput(err.message);
+      } else {
+        setErrorInput('An unexpected error occurred.');
+      }
     } finally {
       setLoading(false);
     }

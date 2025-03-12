@@ -47,10 +47,11 @@ export const signUpSlice = createAsyncThunk(
         userId: user.uid,
         email,
       };
-    } catch (error: any) {
-      return rejectWithValue(
-        error.message || 'An error occurred during sign up',
-      );
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('An unknown error occurred during sign-up');
     }
   },
 );
@@ -73,10 +74,11 @@ export const loginUserSlice = createAsyncThunk(
         userId: user.uid,
         email: user.email,
       };
-    } catch (error: any) {
-      return rejectWithValue(
-        error.message || 'An error occurred during log in',
-      );
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('An error occurred during log in');
     }
   },
 );
@@ -90,14 +92,16 @@ export const forgetPasswordSlice = createAsyncThunk(
       return {
         email,
       };
-    } catch (error: any) {
-      let errorMessage = error.message;
-      if (error.message === 'auth/invalid-email') {
-        errorMessage('Invalid Email');
-      } else if (error.message === 'auth/user-not-found') {
-        errorMessage('user-not-found');
-      } else {
-        errorMessage('Unexpected Error occur');
+    } catch (error: unknown) {
+      let errorMessage = 'An unexpected error occurred';
+      if (error instanceof Error) {
+        if (error.message.includes('auth/invalid-email')) {
+          errorMessage = 'Invalid Email';
+        } else if (error.message.includes('auth/user-not-found')) {
+          errorMessage = 'User not found';
+        } else {
+          errorMessage = error.message;
+        }
       }
       return rejectWithValue(errorMessage);
     }
@@ -157,8 +161,11 @@ export const googleLoginSlice = createAsyncThunk(
       }
 
       return userCredential;
-    } catch (err: any) {
-      return rejectWithValue(err?.message || 'Google login failed');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        return rejectWithValue(err.message);
+      }
+      return rejectWithValue('Google login failed');
     }
   },
 );

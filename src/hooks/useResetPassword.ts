@@ -48,8 +48,12 @@ const useResetPassword = () => {
       navigation.goBack();
 
       ShowToast('success', 'success', 'Password changed successful');
-    } catch (err2: any) {
-      setError('Failed to update password');
+    } catch (err2: unknown) {
+      if (err2 instanceof Error) {
+        setError(err2.message);
+      } else {
+        setError('Failed to update password');
+      }
     } finally {
       setLoading(false);
     }

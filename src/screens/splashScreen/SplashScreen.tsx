@@ -1,6 +1,7 @@
-import {StyleSheet, Image, View} from 'react-native';
+import {Image, View} from 'react-native';
 import React from 'react';
 import {IMAGES} from '../../constants/images';
+import {styles} from './splashScreenStyle';
 
 const SplashScreen: React.FC = () => {
   return (
@@ -11,15 +12,3 @@ const SplashScreen: React.FC = () => {
 };
 
 export default SplashScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-});

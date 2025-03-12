@@ -32,8 +32,14 @@ const useSelfPost = () => {
     try {
       await auth().signOut();
       ShowToast('info', 'LogOut', 'You are successfully logged out.');
-    } catch (error: any) {
-      ShowToast('error', error.message, 'Error in logout.');
+    } catch (err: unknown) {
+      let errorMessage = 'Error in logout.';
+
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+
+      ShowToast('error', 'Logout Failed', errorMessage);
     } finally {
       setLogoutLoading(false);
     }

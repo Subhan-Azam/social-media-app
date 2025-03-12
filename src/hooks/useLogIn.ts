@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {loginUserSlice} from '../store/slices/authSlice';
-import { useAppDispatch, useAppSelector } from './useRedux';
+import {useAppDispatch, useAppSelector} from './useRedux';
 
 const useLogIn = () => {
   const dispatch = useAppDispatch();
@@ -24,8 +24,12 @@ const useLogIn = () => {
           password,
         }),
       ).unwrap();
-    } catch (err: any) {
-      setErrorInput(err || 'Failed to log in. Please try again.');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setErrorInput(err.message);
+      } else {
+        setErrorInput('Failed to log in. Please try again.');
+      }
     }
   };
 

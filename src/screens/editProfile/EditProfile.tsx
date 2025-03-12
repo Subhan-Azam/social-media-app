@@ -1,11 +1,4 @@
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useEditProfile from '../../hooks/useEditProfile';
@@ -13,8 +6,7 @@ import Input from '../../components/input/Input';
 import AuthNavigator from '../../components/authNavigator/AuthNavigator';
 import {ScreenProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
-import {COLORS} from '../../constants/colors';
-import {SCREEN} from '../../constants/screens';
+import {styles} from './editProfileStyle';
 
 const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
   const {
@@ -126,7 +118,7 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
         <AuthNavigator
           title1="Want to change your password? "
           title2="Reset Password."
-          onPress={() => navigation.navigate(SCREEN.RESET_PASSWORD)}
+          onPress={() => navigation.navigate('ResetPassword')}
         />
       </ScrollView>
     </SafeAreaView>
@@ -134,83 +126,3 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
 };
 
 export default EditProfile;
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    marginBottom: 10,
-  },
-  container: {
-    flexGrow: 1,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
-    backgroundColor: 'rgba(166, 166, 170, 0.16)',
-  },
-  cancelText: {
-    color: 'red',
-    fontWeight: 400,
-    fontSize: 16,
-  },
-  editText: {
-    color: COLORS.MINE_SHAFT,
-    fontWeight: 600,
-    fontSize: 16,
-  },
-  doneText: {
-    color: COLORS.PICTON_BLUE,
-    fontWeight: 600,
-    fontSize: 16,
-  },
-  imgChangeSec: {
-    alignItems: 'center',
-    marginVertical: 16,
-  },
-  imgChange: {
-    height: 95,
-    width: 95,
-    borderRadius: 100,
-  },
-  line: {
-    width: '100%',
-    height: 0.5,
-    backgroundColor: COLORS.TUNA,
-    marginTop: 20,
-    marginBottom: 10,
-  },
-  box: {
-    paddingHorizontal: 20,
-  },
-
-  bioSec: {
-    flexDirection: 'row',
-    marginTop: 10,
-  },
-  bioText: {
-    width: 90,
-    fontSize: 15,
-  },
-  bio: {
-    fontSize: 15,
-    width: '75%',
-  },
-  bioName: {
-    fontWeight: 600,
-    color: COLORS.CATALINA_BLUE,
-    marginLeft: 5,
-  },
-  changeName: {
-    fontWeight: 600,
-    fontSize: 13,
-    color: COLORS.PICTON_BLUE,
-    marginTop: 10,
-  },
-
-  privateInfo: {
-    fontWeight: 600,
-    fontSize: 16,
-    marginTop: 10,
-  },
-});

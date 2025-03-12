@@ -1,16 +1,11 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {Image, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import React from 'react';
 import {googleLoginSlice} from '../../store/slices/authSlice';
 import {EditProfileProps} from '../../types/types';
 import {IMAGES} from '../../constants/images';
-import { COLORS } from '../../constants/colors';
-import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
+import {COLORS} from '../../constants/colors';
+import {useAppDispatch, useAppSelector} from '../../hooks/useRedux';
+import {styles} from './googleLoginStyle';
 
 const GoogleLogin: React.FC<EditProfileProps> = ({title}) => {
   const dispatch = useAppDispatch();
@@ -38,15 +33,3 @@ const GoogleLogin: React.FC<EditProfileProps> = ({title}) => {
 };
 
 export default GoogleLogin;
-
-const styles = StyleSheet.create({
-  logInWithGoogle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginVertical: 20,
-  },
-  logInWithGoogleText: {
-    fontWeight: 600,
-  },
-});

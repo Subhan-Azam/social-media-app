@@ -9,7 +9,7 @@ import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
-import { COLORS } from '../constants/colors';
+import {COLORS} from '../constants/colors';
 
 const TabNavigation = () => {
   const {updateOfficialImg} = useEditProfile();

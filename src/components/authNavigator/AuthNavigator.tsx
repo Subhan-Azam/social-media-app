@@ -1,7 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import React from 'react';
 import {AuthNavigatorProps} from '../../types/types';
-import { COLORS } from '../../constants/colors';
+import {styles} from './authNavigatorStyle';
 
 const AuthNavigator: React.FC<AuthNavigatorProps> = ({
   onPress,
@@ -21,19 +21,3 @@ const AuthNavigator: React.FC<AuthNavigatorProps> = ({
 };
 
 export default AuthNavigator;
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    marginTop: 40,
-  },
-  signUpSec: {
-    flexDirection: 'row',
-  },
-  signUpText1: {
-    color: 'gray',
-  },
-  signUpText2: {
-    color: COLORS.PICTON_BLUE,
-  },
-});

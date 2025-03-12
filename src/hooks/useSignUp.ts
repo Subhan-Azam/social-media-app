@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {signUpSlice} from '../store/slices/authSlice';
-import { useAppDispatch } from './useRedux';
+import {useAppDispatch} from './useRedux';
 
 const useSignUp = () => {
   const [name, setName] = useState<string>('');
@@ -49,8 +49,12 @@ const useSignUp = () => {
           password,
         }),
       ).unwrap();
-    } catch (err: any) {
-      setErrorInput(err.message || 'An error occurred during sign up.');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setErrorInput(err.message);
+      } else {
+        setErrorInput('An error occurred during sign up.');
+      }
     } finally {
       setLoading(false);
     }

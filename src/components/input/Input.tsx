@@ -1,7 +1,8 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {Text, TextInput, View} from 'react-native';
 import React from 'react';
 import {EditProfileProps} from '../../types/types';
 import {COLORS} from '../../constants/colors';
+import {styles} from './inputStyle';
 
 const Input: React.FC<EditProfileProps> = ({
   title,
@@ -26,20 +27,3 @@ const Input: React.FC<EditProfileProps> = ({
 };
 
 export default Input;
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 5,
-  },
-  editName: {
-    width: 90,
-  },
-  editInput: {
-    borderBottomWidth: 0.3,
-    borderColor: COLORS.TUNA,
-    width: '75%',
-    color: 'black',
-  },
-});

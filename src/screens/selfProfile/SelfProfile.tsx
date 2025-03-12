@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import React from 'react';
 import Button from '../../components/button/Button';
@@ -8,7 +8,7 @@ import SelfBio from '../../components/selfBio/SelfBio';
 import GridIcon from '../../components/gridIcon/GridIcon';
 import Loader from '../../components/loader/Loader';
 import {SelfProfileProps} from '../../types/types';
-import {SCREEN} from '../../constants/screens';
+import {styles} from './selfProfileStyle';
 
 const SelfProfile: React.FC<SelfProfileProps> = ({navigation}) => {
   const {posts, loading, error, handleLogout, logoutLoading} = useSelfPost();
@@ -20,7 +20,7 @@ const SelfProfile: React.FC<SelfProfileProps> = ({navigation}) => {
         <View style={styles.editBtnSec}>
           <Button
             title="Edit Profile"
-            onPress={() => navigation.navigate(SCREEN.EDIT_PROFILE)}
+            onPress={() => navigation.navigate('EditProfile')}
           />
 
           <Button
@@ -50,24 +50,3 @@ const SelfProfile: React.FC<SelfProfileProps> = ({navigation}) => {
 };
 
 export default SelfProfile;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 10,
-  },
-  editBtnSec: {
-    alignItems: 'center',
-  },
-  noPostText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'gray',
-    textAlign: 'center',
-    marginTop: 10,
-  },
-  postsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-});

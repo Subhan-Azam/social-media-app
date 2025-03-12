@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -6,8 +6,7 @@ import {RootStackParamList} from '../../types/types';
 import {UserProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
 import {IMAGES} from '../../constants/images';
-import {COLORS} from '../../constants/colors';
-import { SCREEN } from '../../constants/screens';
+import {styles} from './userPostStyle';
 
 const UserPost: React.FC<UserProps> = ({post}) => {
   const navigation =
@@ -20,7 +19,7 @@ const UserPost: React.FC<UserProps> = ({post}) => {
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate(SCREEN.USER_PROFILE, {userId: post.userUID});
+            navigation.navigate('UserProfile', {userId: post.userUID});
           }}
           style={styles.profileHeader}>
           {post.officialImg ? (
@@ -57,57 +56,3 @@ const UserPost: React.FC<UserProps> = ({post}) => {
 };
 
 export default UserPost;
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-  },
-  profileHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-  },
-  officialImg: {
-    width: 32,
-    height: 32,
-    borderRadius: 50,
-  },
-  officialName: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
-  postImage: {
-    width: '100%',
-    height: 375,
-    objectFit: 'cover',
-  },
-  officialNameText: {
-    fontWeight: 600,
-    fontSize: 13,
-    color: COLORS.MINE_SHAFT,
-  },
-  userLocationText: {
-    fontSize: 11,
-    fontWeight: 400,
-  },
-  postDescDate: {
-    paddingHorizontal: 10,
-    paddingVertical: 15,
-    gap: 7,
-  },
-  desc: {
-    fontSize: 13,
-  },
-  descName: {
-    fontWeight: 600,
-  },
-  date: {
-    color: COLORS.BLACK,
-    fontSize: 11,
-  },
-});

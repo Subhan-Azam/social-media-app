@@ -33,8 +33,11 @@ export const uploadPost = createAsyncThunk(
         createdAt: firestore.FieldValue.serverTimestamp(),
       });
       return {success: true};
-    } catch (error: any) {
-      return rejectWithValue(error.message || 'Failed to upload post');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Failed to upload post');
     }
   },
 );
