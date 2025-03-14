@@ -3,12 +3,12 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../types/types';
-import {UserProps} from '../../types/types';
+import {AllPostsProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
 import {IMAGES} from '../../constants/images';
 import {styles} from './userPostStyle';
 
-const UserPost: React.FC<UserProps> = ({post}) => {
+const UserPost: React.FC<AllPostsProps> = ({post}) => {
   const navigation =
     useNavigation<
       NativeStackNavigationProp<RootStackParamList, 'UserProfile'>

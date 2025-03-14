@@ -15,6 +15,7 @@ import EyeIcon from 'react-native-vector-icons/FontAwesome';
 import EyeSlash from 'react-native-vector-icons/FontAwesome';
 import {IMAGES} from '../../constants/images';
 import {styles} from './resetPasswordStyle';
+import { COLORS } from '../../constants/colors';
 
 const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
   navigation,
@@ -55,7 +56,7 @@ const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
               secureTextEntry={!showOldPass}
               style={styles.textInputPass}
               placeholder="Old Password"
-              placeholderTextColor="#00000033"
+              placeholderTextColor={COLORS.LIGHT_GRAY}
               autoCapitalize="none"
               value={oldPassword}
               onChangeText={setOldPassword}
@@ -73,7 +74,7 @@ const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
               secureTextEntry={!showNewPass}
               style={styles.textInputPass}
               placeholder="New Password"
-              placeholderTextColor="#00000033"
+              placeholderTextColor={COLORS.LIGHT_GRAY}
               autoCapitalize="none"
               value={newPassword}
               onChangeText={setNewPassword}
@@ -91,7 +92,7 @@ const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
               secureTextEntry={!showConfirmPass}
               style={styles.textInputPass}
               placeholder="Confirm Password"
-              placeholderTextColor="#00000033"
+              placeholderTextColor={COLORS.LIGHT_GRAY}
               autoCapitalize="none"
               value={confirmPassword}
               onChangeText={setConfirmPassword}

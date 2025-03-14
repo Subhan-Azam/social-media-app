@@ -1,9 +1,9 @@
 export const IMAGES = {
   ICON: require('../assets/images/google-icon.png'),
-  TABPNG: require('../assets/images/Tabs.png'),
-  OFFICIALICON: require('../assets/images/OfficialIcon.png'),
-  MOREICON: require('../assets/images/MoreIcon.png'),
-  BACKICON: require('../assets/images/backIcon.png'),
-  INSTAGRAMLOGO: require('../assets/images/InstagramLogo.png'),
-  SPLASHSCREEN: require('../assets/images/SplashScreen.png'),
+  TABPNG: require('../assets/images/tabs.png'),
+  OFFICIALICON: require('../assets/images/official-icon.png'),
+  MOREICON: require('../assets/images/more-icon.png'),
+  BACKICON: require('../assets/images/back-icon.png'),
+  INSTAGRAMLOGO: require('../assets/images/instagram-logo.png'),
+  SPLASHSCREEN: require('../assets/images/splash-screen.png'),
 };

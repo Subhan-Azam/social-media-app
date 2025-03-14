@@ -25,13 +25,16 @@ export const signUpSlice = createAsyncThunk(
         password,
       );
 
-      const user = userCredential.user;
+      const user = userCredential?.user;
+      if (!user) {
+        return rejectWithValue('User sign-up failed: No user object');
+      }
 
       await user.updateProfile({
         displayName: name,
       });
 
-      await firestore().collection('Users').doc(user.uid).set({
+      await firestore().collection('Users').doc(user?.uid).set({
         name,
         userName: '',
         email,
@@ -68,11 +71,15 @@ export const loginUserSlice = createAsyncThunk(
         email,
         password,
       );
-      const user = userCredentials.user;
+      const user = userCredentials?.user;
+      if (!user) {
+        return rejectWithValue('Login failed: No user object');
+      }
+
       return {
-        userName: user.displayName,
-        userId: user.uid,
-        email: user.email,
+        userName: user.displayName ?? '',
+        userId: user.uid ?? '',
+        email: user.email ?? '',
       };
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -116,16 +123,15 @@ export const googleLoginSlice = createAsyncThunk(
       await GoogleSignin.hasPlayServices();
       const signInResult = await GoogleSignin.signIn();
       const idToken = signInResult.data?.idToken;
-
       if (!idToken) {
-        throw new Error('No ID token found!');
+        return rejectWithValue('No ID token found!');
       }
 
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       const userCredential = await auth().signInWithCredential(
         googleCredential,
       );
-      const user = userCredential.user;
+      const user = userCredential?.user;
 
       if (user) {
         const userDocRef = firestore().collection('Users').doc(user.uid);
@@ -147,13 +153,13 @@ export const googleLoginSlice = createAsyncThunk(
             {merge: true},
           );
         } else {
-          const existingData = docSnapshot.data();
+          const existingData = docSnapshot.data() ?? {};
 
           await userDocRef.set(
             {
-              email: user.email || '',
-              name: user.displayName || '',
-              officialImg: existingData?.officialImg || user.photoURL || '',
+              email: user.email ?? '',
+              name: user.displayName ?? '',
+              officialImg: (existingData?.officialImg ?? user.photoURL) ?? '',
             },
             {merge: true},
           );
@@ -192,9 +198,9 @@ const authSlice = createSlice({
       })
       .addCase(signUpSlice.fulfilled, (state, action) => {
         state.loading = false;
-        state.username = action.payload.userName;
-        state.userId = action.payload.userId;
-        state.email = action.payload.email;
+        state.username = action.payload.userName ?? '';
+        state.userId = action.payload.userId ?? '';
+        state.email = action.payload.email ?? '';
       })
       .addCase(signUpSlice.rejected, (state, action) => {
         state.loading = false;
@@ -207,9 +213,9 @@ const authSlice = createSlice({
       })
       .addCase(loginUserSlice.fulfilled, (state, action) => {
         state.loading = false;
-        state.userId = action.payload.userId;
-        state.username = action.payload.userName || ' ';
-        state.email = action.payload.email || '';
+        state.userId = action.payload.userId ?? '';
+        state.username = action.payload.userName ?? '';
+        state.email = action.payload.email ?? '';
       })
       .addCase(loginUserSlice.rejected, (state, action) => {
         state.loading = false;
@@ -222,7 +228,7 @@ const authSlice = createSlice({
       })
       .addCase(forgetPasswordSlice.fulfilled, (state, action) => {
         state.loading = false;
-        state.email = action.payload.email || '';
+        state.email = action.payload.email ?? '';
       })
       .addCase(forgetPasswordSlice.rejected, (state, action) => {
         state.loading = false;
@@ -236,9 +242,9 @@ const authSlice = createSlice({
       })
       .addCase(googleLoginSlice.fulfilled, (state, action) => {
         state.loading = false;
-        state.userId = action.payload.user.uid;
-        state.username = action.payload.user.displayName || '';
-        state.email = action.payload.user.email || '';
+        state.userId = action.payload.user.uid ?? '';
+        state.username = action.payload.user.displayName ?? '';
+        state.email = action.payload.user.email ?? '';
       })
       .addCase(googleLoginSlice.rejected, (state, action) => {
         state.loading = false;

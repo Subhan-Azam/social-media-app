@@ -9,7 +9,7 @@ import {RootStackParamList} from '../types/types';
 
 type ScreenConfig<T extends keyof RootStackParamList> = {
   name: T;
-  component: React.ComponentType<any>;
+  component: Element;
 };
 
 export const AUTH_STACK_IF_USER: ScreenConfig<keyof RootStackParamList>[] = [

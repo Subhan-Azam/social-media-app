@@ -10,5 +10,6 @@ export const COLORS = {
   ALABASTER: '#FAFAFA',
   BORDER_COLOR: '#0000001A',
   SPUN_PEARL: '#A6A6AA',
-  WHITE: '#ffffff'
+  WHITE: '#ffffff',
+  LIGHT_GRAY: '#00000033',
 };

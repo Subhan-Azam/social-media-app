@@ -13,6 +13,7 @@ import useUploadPost from '../../hooks/useUploadPost';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import {styles} from './uploadStyle';
+import {COLORS} from '../../constants/colors';
 
 const Upload = () => {
   const navigation = useNavigation();
@@ -52,7 +53,7 @@ const Upload = () => {
           <TextInput
             style={styles.descInput}
             placeholder="Add post description"
-            placeholderTextColor="#0000001A"
+            placeholderTextColor={COLORS.LIGHT_GRAY}
             value={description}
             onChangeText={setDescription}
           />

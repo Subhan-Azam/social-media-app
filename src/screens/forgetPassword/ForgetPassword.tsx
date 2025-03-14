@@ -12,6 +12,7 @@ import useForgetPass from '../../hooks/useForgetPass';
 import {ScreenProps} from '../../types/types';
 import {IMAGES} from '../../constants/images';
 import {styles} from './forgetPasswordStyle';
+import { COLORS } from '../../constants/colors';
 
 const ForgetPassword: React.FC<ScreenProps<'forgetPassword'>> = ({
   navigation,
@@ -38,7 +39,7 @@ const ForgetPassword: React.FC<ScreenProps<'forgetPassword'>> = ({
             onChangeText={setEmail}
             style={styles.textInput}
             placeholder="Enter Email"
-            placeholderTextColor="#00000033"
+            placeholderTextColor={COLORS.LIGHT_GRAY}
             autoCapitalize="none"
           />
         </View>

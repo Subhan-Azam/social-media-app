@@ -21,8 +21,9 @@ export const fetchUserProfile = createAsyncThunk(
   async (_, {rejectWithValue}) => {
     try {
       const currentUser = auth().currentUser;
+
       if (!currentUser) {
-        return;
+        throw new Error('No authenticated user found');
       }
 
       const snapshot = await firestore()
@@ -31,7 +32,7 @@ export const fetchUserProfile = createAsyncThunk(
         .get();
 
       if (snapshot.exists) {
-        return snapshot.data();
+        return snapshot.data() ?? {};
       } else {
         throw new Error('User not found in Firestore');
       }
@@ -50,12 +51,12 @@ export const updateUserProfile = createAsyncThunk(
     try {
       const currentUser = auth().currentUser;
       if (!currentUser) {
-        return;
+        throw new Error('No authenticated user found');
       }
 
       await firestore()
         .collection('Users')
-        .doc(currentUser.uid)
+        .doc(currentUser?.uid)
         .update(updatedData);
 
       ShowToast('success', 'Congratulations', 'Data updated successfully');
@@ -82,11 +83,12 @@ export const editProfileSlice = createSlice({
       })
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
         state.loading = false;
-        Object.assign(state, action.payload);
+        Object.assign(state, action.payload ?? {});
       })
       .addCase(fetchUserProfile.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error =
+          (action.payload as string) ?? 'Failed to fetch user profile';
       })
 
       // update user profile
@@ -96,11 +98,11 @@ export const editProfileSlice = createSlice({
       })
       .addCase(updateUserProfile.fulfilled, (state, action) => {
         state.loading = false;
-        Object.assign(state, action.payload);
+        Object.assign(state, action.payload ?? {});
       })
       .addCase(updateUserProfile.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = (action.payload as string) ?? 'Failed to update profile';
       });
   },
 });

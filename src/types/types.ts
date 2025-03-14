@@ -24,7 +24,7 @@ export type HomeScreenNavigationProp = NativeStackNavigationProp<
 
 export type Screens = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
-  route: any;
+  route: string;
 };
 
 export interface UserBioProps {
@@ -49,19 +49,20 @@ export interface FetchAllPostSlice {
 }
 
 export interface SelfProfileProps {
-  navigation: NavigationProp<any>;
-  route: RouteProp<any>;
+  navigation: NavigationProp<RootStackParamList>;
 }
 
 export interface UserProps {
-  post: {
-    officialImg: string;
-    imageUrl: string;
-    description: string;
-    userName: string;
-    userUID: string;
-    createdAt: string;
-  };
+  officialImg: string;
+  imageUrl: string;
+  description: string;
+  userName: string;
+  userUID: string;
+  createdAt: string;
+}
+
+export interface AllPostsProps {
+  post: UserProps;
 }
 
 export interface Posts {

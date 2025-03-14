@@ -19,16 +19,16 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
           .doc(userUID)
           .get({source: 'server'});
 
-        const userData = userDoc.exists ? userDoc.data() : {};
+        const userData = userDoc?.exists ? userDoc.data() : {};
 
         return {
           id: doc.id,
-          imageUrl: postData.imageUrl || '',
-          description: postData.description || '',
-          userUID: postData.userUID || '',
-          userName: postData.userName || '',
-          createdAt: postData.createdAt?.toDate().toISOString() || '',
-          officialImg: userData?.officialImg || '',
+          imageUrl: postData.imageUrl ?? '',
+          description: postData.description ?? '',
+          userUID: postData.userUID ?? '',
+          userName: postData.userName ?? '',
+          createdAt: postData.createdAt?.toDate?.()?.toISOString() ?? '',
+          officialImg: userData?.officialImg ?? '',
         };
       }),
     );
@@ -65,11 +65,11 @@ const fetchAllPostSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.loading = false;
-        state.posts = action.payload;
+        state.posts = action.payload ?? [];
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to fetch posts';
+        state.error = action.error?.message ?? 'Failed to fetch posts';
       });
   },
 });

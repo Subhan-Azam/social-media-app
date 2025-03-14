@@ -22,6 +22,7 @@ import EyeSlash from 'react-native-vector-icons/FontAwesome';
 import Divider from '../../components/divider/Divider';
 import {IMAGES} from '../../constants/images';
 import {styles} from './signUpStyle';
+import { COLORS } from '../../constants/colors';
 
 const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
   const {
@@ -66,7 +67,7 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
                 onChangeText={setName}
                 style={styles.textInput}
                 placeholder="Username"
-                placeholderTextColor="#00000033"
+                placeholderTextColor={COLORS.LIGHT_GRAY}
                 autoCapitalize="none"
               />
               <TextInput
@@ -74,7 +75,7 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
                 onChangeText={setEmail}
                 style={styles.textInput}
                 placeholder="Enter Email"
-                placeholderTextColor="#00000033"
+                placeholderTextColor={COLORS.LIGHT_GRAY}
                 keyboardType="email-address"
                 autoCapitalize="none"
               />
@@ -85,7 +86,7 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
                   secureTextEntry={!showPassword}
                   style={styles.textInputPass}
                   placeholder="Password"
-                  placeholderTextColor="#00000033"
+                  placeholderTextColor={COLORS.LIGHT_GRAY}
                   autoCapitalize="none"
                 />
                 <TouchableOpacity onPress={toggleShowPassword}>
@@ -103,7 +104,7 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
                   secureTextEntry={!confirmShowPass}
                   style={styles.textInputPass}
                   placeholder="Confirm Password"
-                  placeholderTextColor="#00000033"
+                  placeholderTextColor={COLORS.LIGHT_GRAY}
                   autoCapitalize="none"
                 />
                 <TouchableOpacity onPress={toggleConfirmShowPass}>

@@ -22,6 +22,7 @@ import EyeSlash from 'react-native-vector-icons/FontAwesome';
 import Divider from '../../components/divider/Divider';
 import {IMAGES} from '../../constants/images';
 import {styles} from './loginStyle';
+import { COLORS } from '../../constants/colors';
 
 const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
   const {email, setEmail, password, setPassword, error, loading, logInUser} =
@@ -45,7 +46,7 @@ const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
                 onChangeText={setEmail}
                 style={styles.textInput}
                 placeholder="Enter Email"
-                placeholderTextColor="#00000033"
+                placeholderTextColor={COLORS.LIGHT_GRAY}
                 keyboardType="email-address"
                 autoCapitalize="none"
               />
@@ -55,7 +56,7 @@ const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
                   onChangeText={setPassword}
                   style={styles.textInputPass}
                   placeholder="Enter Password"
-                  placeholderTextColor="#00000033"
+                  placeholderTextColor={COLORS.LIGHT_GRAY}
                   autoCapitalize="none"
                   secureTextEntry={!showPassword}
                 />

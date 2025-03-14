@@ -56,6 +56,7 @@ const uploadPostSlice = createSlice({
       state.imageUri = '';
       state.description = '';
       state.success = false;
+      state.error = null;
     },
   },
   extraReducers: builder => {
@@ -63,14 +64,15 @@ const uploadPostSlice = createSlice({
       .addCase(uploadPost.pending, state => {
         state.loading = true;
         state.error = null;
+        state.success = false;
       })
       .addCase(uploadPost.fulfilled, (state, action) => {
         state.loading = false;
-        state.success = action.payload?.success;
+        state.success = action.payload?.success ?? false;
       })
       .addCase(uploadPost.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = (action.payload as string) ?? 'Upload failed';
       });
   },
 });

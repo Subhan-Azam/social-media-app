@@ -1,9 +1,9 @@
 import {Image, View} from 'react-native';
 import React from 'react';
-import {UserProps} from '../../types/types';
+import {AllPostsProps} from '../../types/types';
 import {styles} from './allPostsStyle';
 
-const AllPosts: React.FC<UserProps> = ({post}) => {
+const AllPosts: React.FC<AllPostsProps> = ({post}) => {
   return (
     <View style={styles.postContainer}>
       {post.imageUrl && (
