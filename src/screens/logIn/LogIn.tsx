@@ -62,9 +62,9 @@ const LogIn: React.FC<ScreenProps<'logIn'>> = ({navigation}) => {
                 />
                 <TouchableOpacity onPress={togglePasswordVisibility}>
                   {showPassword ? (
-                    <EyeIcon name="eye" size={21} color="gray" />
+                    <EyeIcon name="eye" size={21} color={COLORS.GRAY} />
                   ) : (
-                    <EyeSlash name="eye-slash" size={21} color="gray" />
+                    <EyeSlash name="eye-slash" size={21} color={COLORS.GRAY} />
                   )}
                 </TouchableOpacity>
               </View>

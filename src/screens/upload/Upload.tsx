@@ -42,7 +42,7 @@ const Upload = () => {
             <Image source={{uri: imageUri}} style={styles.uploadedImage} />
           ) : (
             <>
-              <Icon name="cloud-upload" size={50} color="black" />
+              <Icon name="cloud-upload" size={50} color={COLORS.DARK} />
               <Text style={styles.uploadImgText}>Upload Image</Text>
             </>
           )}

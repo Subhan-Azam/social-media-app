@@ -3,6 +3,7 @@ import React from 'react';
 import useEditProfile from '../../hooks/useEditProfile';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {styles} from './selfBioStyle';
+import {COLORS} from '../../constants/colors';
 
 const SelfBio = () => {
   const {updateOfficialImg, updateName, updateUsername, updateBio} =
@@ -27,7 +28,7 @@ const SelfBio = () => {
               source={{uri: updateOfficialImg}}
             />
           ) : (
-            <Icon name="user-circle" size={86} color="gray" />
+            <Icon name="user-circle" size={86} color={COLORS.GRAY} />
           )}
         </View>
         <Text style={styles.officialNameText}>{updateName}</Text>

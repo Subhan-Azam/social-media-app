@@ -91,9 +91,9 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
                 />
                 <TouchableOpacity onPress={toggleShowPassword}>
                   {showPassword ? (
-                    <EyeIcon name="eye" size={21} color="gray" />
+                    <EyeIcon name="eye" size={21} color={COLORS.GRAY} />
                   ) : (
-                    <EyeSlash name="eye-slash" size={21} color="gray" />
+                    <EyeSlash name="eye-slash" size={21} color={COLORS.GRAY} />
                   )}
                 </TouchableOpacity>
               </View>
@@ -109,9 +109,9 @@ const SignUp: React.FC<ScreenProps<'signUp'>> = ({navigation}) => {
                 />
                 <TouchableOpacity onPress={toggleConfirmShowPass}>
                   {confirmShowPass ? (
-                    <EyeIcon name="eye" size={21} color="gray" />
+                    <EyeIcon name="eye" size={21} color={COLORS.GRAY} />
                   ) : (
-                    <EyeSlash name="eye-slash" size={21} color="gray" />
+                    <EyeSlash name="eye-slash" size={21} color={COLORS.GRAY} />
                   )}
                 </TouchableOpacity>
               </View>

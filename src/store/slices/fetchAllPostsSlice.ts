@@ -1,13 +1,14 @@
 import {createSlice, createAsyncThunk, PayloadAction} from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
 import {PostSliceProps} from '../../types/types';
+import {COLLECTIONS} from '../../constants/dbCollection';
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   try {
     const postRes = await firestore()
-      .collection('posts')
-      .orderBy('createdAt', 'desc')
-      .get();
+      ?.collection(COLLECTIONS.POST)
+      ?.orderBy('createdAt', 'desc')
+      ?.get();
 
     const posts = await Promise.all(
       postRes.docs?.map(async doc => {
@@ -15,11 +16,11 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
         const userUID = postData.userUID;
 
         const userDoc = await firestore()
-          .collection('Users')
-          .doc(userUID)
-          .get({source: 'server'});
+          ?.collection(COLLECTIONS.USER)
+          ?.doc(userUID)
+          ?.get({source: 'server'});
 
-        const userData = userDoc?.exists ? userDoc.data() : {};
+        const userData = userDoc?.exists ? userDoc?.data() : {};
 
         return {
           id: doc.id,

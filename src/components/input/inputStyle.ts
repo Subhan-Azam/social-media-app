@@ -14,6 +14,6 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 0.3,
     borderColor: COLORS.TUNA,
     width: '75%',
-    color: 'black',
+    color: COLORS.BLACK,
   },
 });

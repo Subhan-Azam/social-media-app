@@ -34,14 +34,14 @@ export const styles = StyleSheet.create({
     height: 44,
     borderColor: COLORS.BORDER_COLOR,
     backgroundColor: COLORS.ALABASTER,
-    color: 'black',
+    color: COLORS.DARK,
     borderWidth: 1,
     borderRadius: 5,
     borderBlockColor: COLORS.BORDER_COLOR,
     paddingHorizontal: 10,
   },
   error: {
-    color: 'red',
+    color: COLORS.RED,
     fontSize: 12,
     marginTop: -15,
     width: '100%',
@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   MagicLinkBtnText: {
-    color: 'white',
+    color: COLORS.WHITE,
     fontWeight: 600,
   },
   endHrLine: {

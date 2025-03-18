@@ -27,7 +27,7 @@ const TabNavigation = () => {
             <Icon2
               name="home-outline"
               size={24}
-              color={focused ? COLORS.PICTON_BLUE : 'black'}
+              color={focused ? COLORS.PICTON_BLUE : COLORS.DARK}
             />
           ),
         }}
@@ -42,7 +42,7 @@ const TabNavigation = () => {
             <Icon
               name="plus-square-o"
               size={25}
-              color={focused ? COLORS.PICTON_BLUE : 'black'}
+              color={focused ? COLORS.PICTON_BLUE : COLORS.DARK}
             />
           ),
         }}
@@ -62,7 +62,7 @@ const TabNavigation = () => {
                   style={styles.bottomIconImg}
                 />
               ) : (
-                <UserIcon name="user-circle" size={21} color="gray" />
+                <UserIcon name="user-circle" size={21} color={COLORS.GRAY} />
               )}
             </View>
           ),
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(38, 38, 38, 1)',
+    borderColor: COLORS.GRAY,
     borderRadius: 50,
     padding: 1,
   },

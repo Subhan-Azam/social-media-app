@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   signUpText1: {
-    color: 'gray',
+    color: COLORS.GRAY,
   },
   signUpText2: {
     color: COLORS.PICTON_BLUE,

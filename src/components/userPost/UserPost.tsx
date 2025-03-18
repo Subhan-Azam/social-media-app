@@ -7,6 +7,7 @@ import {AllPostsProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
 import {IMAGES} from '../../constants/images';
 import {styles} from './userPostStyle';
+import { COLORS } from '../../constants/colors';
 
 const UserPost: React.FC<AllPostsProps> = ({post}) => {
   const navigation =
@@ -28,7 +29,7 @@ const UserPost: React.FC<AllPostsProps> = ({post}) => {
               source={{uri: post.officialImg}}
             />
           ) : (
-            <UserIcon name="user-circle" size={32} color="gray" />
+            <UserIcon name="user-circle" size={32} color={COLORS.GRAY} />
           )}
           <View>
             <View style={styles.officialName}>

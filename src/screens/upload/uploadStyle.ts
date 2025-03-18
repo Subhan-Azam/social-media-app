@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: 'black',
+    borderColor: COLORS.DARK,
     borderWidth: 1,
     borderStyle: 'dashed',
   },
@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
   },
   descInput: {
     width: '100%',
-    color: 'black',
+    color: COLORS.DARK,
     borderWidth: 1,
     borderColor: COLORS.BORDER_COLOR,
     backgroundColor: COLORS.ALABASTER,

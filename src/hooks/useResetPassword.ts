@@ -13,7 +13,11 @@ const useResetPassword = () => {
   const navigation = useNavigation();
 
   const userValidation = () => {
-    if (!oldPassword || !newPassword || !confirmPassword) {
+    if (
+      !oldPassword?.trim() ||
+      !newPassword?.trim() ||
+      !confirmPassword?.trim()
+    ) {
       return 'All fields are required';
     }
     if (newPassword.length < 6) {
@@ -37,20 +41,23 @@ const useResetPassword = () => {
 
     try {
       const user = auth().currentUser;
+      if (!user) {
+        throw new Error('No user is currently signed in');
+      }
 
       const credential = auth.EmailAuthProvider.credential(
-        user?.email || '',
-        oldPassword,
+        user?.email ?? '',
+        oldPassword ?? '',
       );
-      await user?.reauthenticateWithCredential(credential);
-      await user?.updatePassword(newPassword);
+      await user.reauthenticateWithCredential(credential);
+      await user.updatePassword(newPassword ?? '');
 
-      navigation.goBack();
+      navigation?.goBack();
 
       ShowToast('success', 'success', 'Password changed successful');
     } catch (err2: unknown) {
       if (err2 instanceof Error) {
-        setError(err2.message);
+        setError(err2.message ?? 'An unknown error occurred');
       } else {
         setError('Failed to update password');
       }

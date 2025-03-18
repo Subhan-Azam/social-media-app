@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(166, 166, 170, 0.16)',
   },
   cancelText: {
-    color: 'red',
+    color: COLORS.RED,
     fontWeight: 400,
     fontSize: 16,
   },

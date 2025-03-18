@@ -23,27 +23,23 @@ const useUploadPost = (): UseUploadPostReturn => {
         includeBase64: true,
       },
       response => {
-        if (response.didCancel) {
+        if (response?.didCancel) {
           ShowToast('info', 'Canceled', 'Image picker was canceled.');
-        } else if (response.errorCode) {
+        } else if (response?.errorCode) {
           ShowToast('error', 'Error', 'Failed to pick an image.');
+        } else if (response?.assets?.[0]?.base64) {
+          dispatch(
+            setImageUri(`data:image/jpeg;base64,${response.assets[0].base64}`),
+          );
         } else {
-          if (response.assets && response.assets[0].base64) {
-            dispatch(
-              setImageUri(
-                `data:image/jpeg;base64,${response.assets[0].base64}`,
-              ),
-            );
-          } else {
-            ShowToast('error', 'Error', 'No valid image found.');
-          }
+          ShowToast('error', 'Error', 'No valid image found.');
         }
       },
     );
   };
 
   const uploadData = () => {
-    if (!imageUri || !description) {
+    if (!imageUri || !description.trim()) {
       ShowToast(
         'error',
         'Incomplete Data',
@@ -53,7 +49,7 @@ const useUploadPost = (): UseUploadPostReturn => {
       return;
     }
 
-    dispatch(uploadPost({imageUri, description})).then(() => {
+    dispatch(uploadPost({imageUri, description}))?.then(() => {
       ShowToast('success', 'Success', 'Post uploaded successfully!');
       dispatch(setImageUri(null));
       dispatch(setDescription(''));

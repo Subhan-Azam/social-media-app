@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { COLORS } from '../../constants/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,7 +11,7 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   errorText: {
-    color: 'red',
+    color: COLORS.RED,
     textAlign: 'center',
     marginTop: 20,
   },

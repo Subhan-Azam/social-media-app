@@ -63,9 +63,9 @@ const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
             />
             <TouchableOpacity onPress={toggleOldPass}>
               {showOldPass ? (
-                <EyeIcon name="eye" size={21} color="gray" />
+                <EyeIcon name="eye" size={21} color={COLORS.GRAY} />
               ) : (
-                <EyeSlash name="eye-slash" size={21} color="gray" />
+                <EyeSlash name="eye-slash" size={21} color={COLORS.GRAY} />
               )}
             </TouchableOpacity>
           </View>
@@ -81,9 +81,9 @@ const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
             />
             <TouchableOpacity onPress={toggleNewPass}>
               {showNewPass ? (
-                <EyeIcon name="eye" size={21} color="gray" />
+                <EyeIcon name="eye" size={21} color={COLORS.GRAY} />
               ) : (
-                <EyeSlash name="eye-slash" size={21} color="gray" />
+                <EyeSlash name="eye-slash" size={21} color={COLORS.GRAY} />
               )}
             </TouchableOpacity>
           </View>
@@ -99,9 +99,9 @@ const ResetPassword: React.FC<ScreenProps<'ResetPassword'>> = ({
             />
             <TouchableOpacity onPress={toggleConfirmPass}>
               {showConfirmPass ? (
-                <EyeIcon name="eye" size={21} color="gray" />
+                <EyeIcon name="eye" size={21} color={COLORS.GRAY} />
               ) : (
-                <EyeSlash name="eye-slash" size={21} color="gray" />
+                <EyeSlash name="eye-slash" size={21} color={COLORS.GRAY} />
               )}
             </TouchableOpacity>
           </View>

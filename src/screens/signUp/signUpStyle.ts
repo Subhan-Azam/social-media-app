@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     height: 44,
     borderColor: COLORS.BORDER_COLOR,
     backgroundColor: COLORS.ALABASTER,
-    color: 'black',
+    color: COLORS.DARK,
     borderWidth: 1,
     borderRadius: 5,
     borderBlockColor: COLORS.BORDER_COLOR,
@@ -47,14 +47,14 @@ export const styles = StyleSheet.create({
   },
   textInputPass: {
     width: '90%',
-    color: 'black',
+    color: COLORS.DARK,
   },
   changeIcon: {
     height: 25,
     width: 25,
   },
   error: {
-    color: 'red',
+    color: COLORS.RED,
     fontSize: 12,
     marginTop: -15,
   },
@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   signUpBtnText: {
-    color: 'white',
+    color: COLORS.WHITE,
     fontWeight: 600,
   },
 
@@ -77,7 +77,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   signUpText1: {
-    color: 'gray',
+    color: COLORS.GRAY,
   },
   signUpText2: {
     color: COLORS.PICTON_BLUE,

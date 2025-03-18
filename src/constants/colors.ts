@@ -12,4 +12,7 @@ export const COLORS = {
   SPUN_PEARL: '#A6A6AA',
   WHITE: '#ffffff',
   LIGHT_GRAY: '#00000033',
+  GRAY: 'gray',
+  DARK: 'black',
+  RED: 'red',
 };

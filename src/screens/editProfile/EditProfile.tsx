@@ -7,64 +7,12 @@ import AuthNavigator from '../../components/authNavigator/AuthNavigator';
 import {ScreenProps} from '../../types/types';
 import UserIcon from 'react-native-vector-icons/FontAwesome';
 import {styles} from './editProfileStyle';
+import {COLORS} from '../../constants/colors';
 
 const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
-  const {
-    updateOfficialImg,
-    updateName,
-    setUpdateName,
-    updateUsername,
-    setUpdateUsername,
-    updateBio,
-    setUpdateBio,
-    updateEmail,
-    setUpdateEmail,
-    updatePhone,
-    setUpdatePhone,
-    updateGender,
-    setUpdateGender,
-    handleUpdateProfile,
-    imagePicker,
-  } = useEditProfile();
+  const {updateOfficialImg, handleUpdateProfile, imagePicker, inputsFields} =
+    useEditProfile();
 
-  const inputsFields = [
-    {
-      editable: true,
-      title: 'Name',
-      value: updateName,
-      onChange: setUpdateName,
-      placeholder: 'Name',
-    },
-    {
-      editable: true,
-      title: 'User Name',
-      value: updateUsername,
-      onChange: setUpdateUsername,
-      placeholder: 'User Name',
-    },
-    {editable: true, title: 'Bio', value: updateBio, onChange: setUpdateBio},
-    {
-      editable: false,
-      title: 'Email',
-      value: updateEmail,
-      onChange: setUpdateEmail,
-      placeholder: 'Email',
-    },
-    {
-      editable: true,
-      title: 'Phone',
-      value: updatePhone,
-      onChange: setUpdatePhone,
-      placeholder: 'Phone',
-    },
-    {
-      editable: true,
-      title: 'Gender',
-      value: updateGender,
-      onChange: setUpdateGender,
-      placeholder: 'Gender',
-    },
-  ];
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -81,7 +29,7 @@ const EditProfile: React.FC<ScreenProps<'EditProfile'>> = ({navigation}) => {
           {updateOfficialImg ? (
             <Image source={{uri: updateOfficialImg}} style={styles.imgChange} />
           ) : (
-            <UserIcon name="user-circle" size={95} color="gray" />
+            <UserIcon name="user-circle" size={95} color={COLORS.GRAY} />
           )}
           <TouchableOpacity onPress={imagePicker}>
             <Text style={styles.changeName}>Change Profile Photo</Text>

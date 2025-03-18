@@ -8,7 +8,7 @@ import {ShowToast} from '../components/toastMessage/ToastMessage';
 const useForgetPass = () => {
   const [email, setEmail] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [errorInput, setErrorInput] = useState<string | null>('');
+  const [errorInput, setErrorInput] = useState<string | null>(null);
 
   const navigation = useNavigation();
   const dispatch: AppDispatch = useDispatch();
@@ -22,7 +22,8 @@ const useForgetPass = () => {
     return null;
   };
 
-  const forgetPassword = async (email: string) => {
+  const forgetPassword = async (emailParam: string | null | undefined) => {
+    const emailToUse = emailParam ?? email;
     const error = validateInputs();
     if (error) {
       setErrorInput(error);
@@ -32,17 +33,20 @@ const useForgetPass = () => {
     setLoading(true);
 
     try {
-      await dispatch(forgetPasswordSlice({email})).unwrap();
-      ShowToast(
-        'info',
-        'Send Link',
-        'Please check your email for reset password',
-      );
-
-      navigation.goBack();
+      if (dispatch) {
+        await dispatch(forgetPasswordSlice({email: emailToUse ?? ''})).unwrap();
+        ShowToast(
+          'info',
+          'Send Link',
+          'Please check your email for reset password',
+        );
+        navigation?.goBack();
+      } else {
+        throw new Error('Dispatch is not available');
+      }
     } catch (err: unknown) {
       if (err instanceof Error) {
-        setErrorInput(err.message);
+        setErrorInput(err.message ?? 'An unknown error occurred');
       } else {
         setErrorInput('An unexpected error occurred.');
       }

@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { COLORS } from '../../constants/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -11,7 +12,7 @@ export const styles = StyleSheet.create({
   noPostText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'gray',
+    color: COLORS.GRAY,
     textAlign: 'center',
     marginTop: 10,
   },

@@ -3,6 +3,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import React from 'react';
 import AuthNavigation from './src/navigation/AuthNavigation';
 import Toast from 'react-native-toast-message';
+import { COLORS } from './src/constants/colors';
 
 const App = () => {
   return (
@@ -18,6 +19,6 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.WHITE,
   },
 });

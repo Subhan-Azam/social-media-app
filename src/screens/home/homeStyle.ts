@@ -4,7 +4,7 @@ import {COLORS} from '../../constants/colors';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.WHITE,
   },
   instaImgBox: {
     alignItems: 'center',
@@ -24,6 +24,6 @@ export const styles = StyleSheet.create({
     left: 100,
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'gray',
+    color: COLORS.GRAY,
   },
 });

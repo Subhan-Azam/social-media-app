@@ -13,7 +13,12 @@ const useSignUp = () => {
   const dispatch = useAppDispatch();
 
   const validateInputs = () => {
-    if (!name || !email || !password || !confirmPassword) {
+    if (
+      !name?.trim() ||
+      !email?.trim() ||
+      !password?.trim() ||
+      !confirmPassword?.trim()
+    ) {
       return 'All fields are required.';
     }
     if (!name.trim()) {
@@ -44,14 +49,14 @@ const useSignUp = () => {
     try {
       await dispatch(
         signUpSlice({
-          name,
-          email,
-          password,
+          name: name ?? '',
+          email: email ?? '',
+          password: password ?? '',
         }),
       ).unwrap();
     } catch (err: unknown) {
       if (err instanceof Error) {
-        setErrorInput(err.message);
+        setErrorInput(err.message ?? 'An unknown error occurred');
       } else {
         setErrorInput('An error occurred during sign up.');
       }

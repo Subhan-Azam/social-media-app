@@ -53,8 +53,8 @@ const AppNavigator = () => {
           {AUTH_STACK_IF_USER?.map(({name, component}) => (
             <Stack.Screen
               key={name}
-              name={name}
-              component={component}
+              name={name as keyof RootStackParamList}
+              component={component as React.ComponentType<{}>}
               options={{headerShown: false}}
             />
           ))}
@@ -65,7 +65,7 @@ const AppNavigator = () => {
             <Stack.Screen
               key={name}
               name={name}
-              component={component}
+              component={component as React.ComponentType<{}>}
               options={{headerShown: false}}
             />
           ))}

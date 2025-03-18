@@ -12,7 +12,7 @@ type ScreenConfig<T extends keyof RootStackParamList> = {
   component: Element;
 };
 
-export const AUTH_STACK_IF_USER: ScreenConfig<keyof RootStackParamList>[] = [
+export const AUTH_STACK_IF_USER = [
   {name: 'Home', component: TabNavigation},
   {name: 'UserProfile', component: UserProfile},
   {name: 'EditProfile', component: EditProfile},

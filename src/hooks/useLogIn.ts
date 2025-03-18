@@ -12,21 +12,25 @@ const useLogIn = () => {
 
   const logInUser = async () => {
     setErrorInput('');
-    if (!email || !password) {
+    if (!email?.trim() || !password?.trim()) {
       setErrorInput('Both fields are required');
       return;
     }
 
     try {
-      await dispatch(
-        loginUserSlice({
-          email,
-          password,
-        }),
-      ).unwrap();
+      if (dispatch) {
+        await dispatch(
+          loginUserSlice({
+            email: email ?? '',
+            password: password ?? '',
+          }),
+        ).unwrap();
+      } else {
+        throw new Error('Dispatch is not available');
+      }
     } catch (err: unknown) {
       if (err instanceof Error) {
-        setErrorInput(err.message);
+        setErrorInput(err.message ?? 'An unknown error occurred');
       } else {
         setErrorInput('Failed to log in. Please try again.');
       }
@@ -38,8 +42,8 @@ const useLogIn = () => {
     setEmail,
     password,
     setPassword,
-    loading,
-    error: errorInput || error,
+    loading: loading ?? false,
+    error: (errorInput || error) ?? '',
     logInUser,
   };
 };

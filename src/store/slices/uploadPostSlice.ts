@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {UploadPostSlice} from '../../types/types';
+import {COLLECTIONS} from '../../constants/dbCollection';
 
 const initialState: UploadPostSlice = {
   imageUri: '',
@@ -18,14 +19,14 @@ export const uploadPost = createAsyncThunk(
     {rejectWithValue},
   ) => {
     const userUID = auth().currentUser?.uid;
-    const userName = auth().currentUser?.displayName;
+    const userName = auth().currentUser?.displayName ?? 'Unknown User';
 
     if (!userUID) {
       return rejectWithValue('User is not logged in');
     }
 
     try {
-      await firestore().collection('posts').add({
+      await firestore().collection(COLLECTIONS.POST).add({
         imageUrl: imageUri,
         description,
         userUID,
@@ -35,7 +36,7 @@ export const uploadPost = createAsyncThunk(
       return {success: true};
     } catch (error: unknown) {
       if (error instanceof Error) {
-        return rejectWithValue(error.message);
+        return rejectWithValue(error?.message);
       }
       return rejectWithValue('Failed to upload post');
     }

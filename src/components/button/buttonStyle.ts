@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     marginTop: 25,
   },
   logInBtnText: {
-    color: 'white',
+    color: COLORS.WHITE,
     fontWeight: 'bold',
   },
   editProfileBtn: {

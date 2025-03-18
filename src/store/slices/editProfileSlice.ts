@@ -3,6 +3,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {UserProfileState} from '../../types/types';
 import {ShowToast} from '../../components/toastMessage/ToastMessage';
+import {COLLECTIONS} from '../../constants/dbCollection';
 
 const initialState: UserProfileState = {
   officialImg: '',
@@ -20,18 +21,17 @@ export const fetchUserProfile = createAsyncThunk(
   'editProfile/getDetails',
   async (_, {rejectWithValue}) => {
     try {
-      const currentUser = auth().currentUser;
-
+      const currentUser = auth()?.currentUser;
       if (!currentUser) {
         throw new Error('No authenticated user found');
       }
 
       const snapshot = await firestore()
-        .collection('Users')
-        .doc(currentUser?.uid)
-        .get();
+        ?.collection(COLLECTIONS?.USER)
+        ?.doc(currentUser?.uid)
+        ?.get();
 
-      if (snapshot.exists) {
+      if (snapshot?.exists) {
         return snapshot.data() ?? {};
       } else {
         throw new Error('User not found in Firestore');
@@ -55,7 +55,7 @@ export const updateUserProfile = createAsyncThunk(
       }
 
       await firestore()
-        .collection('Users')
+        .collection(COLLECTIONS.USER)
         .doc(currentUser?.uid)
         .update(updatedData);
 
