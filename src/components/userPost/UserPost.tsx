@@ -20,20 +20,20 @@ const UserPost: React.FC<AllPostsProps> = ({post}) => {
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('UserProfile', {userId: post.userUID});
+            navigation.navigate('UserProfile', {userId: post?.userUID});
           }}
           style={styles.profileHeader}>
-          {post.officialImg ? (
+          {post?.officialImg ? (
             <Image
               style={styles.officialImg}
-              source={{uri: post.officialImg}}
+              source={{uri: post?.officialImg}}
             />
           ) : (
             <UserIcon name="user-circle" size={32} color={COLORS.GRAY} />
           )}
           <View>
             <View style={styles.officialName}>
-              <Text style={styles.officialNameText}>{post.userName}</Text>
+              <Text style={styles.officialNameText}>{post?.userName}</Text>
               <Image source={IMAGES.OFFICIALICON} />
             </View>
             <View>
@@ -44,13 +44,13 @@ const UserPost: React.FC<AllPostsProps> = ({post}) => {
 
         <Image source={IMAGES.MOREICON} />
       </View>
-      <Image source={{uri: post.imageUrl}} style={styles.postImage} />
+      <Image source={{uri: post?.imageUrl}} style={styles.postImage} />
       <View style={styles.postDescDate}>
         <Text style={styles.desc}>
-          <Text style={styles.descName}>{post.userName}</Text>{' '}
-          {post.description}
+          <Text style={styles.descName}>{post?.userName}</Text>{' '}
+          {post?.description}
         </Text>
-        <Text style={styles.date}>{post.createdAt.split('T')[0]}</Text>
+        <Text style={styles.date}>{post?.createdAt.split('T')[0]}</Text>
       </View>
     </>
   );

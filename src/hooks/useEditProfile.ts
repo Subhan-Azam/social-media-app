@@ -27,7 +27,7 @@ const useEditProfile = () => {
 
   useEffect(() => {
     dispatch(fetchUserProfile());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     setUpdateOfficialImg(officialImg ?? '');

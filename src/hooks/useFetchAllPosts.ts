@@ -8,7 +8,7 @@ const useFetchAllPosts = () => {
 
   useEffect(() => {
     dispatch(fetchPosts());
-  }, [dispatch]);
+  }, []);
 
   return {posts, loading, error};
 };

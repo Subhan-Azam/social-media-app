@@ -24,7 +24,7 @@ const useSelfPost = () => {
     if (currentUserUID && dispatch) {
       dispatch(fetchPosts());
     }
-  }, [dispatch, currentUserUID]);
+  }, [currentUserUID]);
 
   const eachUserPost = posts?.filter(post => post?.userUID === currentUserUID);
 

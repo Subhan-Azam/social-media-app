@@ -6,29 +6,29 @@ import {COLLECTIONS} from '../../constants/dbCollection';
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   try {
     const postRes = await firestore()
-      ?.collection(COLLECTIONS.POST)
+      ?.collection(COLLECTIONS?.POST)
       ?.orderBy('createdAt', 'desc')
       ?.get();
 
     const posts = await Promise.all(
-      postRes.docs?.map(async doc => {
-        const postData = doc.data();
-        const userUID = postData.userUID;
+      postRes?.docs?.map(async doc => {
+        const postData = doc?.data();
+        const userUID = postData?.userUID;
 
         const userDoc = await firestore()
-          ?.collection(COLLECTIONS.USER)
+          ?.collection(COLLECTIONS?.USER)
           ?.doc(userUID)
           ?.get({source: 'server'});
 
         const userData = userDoc?.exists ? userDoc?.data() : {};
 
         return {
-          id: doc.id,
-          imageUrl: postData.imageUrl ?? '',
-          description: postData.description ?? '',
-          userUID: postData.userUID ?? '',
-          userName: postData.userName ?? '',
-          createdAt: postData.createdAt?.toDate?.()?.toISOString() ?? '',
+          id: doc?.id,
+          imageUrl: postData?.imageUrl ?? '',
+          description: postData?.description ?? '',
+          userUID: postData?.userUID ?? '',
+          userName: postData?.userName ?? '',
+          createdAt: postData?.createdAt?.toDate?.()?.toISOString() ?? '',
           officialImg: userData?.officialImg ?? '',
         };
       }),
